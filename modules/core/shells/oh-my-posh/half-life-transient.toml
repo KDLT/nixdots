@@ -1,0 +1,98 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+version = 2
+
+# [[var]]
+#   white = "#fff6d4"
+#   purple = "#7E46B6"
+#   orange = "#D75F00"
+#   red = "#E51A1E"
+#   pink = "#E51A84"
+#   green = "#46B67E"
+#   blue = "#5FD7FF"
+
+[[blocks]]
+  alignment = "left"
+  type = "prompt"
+
+  [[blocks.segments]]
+    foreground = "#fff6d4"
+    style = "plain"
+    template = "{{ if .SSHSession }} {{ end }} "
+    type = "session"
+
+  [[blocks.segments]]
+    foreground = "#7E46B6"
+    style = "plain"
+    template = "{{ .UserName }}"
+    type = "session"
+
+  [[blocks.segments]]
+    foreground = "#D75F00"
+    style = "plain"
+    template = " λ "
+    type = "text"
+
+  [[blocks.segments]]
+    foreground = "#46B67E"
+    style = "plain"
+    template = "{{ .HostName }} "
+    type = "session"
+
+  [[blocks.segments]]
+    foreground = "#fff6d4"
+    style = "plain"
+    template = "in "
+    type = "text"
+
+  [[blocks.segments]]
+    foreground = "#B67E46"
+    style = "plain"
+    template = "{{ .Path }} "
+    type = "path"
+
+    [blocks.segments.properties]
+      style = "full"
+
+  [[blocks.segments]]
+    foreground = "#5FD7FF"
+    style = "plain"
+    template = "<#fff6d4>on</> {{ .HEAD }}{{ if .Staging.Changed }}<#46B67E> ● {{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }}<#D75F00> ● {{ .Working.String }}</>{{ end }} "
+    type = "git"
+
+    [blocks.segments.properties]
+      branch_ahead_icon = ""
+      branch_behind_icon = ""
+      branch_gone_icon = ""
+      branch_icon = ""
+      branch_identical_icon = ""
+      cherry_pick_icon = ""
+      commit_icon = ""
+      fetch_status = true
+      merge_icon = ""
+      rebase_icon = ""
+      revert_icon = ""
+      tag_icon = ""
+
+[[blocks]]
+  type = "prompt"
+  alignment = "left"
+  newline = true
+
+  [[blocks.segments]]
+    type = "text"
+    style = "plain"
+    foreground = "#fff6d4"
+    template = ": "
+
+[transient_prompt]
+  background = "transparent"
+  foreground_templates = [
+      "{{if gt .Code 0}}#E51A1E{{end}}",
+      "{{if eq .Code 0}}#E51A84{{end}}",
+  ]
+  template = "❯ "
+
+[secondary_prompt]
+  foreground = "#5FD7FF"
+  background = "transparent"
+  template = "➜➜ "

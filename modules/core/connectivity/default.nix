@@ -1,0 +1,7 @@
+{...}: {
+  imports = [
+    ./systemd
+    ./wireless
+    ./printing
+  ];
+}

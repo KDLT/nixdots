@@ -1,0 +1,19 @@
+{
+  imports = [
+    ./autopairs.nix
+    ./colorizer.nix
+    ./comment.nix
+    ./dap.nix
+    ./harpoon.nix
+    ./lsp.nix
+    ./lualine.nix
+    ./markdown-preview.nix
+    ./oil.nix
+    ./startify.nix
+    ./telescope.nix
+    ./treesitter.nix
+    ./trim.nix
+    ./undotree.nix
+    ./which-key.nix
+  ];
+}
