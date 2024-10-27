@@ -1,10 +1,9 @@
 {
-  pkgs,
-  config,
-  ...
-}:
-{
-  imports = [ ./hardware.nix ];
+  imports = [
+    ./zfs-mirror.nix
+    ./zfs-mirror-copy.nix
+    ./hardware.nix
+  ];
 
   networking = {
     hostName = "Link"; # Define your hostname.
@@ -23,8 +22,10 @@
         zpool = {
           name = "rpool";
           dataset = {
-            cache = "rpool/local/cache";
-            data = "rpool/persist/data";
+            # note that these datasets are always relative to the declared poolname
+            # do not include your selected poolname and no leading forward slash
+            cache = "local/cache";
+            data = "persist/data";
           };
         };
       };

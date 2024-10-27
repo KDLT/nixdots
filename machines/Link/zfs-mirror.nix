@@ -11,29 +11,19 @@
   ...
 }:
 let
+  # poolName = "rpool";
   poolName = config.kdlt.storage.zfs.zpool.name;
   poolData = config.kdlt.storage.zfs.zpool.dataset.data;
   poolCache = config.kdlt.storage.zfs.zpool.dataset.cache;
+  # poolData = "notcopy/" + config.kdlt.storage.zfs.zpool.dataset.data;
+  # poolCache = "notcopy/" + config.kdlt.storage.zfs.zpool.dataset.cache;
   blankRootSnap = poolName + "/local/root@blank";
 in
+# blankRootSnap = "rpool/local/root@blank";
 with lib;
 # not sure if this is the place to put options and config so i backed this up
 {
   options.kdlt.storage.zfs = {
-    # zpool = mkOption {
-    #   default = "rpool";
-    #   type = types.string;
-    #   datasets = {
-    #     data = mkOption {
-    #       default = "persist/data";
-    #       type = types.string;
-    #     };
-    #     cache = mkOption {
-    #       default = "local/cache";
-    #       type = types.string;
-    #     };
-    #   };
-    # };
     zpool = mkOption {
       type =
         with types;
@@ -46,11 +36,13 @@ with lib;
             dataset = {
               data = mkOption {
                 type = str;
-                default = "rpool/local/cache";
+                description = "dataset to store persistent data, name of zpool excluded";
+                default = "persist/data";
               };
               cache = mkOption {
                 type = str;
-                default = "rpool/persist/data";
+                description = "dataset to store generated cache, name of zpool excluded";
+                default = "local/cache";
               };
             };
           };
@@ -105,7 +97,8 @@ with lib;
       };
       zpool = {
         # zroot = {
-        ${poolName} = {
+        # ${poolName} = {
+        rpool = {
           type = "zpool";
           mode = {
             topology = {
@@ -155,6 +148,7 @@ with lib;
               type = "zfs_fs";
               mountpoint = "/";
               postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^${blankRootSnap}$' || zfs snapshot ${blankRootSnap}";
+              # postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^rpool/local/root@blank$' || zfs snapshot rpool/local/root@blank";
             };
             "local/nix" = {
               type = "zfs_fs";

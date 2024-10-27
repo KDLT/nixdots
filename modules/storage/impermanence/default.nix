@@ -136,5 +136,39 @@ with lib;
         directories = PersistentCacheDirs;
       };
     };
+
+    environment.etc = {
+      # persistence for network connections
+      "NetworkManager/system-connections" = {
+        # dataPrefix does not get rolled back on boot
+        source = "${dataPrefix}" + "/etc/NetworkManager/system-connections/";
+      };
+    };
+
+    # persistence for ssh keys
+    services.openssh = {
+      enable = true;
+      hostKeys = [
+        {
+          path = "${dataPrefix}" + "/ssh/ssh_host_K-Link_ed25519_key";
+          type = "ed25519";
+        }
+        {
+          path = "${dataPrefix}" + "/ssh/ssh_host_K-Link_rsa_key";
+          type = "rsa";
+          bits = 4096;
+        }
+      ];
+    };
+
+    # persistence for bluetooth devices
+    systemd.tmpfiles.rules = [
+      # L creates symlink, from target path to destination?
+      ''L /var/lib/bluetooth - - - - "${dataPrefix}" + "/var/lib/bluetooth''
+    ];
+
+    # allegedly needed for persistence
+    # allow non-root users to specify the allow_other or allow_root mount options
+    programs.fuse.userAllowOther = true;
   };
 }

@@ -124,9 +124,8 @@
           specialArgs = inheritArgs;
           modules = sharedModules ++ [
             disko.nixosModules.disko
-            ./machines/Link/zfs-mirror.nix
-            impermanence.nixosModules.impermanence
             ./machines/Link/default.nix
+            impermanence.nixosModules.impermanence
           ];
           # modules = [
           #   disko.nixosModules.disko

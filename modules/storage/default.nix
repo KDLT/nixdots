@@ -21,4 +21,10 @@ with lib;
       description = "directory prefix for all cache that must persist on reboot";
     };
   };
+
+  # one of these must be set to true filesystem
+  config.kdlt.storage = {
+    btrfs.enable = mkDefault false;
+    zfs.enable = mkDefault false;
+  };
 }

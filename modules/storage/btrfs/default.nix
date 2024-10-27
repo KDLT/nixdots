@@ -7,8 +7,8 @@
   ...
 }:
 let
-  btrfs = config.kdlt.storage.btrfs.enable;
-  impermanence = config.kdlt.storage.impermanence.enable;
+  btrfs = config.kdlt.storage.btrfs;
+  impermanence = config.kdlt.storage.impermanence;
 in
 with lib;
 {
@@ -41,9 +41,9 @@ with lib;
     };
   };
 
-  config = mkIf btrfs {
+  config = mkIf btrfs.enable {
     # TODO: make sure this matches the subvolume layout from my own machine
-    boot.initrd = mkIf impermanence {
+    boot.initrd = mkIf impermanence.enable {
       postDeviceCommands = mkAfter ''
         mkdir /btrfs_tmp
         mount /dev/root_vg/root /btrfs_tmp

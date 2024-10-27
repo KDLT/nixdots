@@ -5,8 +5,9 @@ let
   impermanence = config.kdlt.storage.impermanence;
   poolName = config.kdlt.storage.zfs.zpool.name;
   blankRootSnap = poolName + "/local/root@blank";
-  cacheDataset = config.kdlt.zfs.zpool.dataset.cache;
-  dataDataset = config.kdlt.zfs.zpool.dataset.data;
+  # note that the declaration for these dataset do not include the pool name and leading forward slash
+  cacheDataset = poolName + "/" + config.kdlt.zfs.zpool.dataset.cache;
+  dataDataset = poolName + "/" + config.kdlt.zfs.zpool.dataset.data;
 in
 with lib;
 {
