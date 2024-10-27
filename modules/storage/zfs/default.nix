@@ -1,8 +1,8 @@
-# ~/dotfiles/modules/core/storage/zfs/default.nix
+# ~/dotfiles/modules/storage/zfs/default.nix
 { config, lib, ... }:
 let
-  zfs = config.kdlt.storage.zfs.enable;
-  impermanence = config.kdlt.storage.impermanence.enable;
+  zfsEnabled = config.kdlt.storage.zfs.enable;
+  impermanenceEnabled = config.kdlt.storage.impermanence.enable;
 in
 with lib;
 {
@@ -11,7 +11,7 @@ with lib;
       enable = mkEnableOption "zfs";
     };
   };
-  config = mkIf zfs {
+  config = mkIf zfsEnabled {
     # pending sanoid
     services = {
       zfs = {
@@ -19,6 +19,7 @@ with lib;
         trim.enable = true;
       };
 
+      # sanoid is zfs snapshotting service
       sanoid = {
         enable = true;
         interval = "hourly"; # default is hourly
@@ -38,7 +39,7 @@ with lib;
       };
     };
 
-    boot.initrd.systemd = mkIf impermanence {
+    boot.initrd.systemd = mkIf impermanenceEnabled {
       enable = mkDefault true;
       services.rollback = {
         description = "Rollback root filesystem to blank state";

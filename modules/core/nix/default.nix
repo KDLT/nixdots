@@ -2,13 +2,15 @@
   config,
   lib,
   ...
-}: let
-  username = config.kdlt.username;
-in {
+}:
+let
+  userName = config.kdlt.username;
+in
+{
   options = {
     kdlt.core.nix = {
-      enableDirenv = lib.mkOption {default = true;};
-      unfreePackages = lib.mkOption {default = [];};
+      enableDirenv = lib.mkOption { default = true; };
+      unfreePackages = lib.mkOption { default = [ ]; };
     };
   };
 
@@ -25,7 +27,7 @@ in {
     programs.nh = {
       enable = true;
       clean.enable = false;
-      flake = "/home/${username}/dotfiles";
+      flake = "/home/${userName}/nixdots";
     };
 
     nixpkgs.config = {
@@ -34,8 +36,14 @@ in {
 
     nix = {
       settings = {
-        trusted-users = [username "@wheel"];
-        experimental-features = ["nix-command" "flakes"];
+        trusted-users = [
+          userName
+          "@wheel"
+        ];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
         warn-dirty = false;
 
         # manual optimise: nix-store --optimise
@@ -54,7 +62,7 @@ in {
 
       nixPath = [
         "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-        "nixos-config=/home/kba/dotfiles"
+        "nixos-config=/home/${userName}/nixdots"
         "/nix/var/nix/profiles/per-user/root/channels"
       ];
     };

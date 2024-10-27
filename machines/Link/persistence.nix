@@ -57,7 +57,7 @@
   #       "Pictures"
   #       "Documents"
   #       "Videos"
-  #       "dotfiles"
+  #       "nixdots"
   #       "code"
   #       {
   #         directory = ".ssh";
