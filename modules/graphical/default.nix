@@ -3,11 +3,13 @@
   lib,
   ...
 }:
-with lib; {
+with lib;
+{
   imports = [
     ./applications
     ./desktop
     ./gtk
+    ./nvidia
     ./sound
     ./stylix # TODO: still infinite recursion when stylix is enabled
     ./terminal

@@ -17,6 +17,7 @@ with lib;
     # leaving it btrfs for now so options are defined
     # TODO redo for btrfs
     btrfs = {
+      # filesystem MUST be specified
       enable = mkEnableOption "btrfs";
       encrypted = mkEnableOption "btrfs request credentials";
 
@@ -41,11 +42,6 @@ with lib;
   };
 
   config = mkIf btrfs {
-    # root filesystem must be explicitly declared per machine
-    btrfs = {
-      enable = mkDefault false;
-    };
-
     # TODO: make sure this matches the subvolume layout from my own machine
     boot.initrd = mkIf impermanence {
       postDeviceCommands = mkAfter ''

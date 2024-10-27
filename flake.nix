@@ -59,7 +59,7 @@
       anyrun,
       home-manager,
       nix-index-database,
-      nixvim,
+      # nixvim, # not using my own nixvim config just yet
       alejandra,
       stylix,
       ...
@@ -89,13 +89,22 @@
       hyprlandFlake = hyprland.packages.${pkgs.stdenv.hostPlatform.system};
       anyrunFlake = anyrun.packages.${pkgs.system};
 
+      inheritArgs = {
+        inherit
+          inputs
+          outputs
+          user
+          hyprlandFlake
+          anyrunFlake
+          ;
+      };
       sharedModules = [
         # stylix.homeManagerModules.stylix # TODO: hm.nix gnome dconf issue
         # stylix.nixosModules.stylix # TODO: still suffering from infinite recursion
         { environment.systemPackages = [ alejandra.defaultPackage.${system} ]; }
         home-manager.nixosModules.home-manager
         nix-index-database.nixosModules.nix-index
-        nixvim.nixosModules.nixvim
+        # nixvim.nixosModules.nixvim
         sops-nix.nixosModules.sops
 
         ./modules # this points to default.nix that imports storage, core, development, graphical
@@ -106,30 +115,26 @@
         # 5700X3D 4080 Super Desktop
         Super = nixpkgs.lib.nixosSystem {
           modules = sharedModules ++ [ ./machines/Super/default.nix ];
-          specialArgs = {
-            inherit
-              inputs
-              outputs
-              user
-              hyprlandFlake
-              anyrunFlake
-              ;
-          };
+          specialArgs = inheritArgs;
         };
 
         # Beelink Mini PC
         Link = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
+          specialArgs = inheritArgs;
+          modules = sharedModules ++ [
             disko.nixosModules.disko
             ./machines/Link/zfs-mirror.nix
             impermanence.nixosModules.impermanence
-            ./machines/Link/configuration.nix
-            home-manager.nixosModules.home-manager
+            ./machines/Link/default.nix
           ];
+          # modules = [
+          #   disko.nixosModules.disko
+          #   ./machines/Link/zfs-mirror.nix
+          #   impermanence.nixosModules.impermanence
+          #   ./machines/Link/configuration.nix
+          #   home-manager.nixosModules.home-manager
+          # ];
         };
       };
 

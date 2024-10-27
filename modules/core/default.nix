@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./connectivity
     ./font
@@ -7,7 +8,6 @@
     ./nixvim # nixvim not working
     ./shells
     ./sops
-    ./storage
     ./system
     ./users
     ./utils

@@ -7,7 +7,7 @@ let
   userName = config.kdlt.username;
   dataPrefix = config.kdlt.storage.dataPrefix;
   cachePrefix = config.kdlt.storage.cachePrefix;
-  persistSystemDirs = [
+  persistentSystemDirs = [
     "/etc/nixos"
     "/var/log"
     "/var/lib/bluetooth"
@@ -20,8 +20,8 @@ let
       group = "colord";
       mode = "u=rwx,g=rx,o=";
     }
-  ];
-  persistSystemFiles = [
+  ] ++ config.kdlt.storage.impermanence.persist.systemDirs;
+  persistentSystemFiles = [
     "/etc/machine-id"
     {
       file = "/var/keys/secret_file";
@@ -29,8 +29,8 @@ let
         mode = "u=rwx,g=,o=";
       };
     }
-  ];
-  persistHomeDirs = [
+  ] ++ config.kdlt.storage.impermanence.persist.systemFiles;
+  persistentHomeDirs = [
     "Downloads"
     "Music"
     "Pictures"
@@ -54,62 +54,64 @@ let
       directory = ".local/share";
       mode = "0700";
     }
-  ];
-  persistHomeFiles = [
+  ] ++ config.kdlt.storage.impermanence.persist.homeDirs;
+  persistentHomeFiles = [
     ".screenrc"
-  ];
-  cacheDirs = [
+  ] ++ config.kdlt.storage.impermanence.persist.homeFiles;
+  PersistentCacheDirs = [
     ".cache/epiphany"
     ".cache/mozilla"
     ".cache/tracker3"
     ".cache/mesa_shader_cache_db"
-  ];
+  ] ++ config.kdlt.storage.impermanence.persist.cacheDirs;
 in
 with lib;
 {
   options.kdlt.storage = {
     impermanence = {
       enable = mkEnableOption "Enable Impermanence";
-    };
-    persist = {
-      systemDirs = mkOption {
-        type = types.listOf (types.str || types.attrs); # not sure if this is the right type declaration
-        default = [ "" ]; # would this complain on an empty string?
-        example = [ "/etc/nixos" ];
-        description = "Additional system directories to persist on boot";
-      };
-      systemFiles = mkOption {
-        type = types.listOf (types.str || types.attrs); # not sure if this is the right type declaration
-        default = null; # would this complain on null?
-        example = [ "/etc/machine-id" ];
-        description = "Additional system files to persist on boot";
-      };
-      homeDirs = mkOption {
-        type = types.listOf (types.str || types.attrs); # not sure if this is the right type declaration
-        default = null; # would this complain on null?
-        example = [
-          "Documents"
-          "Downloads"
-        ];
-        description = "Additional home directories to persist on boot";
-      };
-      homeFiles = mkOption {
-        type = types.listOf (types.str || types.attrs); # not sure if this is the right type declaration
-        default = null; # would this complain on null?
-        example = [
-          ".screenrc"
-          ".zshenv"
-        ];
-        description = "Additional home files to persist on boot";
-      };
-      cacheDirs = mkOption {
-        type = types.listOf (types.str || types.attrs); # not sure if this is the right type declaration
-        default = null; # would this complain on null?
-        example = [
-          ".cache/epiphany"
-          ".cache/mozilla"
-        ];
-        description = "Additional home directories to persist on boot";
+      persist = with types; {
+        systemDirs = mkOption {
+          # a list that can consist of strings or attributes consisting of strings
+          type = listOf (either str (attrsOf str));
+          # type = types.listOf (types.str || types.attrs); # not sure if this is the right type declaration
+          default = [ ];
+          example = [ "/etc/nixos" ];
+          description = "Additional system directories to persist on boot";
+        };
+        systemFiles = mkOption {
+          type = listOf (either str (attrsOf str));
+          default = [ ];
+          example = [ "/etc/machine-id" ];
+          description = "Additional system files to persist on boot";
+        };
+        homeDirs = mkOption {
+          type = listOf (either str (attrsOf str));
+          default = [ ];
+          example = [
+            "Documents"
+            "Downloads"
+          ];
+          description = "Additional home directories to persist on boot";
+        };
+        homeFiles = mkOption {
+          type = listOf (either str (attrsOf str));
+          default = [ ];
+          example = [
+            ".screenrc"
+            ".zshenv"
+          ];
+          description = "Additional home files to persist on boot";
+        };
+        cacheDirs = mkOption {
+          type = listOf (either str (attrsOf str));
+          default = [ ];
+          example = [
+            ".cache/epiphany"
+            ".cache/mozilla"
+          ];
+          description = "Additional home directories to persist on boot";
+        };
       };
     };
   };
@@ -118,20 +120,20 @@ with lib;
     fileSystems."${dataPrefix}".neededForBoot = true;
     environment.persistence."${dataPrefix}" = {
       hideMounts = true;
-      directories = persistSystemDirs ++ config.kdlt.storage.persist.systemDirs;
-      files = persistSystemFiles ++ config.kdlt.storage.persist.systemFiles;
+      directories = persistentSystemDirs;
+      files = persistentSystemFiles;
 
       # either this or the home.persistence approach
       users."${userName}" = {
-        directories = persistHomeDirs ++ config.kdlt.storage.persist.homeDirs;
-        files = persistHomeFiles ++ config.kdlt.storage.persist.homeFiles;
+        directories = persistentHomeDirs;
+        files = persistentHomeFiles;
       };
     };
 
     fileSystems."${cachePrefix}".neededForBoot = true;
     environment.persistence."${cachePrefix}" = {
       users."${userName}" = {
-        directories = cacheDirs ++ config.kdlt.storage.persist.cacheDirs;
+        directories = PersistentCacheDirs;
       };
     };
   };

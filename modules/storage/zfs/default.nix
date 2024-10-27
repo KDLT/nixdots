@@ -1,8 +1,12 @@
 # ~/dotfiles/modules/storage/zfs/default.nix
 { config, lib, ... }:
 let
-  zfsEnabled = config.kdlt.storage.zfs.enable;
-  impermanenceEnabled = config.kdlt.storage.impermanence.enable;
+  zfs = config.kdlt.storage.zfs;
+  impermanence = config.kdlt.storage.impermanence;
+  poolName = config.kdlt.storage.zfs.zpool.name;
+  blankRootSnap = poolName + "/local/root@blank";
+  cacheDataset = config.kdlt.zfs.zpool.dataset.cache;
+  dataDataset = config.kdlt.zfs.zpool.dataset.data;
 in
 with lib;
 {
@@ -11,7 +15,8 @@ with lib;
       enable = mkEnableOption "zfs";
     };
   };
-  config = mkIf zfsEnabled {
+
+  config = mkIf zfs.enable {
     # pending sanoid
     services = {
       zfs = {
@@ -25,12 +30,12 @@ with lib;
         interval = "hourly"; # default is hourly
         datasets = {
           # attribute set of (dataset/template options)
-          "rpool/local/cache" = {
+          ${dataDataset} = {
             autoprune = true;
             autosnap = true;
             daily = 3; # number of daily snapshots, 3 is every 8 hours quick mafs
           };
-          "rpool/persist/data" = {
+          ${cacheDataset} = {
             autoprune = true;
             autosnap = true;
             daily = 3;
@@ -39,7 +44,7 @@ with lib;
       };
     };
 
-    boot.initrd.systemd = mkIf impermanenceEnabled {
+    boot.initrd.systemd = mkIf impermanence.enable {
       enable = mkDefault true;
       services.rollback = {
         description = "Rollback root filesystem to blank state";
@@ -50,7 +55,7 @@ with lib;
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
         script = ''
-          zfs rollback -r rpool/local/root@blank && echo " >> >> rollback complete << <<"
+          zfs rollback -r ${blankRootSnap} && echo " >> >> rollback complete << <<"
         '';
       };
     };
