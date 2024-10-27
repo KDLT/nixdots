@@ -7,9 +7,9 @@
   imports = [ ./hardware.nix ];
 
   networking = {
-    hostName = "K-Super";
-    # hostId = "";
-    # nameservers = [ "" "" ];
+    hostName = "Link"; # Define your hostname.
+    hostId = "765c4d0e"; # head -c 8 /etc/machine-id
+    # nameservers = ["" ""];
   };
 
   kdlt = {
@@ -18,17 +18,16 @@
     email = "aguirrekenneth@gmail.com";
     stateVersion = "24.05";
     storage = {
-      btrfs = {
-        enable = true;
-      };
+      zfs.enable = true;
+      persistence = true;
     };
     core = {
       wireless = {
         enable = true;
       };
       nvidia = {
-        enable = true;
-        super = true;
+        enable = false;
+        super = false;
       };
       nix = {
         enableDirenv = false;
