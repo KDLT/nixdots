@@ -21,6 +21,7 @@ let
       mode = "u=rwx,g=rx,o=";
     }
   ] ++ config.kdlt.storage.impermanence.persist.systemDirs;
+
   persistentSystemFiles = [
     "/etc/machine-id"
     {
@@ -30,6 +31,7 @@ let
       };
     }
   ] ++ config.kdlt.storage.impermanence.persist.systemFiles;
+
   persistentHomeDirs = [
     "Downloads"
     "Music"
@@ -55,18 +57,24 @@ let
       mode = "0700";
     }
   ] ++ config.kdlt.storage.impermanence.persist.homeDirs;
+
   persistentHomeFiles = [
     ".screenrc"
   ] ++ config.kdlt.storage.impermanence.persist.homeFiles;
+
   PersistentCacheDirs = [
     ".cache/epiphany"
     ".cache/mozilla"
     ".cache/tracker3"
     ".cache/mesa_shader_cache_db"
   ] ++ config.kdlt.storage.impermanence.persist.cacheDirs;
+
 in
 with lib;
 {
+  # imports = [
+  #   ./persist
+  # ];
   options.kdlt.storage = {
     impermanence = {
       enable = mkEnableOption "Enable Impermanence";
@@ -137,35 +145,40 @@ with lib;
       };
     };
 
-    environment.etc = {
-      # persistence for network connections
-      "NetworkManager/system-connections" = {
-        # dataPrefix does not get rolled back on boot
-        source = "${dataPrefix}" + "/etc/NetworkManager/system-connections/";
-      };
-    };
+    # # now declared in ~/nixdots/modules/core/connectivity/wireless/default.nix
+    # environment.etc = {
+    #   # difference between environment.etc declaration and ones that directly point to the directory to persist
+    #   # is how this references a directory OUTSIDE of the typical /etc location
+    #   # in this case the system-connection is created during installation, this was manually copied to the persistent path described by the dataPrefix variable
+    #   "NetworkManager/system-connections" = {
+    #     # dataPrefix does not get rolled back on boot
+    #     source = "${dataPrefix}" + "/etc/NetworkManager/system-connections/";
+    #   };
+    # };
 
-    # persistence for ssh keys
-    services.openssh = {
-      enable = true;
-      hostKeys = [
-        {
-          path = "${dataPrefix}" + "/ssh/ssh_host_K-Link_ed25519_key";
-          type = "ed25519";
-        }
-        {
-          path = "${dataPrefix}" + "/ssh/ssh_host_K-Link_rsa_key";
-          type = "rsa";
-          bits = 4096;
-        }
-      ];
-    };
+    # # now declared in ~/nixdots/modules/core/utils/sshd/default.nix
+    # # persistence for ssh keys
+    # services.openssh = {
+    #   enable = true;
+    #   hostKeys = [
+    #     {
+    #       path = "${dataPrefix}" + "/ssh/ssh_host_K-Link_ed25519_key";
+    #       type = "ed25519";
+    #     }
+    #     {
+    #       path = "${dataPrefix}" + "/ssh/ssh_host_K-Link_rsa_key";
+    #       type = "rsa";
+    #       bits = 4096;
+    #     }
+    #   ];
+    # };
 
-    # persistence for bluetooth devices
-    systemd.tmpfiles.rules = [
-      # L creates symlink, from target path to destination?
-      ''L /var/lib/bluetooth - - - - "${dataPrefix}" + "/var/lib/bluetooth''
-    ];
+    # # now declared in ~/nixdots/modules/core/connectivity/bluetooth/default.nix
+    # # persistence for bluetooth devices
+    # systemd.tmpfiles.rules = [
+    #   # L creates symlink, from target path to destination?
+    #   ''L /var/lib/bluetooth - - - - "${dataPrefix}" + "/var/lib/bluetooth''
+    # ];
 
     # allegedly needed for persistence
     # allow non-root users to specify the allow_other or allow_root mount options

@@ -1,11 +1,13 @@
 # ~/dotfiles/modules/core/utils/eza/default.nix
-{config, ...}: {
+{ config, ... }:
+{
   config = {
     home-manager.users.${config.kdlt.username} = {
       programs.eza = {
         enable = true;
         enableZshIntegration = true;
-        icons = true;
+        # icons = true; # bool deprecated
+        icons = "auto";
         git = true;
       };
     };

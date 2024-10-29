@@ -1,13 +1,18 @@
 # ~/dotfiles/modules/storage/zfs/default.nix
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   zfs = config.kdlt.storage.zfs;
   impermanence = config.kdlt.storage.impermanence;
   poolName = config.kdlt.storage.zfs.zpool.name;
   blankRootSnap = poolName + "/local/root@blank";
   # note that the declaration for these dataset do not include the pool name and leading forward slash
-  cacheDataset = poolName + "/" + config.kdlt.zfs.zpool.dataset.cache;
-  dataDataset = poolName + "/" + config.kdlt.zfs.zpool.dataset.data;
+  cacheDataset = poolName + "/" + config.kdlt.storage.zfs.zpool.dataset.cache;
+  dataDataset = poolName + "/" + config.kdlt.storage.zfs.zpool.dataset.data;
 in
 with lib;
 {
