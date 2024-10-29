@@ -252,7 +252,7 @@ in
 
             exec-once = [
               # commented because it doubles with the enable
-              # "${pkgs.waybar}/bin/waybar"
+              "${pkgs.waybar}/bin/waybar"
 
               "${pkgs.swww}/bin/swww-daemon"
               "${pkgs.swww}/bin/swww img ${wallpaper}"

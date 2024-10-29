@@ -1,7 +1,6 @@
 {
   imports = [
     ./zfs-mirror.nix
-    ./zfs-mirror-copy.nix
     ./hardware.nix
   ];
 
@@ -58,7 +57,8 @@
     graphical = {
       enable = true;
       # wallpaper = "home/kba/Pictures/aesthetic-wallpapers/images/chill.gif";
-      wallpaper = ../../assets/wallpaper.png;
+      # wallpaper = ../../assets/wallpaper.png;
+      wallpaper = ../../assets/wallpaper.gif;
       sound = true;
       laptop = false;
       amd.enable = true;

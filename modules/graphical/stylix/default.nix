@@ -23,11 +23,9 @@ with lib;
       enable = true; # infinite recursion likely solved by programs.dconf.enable = true;
       autoEnable = true;
       polarity = "dark";
-      image = /. + wallpaper; # not sure  if i can coerce this to a path like so;
-      # image = /home/kba/Pictures/aesthetic-wallpapers/images/manga.png;
-      # image = /home/kba/nixdots/assets/wallpaper.png;
-      # base16Scheme = "${pkgs.base16-schemes}/share/themes/vesper.yaml";
-      fonts.packages = [ pkgs.nerdfonts ];
+      # this cannot be an absolute path, evaluation becomes impure
+      image = /. + wallpaper; # succesfully coerced this to path
+      # fonts.packages = [ pkgs.nerdfonts ];
 
       cursor = {
         package = pkgs.bibata-cursors;
@@ -53,14 +51,15 @@ with lib;
           package = pkgs.noto-fonts-color-emoji;
         };
         sizes = {
-          terminal = 18;
-          applications = 14;
-          popups = 12;
-          desktop = 14;
+          terminal = 16;
+          applications = 16;
+          popups = 18;
+          desktop = 16;
         };
       };
     };
 
+    # this conflicts with home-manager's nixosModule
     # home-manager.users.${userName} = {
     #   stylix = {
     #     enable = true;
