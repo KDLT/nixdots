@@ -11,10 +11,10 @@
   config = lib.mkIf config.kdlt.graphical.waybar.enable {
     home-manager.users.${config.kdlt.username} = {
       # better run waybar from hyprland's exec-start where configs are intact
-      # programs.waybar = {
-      #   enable = true;
-      #   systemd.enable = true;
-      # };
+      programs.waybar = {
+        enable = true;
+        systemd.enable = true;
+      };
 
       xdg.configFile = {
         "waybar" = {
