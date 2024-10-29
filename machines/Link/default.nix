@@ -66,7 +66,8 @@
         # enable = false; # part of the refresh rate sanity check
         # use `hyprctl monitors` for info
         # display = "HDMI-A-1, 3840x2160@119.88, 0x0, 1";
-        display = "DP-2, 3840x2160@120, 0x0, 1";
+        # display = "DP-2, 3840x2160@120, 0x0, 1"; # DP-2 attached to USB 4.0 port via adapter, steady connection
+        display = "DP-1, 3840x2160@100, 0x0, 1"; # kumukurap 'yung 120hz sa DP-1
       };
       xdg.enable = true;
     };

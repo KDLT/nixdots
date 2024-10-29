@@ -34,7 +34,7 @@ in
         in
         {
           enable = true;
-          userKnownHostsFile = "${username}/home/.ssh/known_hosts";
+          userKnownHostsFile = "/home/${username}/.ssh/known_hosts";
           hashKnownHosts = true; # hashes the known contents of know_hosts file
 
           extraOptionOverrides = {

@@ -20,7 +20,7 @@ with lib;
 
     # make xserver use the the "amdgpu" driver
     services.xserver = {
-      enable = true; # try disable, check if conflicting with wayland hence the noshow 120hz, default is false so i can just uncomment
+      enable = true;
       videoDrivers = [ "amdgpu" ];
     };
 
@@ -43,20 +43,18 @@ with lib;
     # ];
 
     hardware.graphics = {
-      enable = true; # this must be the missing declaration for high refresh, the other wiki didn't have this
-
-      # 64-bit Vulkan is enabled by default. 32-bit Vulkan has to be enabled.
-      # hardware.opengl.driSupport32Bit = true; # getting deprecated
-      enable32Bit = true;
+      enable = true;
 
       extraPackages = with pkgs; [
         rocmPackages.clr.icd # OpenCL
         amdvlk # Vulkan 64 bit
-        mesa.opencl # for old cards
+        # mesa.opencl # for old cards
       ];
+      # 64-bit Vulkan is enabled by default. 32-bit Vulkan has to be enabled.
+      # enable32Bit = true;
 
       # Vulkan 32 bit
-      extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+      # extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
     };
 
     # multi-monitors config from the wiki but not certain if this is an amd thing or general

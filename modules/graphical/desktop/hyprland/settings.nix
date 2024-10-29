@@ -250,14 +250,13 @@ in
             ];
 
             exec-once = [
-              # "${pkgs.waybar}/bin/waybar" # start waybar
+              "${pkgs.waybar}/bin/waybar" # start waybar
 
               # calling swww here works but doesn't on xdgautostart
               "${pkgs.swww}/bin/swww-daemon"
-              # "${pkgs.swww}/bin/swww img ./assets/wallpaper.png"
+              "${pkgs.swww}/bin/swww img ~/nixdots/assets/wallpaper.png"
 
               "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
-              "${pkgs.swww}/bin/swww img ./assets/wallpaper.png"
 
               # open a kitty and firefox
               "${pkgs.kitty}/bin/kitty"
