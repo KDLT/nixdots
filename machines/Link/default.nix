@@ -48,10 +48,6 @@
       wireless = {
         enable = true;
       };
-      nvidia = {
-        enable = false;
-        super = false;
-      };
       nix = {
         enableDirenv = false;
         # unfreePackages = [];
@@ -64,9 +60,8 @@
       enable = true;
       sound = true;
       laptop = false;
-      # stylix = {
-      #   enable = true;
-      # };
+      amd.enable = true;
+      # stylix.enable = true;
       hyprland = {
         enable = true;
         # use `hyprctl monitors` for info

@@ -10,6 +10,7 @@ with lib;
     ./desktop
     ./gtk
     ./nvidia
+    ./amd
     ./sound
     ./stylix # TODO: still infinite recursion when stylix is enabled
     ./terminal

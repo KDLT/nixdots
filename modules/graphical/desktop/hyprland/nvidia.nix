@@ -3,12 +3,14 @@
   lib,
   ...
 }:
-with lib; let
-  hyprlandConfig = config.kdlt.graphical.hyprland;
-  nvidiaConfig = config.kdlt.core.nvidia;
+with lib;
+let
+  hyprland = config.kdlt.graphical.hyprland;
+  nvidia = config.kdlt.graphical.nvidia;
   username = config.kdlt.username;
-in {
-  config = mkIf (hyprlandConfig.enable && nvidiaConfig.enable) {
+in
+{
+  config = mkIf (hyprland.enable && nvidia.enable) {
     # nvidia hyprland reference: https://wiki.hyprland.org/Nvidia/#installation
     # for wayland compositors to load properly these nvidia driver modules need to be loaded in initramfs
     boot = {
@@ -24,28 +26,31 @@ in {
     };
 
     # hyprland requirements for nvidia gpus
-    nixpkgs.config.allowUnfreePredicate = pkg:
+    nixpkgs.config.allowUnfreePredicate =
+      pkg:
       builtins.elem (lib.getName pkg) [
         "nvidia-utils"
         "lib32-nvidia-utils"
       ];
 
-    home-manager.users.${username} = {...}: {
-      wayland.windowManager.hyprland = {
-        settings = {
-          cursor = {
-            no_hardware_cursors = true; # nvidia hyprland requirement
+    home-manager.users.${username} =
+      { ... }:
+      {
+        wayland.windowManager.hyprland = {
+          settings = {
+            cursor = {
+              no_hardware_cursors = true; # nvidia hyprland requirement
+            };
+            # nvidia hyprland environment variables
+            env = [
+              "LIBVA_DRIVER_NAME,nvidia"
+              "XDG_SESSION_TYPE,wayland"
+              "GBM_BACKEND,nvidia-drm"
+              "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+              "NIXOS_OZONE_WL,1"
+            ];
           };
-          # nvidia hyprland environment variables
-          env = [
-            "LIBVA_DRIVER_NAME,nvidia"
-            "XDG_SESSION_TYPE,wayland"
-            "GBM_BACKEND,nvidia-drm"
-            "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-            "NIXOS_OZONE_WL,1"
-          ];
         };
       };
-    };
   };
 }

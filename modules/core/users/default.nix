@@ -5,7 +5,8 @@
   pkgs,
   user,
   ...
-}: {
+}:
+{
   options = {
     kdlt = {
       username = lib.mkOption {
@@ -36,12 +37,17 @@
           # this is a different declaration from the rest of the config
           isNormalUser = true;
           description = "${config.kdlt.fullname}";
-          extraGroups = ["wheel" "networkmanager"];
+          extraGroups = [
+            "wheel"
+            "networkmanager"
+          ];
           shell = pkgs.zsh;
+          hashedPassword = "$y$j9T$0cy6huv8H2SHD0mAajoIF0$KIb3CaPIV8MiXjyIUSqWznuzVKbuJj8GI77u.2zfGU3";
           # hashedPasswordFile = config.sops.secrets."users/${username}".path;
         };
+        # root.hashedPasswordFile = config.sops.secrets."users/root".path;
+        root.hashedPassword = "$y$j9T$G/2CdvV6kjU6zXGWO6lgR/$dEYkMHuN9xD4za2WufZQx3NeiRcIvrlAKAAif6DoVr5";
       };
-      # root.hashedPasswordFile = config.sops.secrets."users/root".path;
     };
   };
 }

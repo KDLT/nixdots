@@ -1,9 +1,4 @@
 {
-  pkgs,
-  config,
-  ...
-}:
-{
   imports = [ ./hardware.nix ];
 
   networking = {
@@ -26,10 +21,6 @@
       wireless = {
         enable = true;
       };
-      nvidia = {
-        enable = true;
-        super = true;
-      };
       nix = {
         enableDirenv = false;
         # unfreePackages = [];
@@ -42,6 +33,10 @@
       enable = true;
       sound = true;
       laptop = false;
+      nvidia = {
+        enable = true;
+        super = true;
+      };
       # stylix = {
       #   enable = true;
       # };
