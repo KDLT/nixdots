@@ -3,49 +3,43 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   username = config.kdlt.username;
-in {
-  # imports = [];
-  # kdlt.core.zfs = lib.mkMerge [
-  #   (lib.mkIf config.kdlt.core.persistence.enable {
-  #     homeCacheLinks = [ ".config" ".cache" ".local" ".cloudflared" ];
-  #   })
-  #   (lib.mkIf (!config.dc-tec.core.persistence.enable) {})
-  # ];
-  # colorScheme = inputs.nix-colors.colorScheme.catpuccin-macchiato;
-  # catppuccin.flavor = "macchiato";
-
+in
+{
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
 
     users = {
-      ${username} = {...}: {
-        # imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
-        home = {
-          stateVersion = config.kdlt.stateVersion;
+      ${username} =
+        { ... }:
+        {
+          # imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+          home = {
+            stateVersion = config.kdlt.stateVersion;
 
-          homeDirectory = "/home/${username}";
+            homeDirectory = "/home/${username}";
 
-          packages = with pkgs; [
-            libnotify # sends desktop notifs to notif daemon
-            wireguard-tools # secure tunneling whatever that means
-            ventoy # endgame bootable usb
+            packages = with pkgs; [
+              libnotify # sends desktop notifs to notif daemon
+              wireguard-tools # secure tunneling whatever that means
+              ventoy # endgame bootable usb
 
-            fzf # command line fuzzy finder written in go
-            ripgrep
-            gcc # gnu compiler collection
-            fd # alternative to find
-            xclip # tool to access clipboard from console
-            oh-my-posh # prompt engine
-            fortune # pseudorandom message generator
-            cowsay # generates ascii picture of cow with message
-            lolcat # rainbow cat
-            onefetch # git repository summary from terminal
-          ];
+              fzf # command line fuzzy finder written in go
+              ripgrep
+              gcc # gnu compiler collection
+              fd # alternative to find
+              xclip # tool to access clipboard from console
+              oh-my-posh # prompt engine
+              fortune # pseudorandom message generator
+              cowsay # generates ascii picture of cow with message
+              lolcat # rainbow cat
+              onefetch # git repository summary from terminal
+            ];
+          };
         };
-      };
 
       root = _: {
         # the underscore colon _: might just be the same as {...}:

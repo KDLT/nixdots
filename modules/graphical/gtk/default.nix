@@ -3,10 +3,16 @@
   lib,
   config,
   ...
-}: {
-  options = {};
+}:
+{
+  options = { };
 
   config = lib.mkIf config.kdlt.graphical.enable {
+    # this is what stylix probably needed all along
+    programs.dconf = {
+      enable = true; # not sure if this is the place to declare it
+    };
+
     home-manager.users.${config.kdlt.username} = {
       home.pointerCursor = {
         gtk.enable = true;
@@ -33,15 +39,16 @@
           size = 14;
         };
 
-        theme = {
-          name = "catppuccin-macchiato-pink-compact";
-          package = pkgs.catppuccin-gtk.override {
-            accents = ["pink"];
-            # accents = ["peach"];
-            size = "compact";
-            variant = "macchiato";
-          };
-        };
+        # stylix got the theme now
+        # theme = {
+        #   name = "catppuccin-macchiato-pink-compact";
+        #   package = pkgs.catppuccin-gtk.override {
+        #     accents = [ "pink" ];
+        #     # accents = ["peach"];
+        #     size = "compact";
+        #     variant = "macchiato";
+        #   };
+        # };
       };
 
       qt = {

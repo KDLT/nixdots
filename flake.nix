@@ -99,8 +99,7 @@
           ;
       };
       sharedModules = [
-        # stylix.homeManagerModules.stylix # TODO: hm.nix gnome dconf issue
-        # stylix.nixosModules.stylix # TODO: still suffering from infinite recursion
+        stylix.nixosModules.stylix
         { environment.systemPackages = [ alejandra.defaultPackage.${system} ]; }
         home-manager.nixosModules.home-manager
         nix-index-database.nixosModules.nix-index
@@ -127,13 +126,6 @@
           modules = sharedModules ++ [
             ./machines/Link/default.nix
           ];
-          # modules = [
-          #   disko.nixosModules.disko
-          #   ./machines/Link/zfs-mirror.nix
-          #   impermanence.nixosModules.impermanence
-          #   ./machines/Link/configuration.nix
-          #   home-manager.nixosModules.home-manager
-          # ];
         };
       };
 

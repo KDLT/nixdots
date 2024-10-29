@@ -24,6 +24,10 @@ with lib;
       videoDrivers = [ "amdgpu" ];
     };
 
+    hardware.graphics = {
+      enable = true;
+    };
+
     # HIP libraries hard-code workaround
     systemd.tmpfiles.rules = mkBefore [
       # trying mkBefore so this gets listed before bluetooth in
@@ -32,30 +36,30 @@ with lib;
 
     # Blender package for hardware encoding
     # clinfo is used to verify that openCL is correctly set up
-    environment.systemPackages = with pkgs; [
-      blender-hip
-      clinfo
-    ];
+    # environment.systemPackages = with pkgs; [
+    #   blender-hip
+    #   clinfo
+    # ];
 
     # hardware.opengl.extraPackages = with pkgs; [
     #   rocmPackages.clr.icd # OpenCL
     #   amdvlk # Vulkan 64 bit
     # ];
 
-    hardware.graphics = {
-      enable = true;
+    # hardware.graphics = {
+    #   extraPackages = with pkgs; [
+    #     rocmPackages.clr.icd # OpenCL
+    #     amdvlk # Vulkan 64 bit
+    #     mesa.opencl # for old cards
+    #   ];
+    # };
 
-      extraPackages = with pkgs; [
-        rocmPackages.clr.icd # OpenCL
-        amdvlk # Vulkan 64 bit
-        # mesa.opencl # for old cards
-      ];
-      # 64-bit Vulkan is enabled by default. 32-bit Vulkan has to be enabled.
-      # enable32Bit = true;
-
-      # Vulkan 32 bit
-      # extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
-    };
+    ## prob optionals below
+    # 32-bit vulkan
+    # hardware.graphics = {
+    #   enable32Bit = true;
+    #   extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+    # };
 
     # multi-monitors config from the wiki but not certain if this is an amd thing or general
     # `head /sys/class/drm/*/status` to find the right display name

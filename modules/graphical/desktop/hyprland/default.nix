@@ -3,9 +3,11 @@
   lib,
   pkgs,
   hyprlandFlake,
+  inputs,
   ...
 }:
 let
+  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   hyprland = config.kdlt.graphical.hyprland;
   username = config.kdlt.username;
 in
@@ -29,6 +31,14 @@ in
       trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
+    # On Lag, FPS drops uncomment this
+    # hardware.opengl = {
+    #   package = pkgs-unstable.mesa.drivers;
+    #   # 32-bit support, e.g, for steam
+    #   driSupport32Bit = true;
+    #   package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+    # };
+
     # TODO-COMPLETE: test if this xserver setting is required by hyprland, NO
     services = {
       # xserver.enable = false; # TODO commenting this out because amd wiki entry sets this to true
@@ -42,18 +52,19 @@ in
         };
       };
     };
-    # # hyprland, hyprlock, & waybar
-    programs = {
-      xwayland.enable = true;
-      hyprland = {
-        enable = true;
-        package = hyprlandFlake.hyprland;
-        portalPackage = hyprlandFlake.xdg-desktop-portal-hyprland;
-      };
-      hyprland.xwayland.enable = true;
-      waybar.enable = true;
-      hyprlock.enable = true;
-    };
+
+    ## hyprland, hyprlock, & waybar -> opting to declare this in home-manager
+    # programs = {
+    #   xwayland.enable = true;
+    #   hyprland = {
+    #     enable = true;
+    #     package = hyprlandFlake.hyprland;
+    #     portalPackage = hyprlandFlake.xdg-desktop-portal-hyprland;
+    #   };
+    #   hyprland.xwayland.enable = true;
+    #   waybar.enable = true;
+    #   hyprlock.enable = true;
+    # };
 
     # hyprland xdg portal
     xdg.portal = {
