@@ -106,6 +106,8 @@
         nix-index-database.nixosModules.nix-index
         # nixvim.nixosModules.nixvim
         sops-nix.nixosModules.sops
+        disko.nixosModules.disko
+        impermanence.nixosModules.impermanence
 
         ./modules # this points to default.nix that imports storage, core, development, graphical
       ];
@@ -123,9 +125,7 @@
           system = "x86_64-linux";
           specialArgs = inheritArgs;
           modules = sharedModules ++ [
-            disko.nixosModules.disko
             ./machines/Link/default.nix
-            impermanence.nixosModules.impermanence
           ];
           # modules = [
           #   disko.nixosModules.disko

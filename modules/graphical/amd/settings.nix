@@ -13,9 +13,14 @@ with lib;
     # have the kernel load the correct driver immediately
     boot.initrd.kernelModules = [ "amdgpu" ];
 
+    boot.kernelParams = [
+      "video=HDMI-A-1:3840x2560@120"
+      # "video=HDMI-A-1:3840x2560@119.98"
+    ];
+
     # make xserver use the the "amdgpu" driver
     services.xserver = {
-      enable = true;
+      enable = true; # try disable, check if conflicting with wayland hence the noshow 120hz, default is false so i can just uncomment
       videoDrivers = [ "amdgpu" ];
     };
 
@@ -32,18 +37,27 @@ with lib;
       clinfo
     ];
 
-    hardware.opengl.extraPackages = with pkgs; [
-      rocmPackages.clr.icd # OpenCL
-      amdvlk # Vulkan 64 bit
-    ];
+    # hardware.opengl.extraPackages = with pkgs; [
+    #   rocmPackages.clr.icd # OpenCL
+    #   amdvlk # Vulkan 64 bit
+    # ];
 
-    # Vulkan 32 bit
-    # hardware.opengl.extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ]; # old syntax, getting deprecated
-    hardware.graphics.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+    hardware.graphics = {
+      enable = true; # this must be the missing declaration for high refresh, the other wiki didn't have this
 
-    # 64-bit Vulkan is enabled by default. 32-bit Vulkan has to be enabled.
-    # hardware.opengl.driSupport32Bit = true; # getting deprecated
-    hardware.graphics.enable32Bit = true; # new declaration syntax
+      # 64-bit Vulkan is enabled by default. 32-bit Vulkan has to be enabled.
+      # hardware.opengl.driSupport32Bit = true; # getting deprecated
+      enable32Bit = true;
+
+      extraPackages = with pkgs; [
+        rocmPackages.clr.icd # OpenCL
+        amdvlk # Vulkan 64 bit
+        mesa.opencl # for old cards
+      ];
+
+      # Vulkan 32 bit
+      extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+    };
 
     # multi-monitors config from the wiki but not certain if this is an amd thing or general
     # `head /sys/class/drm/*/status` to find the right display name
@@ -51,6 +65,16 @@ with lib;
     # boot.kernelParams = [
     #   "video=DP-1:2560x1440@144"
     #   "video=HDMI-A-1:3840x2560@120"
+    # ];
+
+    # boot.kernelParams = [
+    #   # for Southern Island 1 cards radeon 7000
+    #   # "radeon.si_support=0"
+    #   # "amdgpu.si_support=1"
+    #
+    #   # for Sea Island cards - radeon 8000
+    #   # "radeon.cik_support=0"
+    #   # "amdgpu.cik_support=1"
     # ];
   };
 }

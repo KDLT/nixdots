@@ -11,6 +11,12 @@
     # nameservers = ["" ""];
   };
 
+  # sanity check that the display is not the problem re: low refresh rate
+  # Enable the GNOME Desktop Environment.
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
   kdlt = {
     username = "kba";
     fullname = "Kenneth Balboa Aguirre";
@@ -32,14 +38,7 @@
       impermanence = {
         enable = true;
         # list of directories and files to persist in addition to defaults
-        # located in ../../modules/storage/impermanence/default.nix
-        persist = {
-          systemDirs = [ ];
-          systemFiles = [ ];
-          homeDirs = [ ];
-          homeFiles = [ ];
-          cacheDirs = [ ];
-        };
+        # more options located in ../../modules/storage/impermanence/default.nix
       };
       dataPrefix = "/data";
       cachePrefix = "/cache";
@@ -64,8 +63,10 @@
       # stylix.enable = true;
       hyprland = {
         enable = true;
+        # enable = false; # part of the refresh rate sanity check
         # use `hyprctl monitors` for info
-        display = "HDMI-A-1, 3840x2160@119.88, 0x0, 1";
+        # display = "HDMI-A-1, 3840x2160@119.88, 0x0, 1";
+        display = "DP-2, 3840x2160@120, 0x0, 1";
       };
       xdg.enable = true;
     };

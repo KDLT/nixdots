@@ -146,7 +146,7 @@ in
             };
 
             bind = [
-              "$mod ALT, del, exit"
+              "$mod ALT, Delete, exit"
               "$mod SHIFT, f, exec, $browser"
               "$mod, RETURN, exec, $terminal"
               "$mod ALT, c, killactive"
@@ -250,15 +250,14 @@ in
             ];
 
             exec-once = [
-              # "${pkgs.waybar}" # this supposedly proper way doesn't seem to work
-              # "${pkgs.waybar}/bin/waybar" # nevermind, i'm just dumb
-              # "waybar" # while this works
+              # "${pkgs.waybar}/bin/waybar" # start waybar
 
               # calling swww here works but doesn't on xdgautostart
               "${pkgs.swww}/bin/swww-daemon"
-              "${pkgs.swww}/bin/swww img /home/kba/Pictures/aesthetic-wallpapers/images/minim-helmet.png"
+              # "${pkgs.swww}/bin/swww img ./assets/wallpaper.png"
 
               "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
+              "${pkgs.swww}/bin/swww img ./assets/wallpaper.png"
 
               # open a kitty and firefox
               "${pkgs.kitty}/bin/kitty"
