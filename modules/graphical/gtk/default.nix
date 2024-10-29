@@ -14,12 +14,13 @@
     };
 
     home-manager.users.${config.kdlt.username} = {
+      # cursor declarations conflicts with stylix
       home.pointerCursor = {
         gtk.enable = true;
         x11.enable = true;
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Modern-Ice";
-        size = 24;
+        #   package = pkgs.bibata-cursors;
+        #   name = "Bibata-Modern-Ice";
+        #   size = 24; 
       };
 
       xresources.properties = {
@@ -32,12 +33,11 @@
         gtk2.extraConfig = "gtk-application-prefer-dark-theme = true;";
         gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
 
-        # this also controls all the non configurable font size in firefox
-        font = {
-          name = "Commit Mono Nerd Font";
-          # size = 16;
-          size = 14;
-        };
+        # stylix time again
+        # font = {
+        #   name = "Commit Mono Nerd Font";
+        #   size = 14;
+        # };
 
         # stylix got the theme now
         # theme = {

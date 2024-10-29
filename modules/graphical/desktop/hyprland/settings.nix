@@ -7,8 +7,9 @@
 }:
 with lib;
 let
-  hyprland = config.kdlt.graphical.hyprland;
   username = config.kdlt.username;
+  hyprland = config.kdlt.graphical.hyprland;
+  wallpaper = config.kdlt.graphical.wallpaper;
 in
 {
   options = {
@@ -250,11 +251,11 @@ in
             ];
 
             exec-once = [
-              "${pkgs.waybar}/bin/waybar" # start waybar
+              # commented because it doubles with the enable
+              # "${pkgs.waybar}/bin/waybar"
 
-              # calling swww here works but doesn't on xdgautostart
               "${pkgs.swww}/bin/swww-daemon"
-              "${pkgs.swww}/bin/swww img ~/nixdots/assets/wallpaper.png"
+              "${pkgs.swww}/bin/swww img ${wallpaper}"
 
               "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
 

@@ -100,7 +100,7 @@
       };
       sharedModules = [
         stylix.nixosModules.stylix
-        { environment.systemPackages = [ alejandra.defaultPackage.${system} ]; }
+        # stylix.homeManagerModules.stylix # not sure if this would work alongside the nixos module
         home-manager.nixosModules.home-manager
         nix-index-database.nixosModules.nix-index
         # nixvim.nixosModules.nixvim

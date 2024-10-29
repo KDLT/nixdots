@@ -4,6 +4,7 @@
   ...
 }:
 with lib;
+with types;
 {
   imports = [
     ./applications
@@ -21,6 +22,12 @@ with lib;
     kdlt.graphical = {
       enable = mkEnableOption "Graphical Environment";
       laptop = mkEnableOption "Laptop config";
+      wallpaper = mkOption {
+        description = "path to wallpaper";
+        type = either str path;
+        default = ../../assets/wallpaper.png;
+        # default = "~/nixdots/assets/wallpaper.png";
+      };
     };
   };
 

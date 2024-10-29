@@ -17,13 +17,13 @@
           systemd.enable = true; # this probably causes double waybar
         };
 
-        # xdg.configFile = {
-        #   "waybar" = {
-        #     # this will be the created directory relative to $XDG_CONFIG_HOME
-        #     source = ./config;
-        #     recursive = true;
-        #   };
-        # };
+        xdg.configFile = {
+          "waybar" = {
+            # this will be the created directory relative to $XDG_CONFIG_HOME
+            source = ./config;
+            recursive = true;
+          };
+        };
       };
   };
 }

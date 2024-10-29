@@ -13,31 +13,31 @@
 /*@define-color blueish #7dcfff;*/
 /*@define-color blue #7aa2f7;*/
 /*@define-color violet #bb9af7;*/
-/**/
+
 /*@define-color text #c0caf5;*/
 /*@define-color whiteish #a9b1d6;*/
 /*@define-color grayish #9aa5ce;*/
 /*@define-color gray #565f89;*/
-/**/
+
 /*@define-color base #414868;*/
 /*@define-color mantle #24283b;*/
 /*@define-color crust #1a1b26;*/
 
 * {
-  /* https://docs.gtk.org/gtk3/css-overview.html#colors */
-  color: @text;
+  /*https://docs.gtk.org/gtk3/css-overview.html#colors */
+  /*color: @text;*/
   font-family: "JetBrainsMono Nerd Font";
   font-size: 14pt;
   font-weight: bold;
   border-radius: 8px;
-  transition-property: background-color;
+  /*transition-property: background-color;*/
   transition-duration: 0.5s;
 }
 
 @keyframes blink_red {
   to {
-    background-color: @red;
-    color: @crust;
+    /*background-color: @red;*/
+    /*color: @crust;*/
   }
 }
 
@@ -52,7 +52,7 @@
 }
 
 window#waybar {
-  background-color: transparent;
+  /*background-color: transparent;*/
   /* border: 2px solid alpha(@crust, 0.3); */
   /* border: 2px solid alpha(#1a1b26, 0.3); */
 }
@@ -61,8 +61,8 @@ window > box {
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 5px;
-  /* background-color: shade(@base, 0.9); */
-  background-color: transparent;
+  /*background-color: shade(@base, 0.9); */
+  /*background-color: transparent;*/
   padding: 3px;
   padding-left: 8px;
   border: 2px none @blue;
@@ -81,18 +81,18 @@ window > box {
 }
 
 #workspaces button.active {
-  /* background-color: #b5e8e0; */
-  background-color: @mantle;
-  color: #1a1826;
+  /*background-color: #b5e8e0; */
+  /*background-color: @mantle;*/
+  /*color: #1a1826;*/
 }
 
 #workspaces button.urgent {
-  color: #1a1826;
+  /*color: #1a1826;*/
 }
 
 #workspaces button:hover {
-  background-color: @blueish;
-  color: #1a1826;
+  /*background-color: @blueish;*/
+  /*color: #1a1826;*/
 }
 
 tooltip {
@@ -100,7 +100,7 @@ tooltip {
 }
 
 tooltip label {
-  color: #d9e0ee;
+  /*color: #d9e0ee;*/
 }
 
 #custom-launcher {
@@ -108,7 +108,7 @@ tooltip label {
   padding-left: 8px;
   /* padding-right: 6px; */
   padding-right: 20px;
-  color: #b5e8e0;
+  /*color: #b5e8e0;*/
 }
 
 #mode,
@@ -131,36 +131,36 @@ tooltip label {
 }
 
 #memory {
-  color: @teal;
+  /*color: @teal;*/
 }
 
 #cpu {
-  color: @violet;
+  /*color: @violet;*/
 }
 
 #clock {
-  color: @whiteish;
+  /*color: @whiteish;*/
 }
 
 #idle_inhibitor {
-  color: @sand;
+  /*color: @sand;*/
   /* padding-right: 8px; */
   padding-right: 16px;
 }
 
 #battery {
   min-width: 55px;
-  color: @blueish;
+  /*color: @blueish;*/
 }
 
 #battery.charging,
 #battery.full,
 #battery.plugged {
-  color: @green;
+  /*color: @green;*/
 }
 
 #battery.critical:not(.charging) {
-  color: @red;
+  /*color: @red;*/
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -169,35 +169,35 @@ tooltip label {
 }
 
 #custom-wall {
-  color: @blueish;
+  /*color: @blueish;*/
 }
 
 #temperature {
-  color: @grayish;
+  /*color: @grayish;*/
 }
 
 #backlight {
-  color: @sand;
+  /*color: @sand;*/
 }
 
 #pulseaudio {
-  color: @whiteish;
+  /*color: @whiteish;*/
 }
 
 #network {
-  color: @tealish;
+  /*color: @tealish;*/
 }
 
 #bluetooth {
-  color: @blue;
+  /*color: @blue;*/
 }
 
 #network.disconnected {
-  color: @text;
+  /*color: @text;*/
 }
 
 #custom-powermenu {
-  color: @red;
+  /*color: @red;*/
   padding-right: 8px;
 }
 
@@ -207,8 +207,8 @@ tooltip label {
 }
 
 #mpd.paused {
-  /* color: #414868; */
-  color: @base;
+  /*color: #414868; */
+  /*color: @base;*/
   font-style: italic;
 }
 
@@ -217,6 +217,6 @@ tooltip label {
 }
 
 #mpd {
-  /* color: #c0caf5; */
-  color: @mantle;
+  /*color: #c0caf5; */
+  /*color: @mantle;*/
 }

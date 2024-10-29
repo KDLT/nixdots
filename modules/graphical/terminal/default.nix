@@ -3,8 +3,9 @@
   lib,
   ...
 }:
-# nerdFontName = name: builtins.replaceStrings ["-"] [""] name + " Nerd Font";
-# nerdFontPkg = nerdFontName: (pkgs.nerdfonts.override { fonts = [ nerdFontName ]; });
+let
+  nerdfont = config.kdlt.nerdfont;
+in
 {
   options = {
     kdlt = {
@@ -13,16 +14,21 @@
   };
 
   config = lib.mkIf config.kdlt.graphical.terminal.enable {
-    home-manager.users.${config.kdlt.username} = {...}: {
+    home-manager.users.${config.kdlt.username} = {
       programs.kitty = {
         enable = true;
-
-        font = lib.mkIf config.kdlt.nerdfont.enable {
-          # name = config.kdlt.nerdfont.monospace.fontName + " Nerd Font";
-          # name = "BlexMono Nerd Font";
-          name = builtins.replaceStrings ["-"] [""] config.kdlt.nerdfont.monospace.fontName + " Nerd Font";
-          size = 16;
+        font = {
+          name = if nerdfont.enable then config.kdlt.nerdfont.monospace.name else "CommitMono Nerd Font";
+          # size = 16;
         };
+
+        # let stylix handle this
+        # font = lib.mkIf config.kdlt.nerdfont.enable {
+        #   # name = config.kdlt.nerdfont.monospace.fontName + " Nerd Font";
+        #   # name = "BlexMono Nerd Font";
+        #   name = builtins.replaceStrings ["-"] [""] config.kdlt.nerdfont.monospace.fontName + " Nerd Font";
+        #   size = 16;
+        # };
 
         settings = {
           background_opacity = lib.mkForce "0.89";

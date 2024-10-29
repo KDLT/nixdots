@@ -57,10 +57,12 @@
     };
     graphical = {
       enable = true;
+      # wallpaper = "home/kba/Pictures/aesthetic-wallpapers/images/chill.gif";
+      wallpaper = ../../assets/wallpaper.png;
       sound = true;
       laptop = false;
       amd.enable = true;
-      # stylix.enable = true;
+      stylix.enable = true;
       hyprland = {
         enable = true;
         # enable = false; # part of the refresh rate sanity check
@@ -72,11 +74,20 @@
       xdg.enable = true;
     };
     nerdfont = {
+      # font name reference:
+      # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/shas.nix
       enable = true;
-      monospace.fontName = "CommitMono";
-      serif.fontName = "Go-Mono";
-      sansSerif.fontName = "JetBrainsMono";
-      emoji.fontName = "Noto-Emoji";
+      monospace.name = "CommitMono";
+      serif.name = "Go-Mono";
+      sansSerif.name = "JetbrainsMono";
+      emoji.name = "Noto-Emoji";
     };
+    # nerdfont = {
+    #   enable = true;
+    #   monospace.fontName = "CommitMono";
+    #   serif.fontName = "Go-Mono";
+    #   sansSerif.fontName = "JetBrainsMono";
+    #   emoji.fontName = "Noto-Emoji";
+    # };
   };
 }
