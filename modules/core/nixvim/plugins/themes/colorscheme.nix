@@ -1,19 +1,32 @@
-{...}: let
-  schemeName = "tokyonight";
-  # schemeName = "catppuccin";
-  # schemeName = "dracula-nvim";
-  # schemeName = "kanagawa";
-  # schemeName = "palette";
-  # schemeName = "onedark";
-in {
+{ ... }:
+let
+in
+# schemeName = "tokyonight";
+# schemeName = "catppuccin";
+# schemeName = "dracula-nvim";
+# schemeName = "kanagawa";
+# schemeName = "palette";
+# schemeName = "onedark";
+{
   programs.nixvim.colorschemes = {
     # even if this is enabled, stylix takes over
-    "${schemeName}" = {
+    catppuccin = {
       enable = true;
       settings = {
-        transparent = true; # uncomment for tokyonight, kanagawa, onedark
-        # transparent_background = true; # uncomment for catppuccin, pallette
+        background = {
+          dark = "mocha";
+        };
+        # transparent = true; # uncomment for tokyonight, kanagawa, onedark
+        transparent_background = true; # uncomment for catppuccin, pallette
         # transparent_bg = true; # uncomment for draculanvim
+        custom_highlights = ''
+          function(highlights)
+            return {
+            cursorLineNr = { fg = highlights.peach, style = {} },
+            NavicText = { fg = highlights.text },
+            }
+          end
+        '';
       };
     };
   };

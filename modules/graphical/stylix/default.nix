@@ -26,12 +26,16 @@ with lib;
     stylix = {
       enable = true;
       autoEnable = true;
+      targets.nixvim.enable = false; # don't style nixvim
       polarity = "dark";
       image = ../../../assets/wallpaper-blue.png;
       # somewhere in /nix/store/ is the base16 scheme directory, the yaml filenames are the options
       # base16Scheme = "${pkgs.base16-schemes}/share/themes/twilight.yaml";
       # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/saga.yaml";
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/saga.yaml";
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/primer-dark.yaml";
+      # see generated color scheme in /etc/stylix/generated.json
 
       cursor = {
         package = pkgs.bibata-cursors;

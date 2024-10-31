@@ -48,14 +48,22 @@
                 action = ":noh<CR>";
                 desc = "clear highlights";
               };
-              "L" = {
-                action = "$";
-                desc = "go to last character of line";
+              "<leader>|" = {
+                action = "<Cmd>vsp<CR>";
+                desc = "Split Window Right";
               };
-              "H" = {
-                action = "^";
-                desc = "go to first non-empty character of line";
+              "<leader>-" = {
+                action = "<Cmd>sp<CR>";
+                desc = "Split Window Below";
               };
+              # "L" = {
+              #   action = "$";
+              #   desc = "go to last character of line";
+              # };
+              # "H" = {
+              #   action = "^";
+              #   desc = "go to first non-empty character of line";
+              # };
 
               "<leader><F7>" = {
                 action = "gg=G";
