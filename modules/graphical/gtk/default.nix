@@ -4,23 +4,22 @@
   config,
   ...
 }:
+let
+  stylix = config.kdlt.graphical.stylix;
+in
+with lib;
 {
   options = { };
 
-  config = lib.mkIf config.kdlt.graphical.enable {
-    # this is what stylix probably needed all along
-    programs.dconf = {
-      enable = true; # not sure if this is the place to declare it
-    };
-
+  config = mkIf config.kdlt.graphical.enable {
     home-manager.users.${config.kdlt.username} = {
       # cursor declarations conflicts with stylix
-      home.pointerCursor = {
+      home.pointerCursor = mkIf (!stylix.enable) {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Ice";
+        size = 24;
         gtk.enable = true;
         x11.enable = true;
-        #   package = pkgs.bibata-cursors;
-        #   name = "Bibata-Modern-Ice";
-        #   size = 24; 
       };
 
       xresources.properties = {

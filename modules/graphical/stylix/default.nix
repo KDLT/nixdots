@@ -7,25 +7,31 @@
 }:
 let
   stylix = config.kdlt.graphical.stylix;
-  wallpaper = config.kdlt.graphical.wallpaper;
-  userName = config.kdlt.username;
 in
+# wallpaper = config.kdlt.graphical.wallpaper;
+# userName = config.kdlt.username;
 with lib;
 {
-  options = {
-    kdlt = {
-      graphical.stylix.enable = mkEnableOption "Use Stylix";
-    };
+  options.kdlt.graphical = {
+    stylix.enable = mkEnableOption "Use Stylix";
   };
 
   config = mkIf stylix.enable {
+    # enabling this solved the stylix infinite recursion issue on rebuild
+    # as long as i am using nixosModule and NOT the homeConfigurations one
+    programs.dconf = {
+      enable = true; # not sure if this is the place to declare it
+    };
+
     stylix = {
-      enable = true; # infinite recursion likely solved by programs.dconf.enable = true;
+      enable = true;
       autoEnable = true;
       polarity = "dark";
-      # this cannot be an absolute path, evaluation becomes impure
-      image = /. + wallpaper; # succesfully coerced this to path
-      # fonts.packages = [ pkgs.nerdfonts ];
+      image = ../../../assets/wallpaper-blue.png;
+      # somewhere in /nix/store/ is the base16 scheme directory, the yaml filenames are the options
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/twilight.yaml";
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/saga.yaml";
 
       cursor = {
         package = pkgs.bibata-cursors;

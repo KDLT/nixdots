@@ -7,9 +7,28 @@
       # | A | B | C                             X | Y | Z |
       # +-------------------------------------------------+
       sections = {
-        lualine_a = ["mode"];
-        lualine_b = ["branch"];
-        lualine_c = ["filename" "diff"];
+        lualine_a = [ "mode" ];
+
+        lualine_b = [
+          "branch"
+          {
+            __unkeyed.__raw = ''
+              function()
+                local recording_register = vim.fn.reg_recording()
+                if recording_register == "" then
+                    return ""
+                else
+                    return "Recording @" .. recording_register
+                end
+              end
+            '';
+          }
+        ];
+
+        lualine_c = [
+          "filename"
+          "diff"
+        ];
 
         lualine_x = [
           "diagnostics"

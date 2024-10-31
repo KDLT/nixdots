@@ -37,6 +37,7 @@ in
           hyprshot # screenshot
           grim # full screenshot, too?
           slurp # region screenshot
+          swappy # screenshot editor???
           wf-recorder # screen recording
 
           mako # notification daemon, dunst alt

@@ -29,8 +29,8 @@
     anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixvim.url = "github:nix-community/nixvim"; # for unstable channel
-    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.url = "github:nix-community/nixvim"; # for unstable channel
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
@@ -41,8 +41,12 @@
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs-stable";
 
+    # nixvim.url = "path:./nvix";
+    # nixvim.url = "path:./Neve"; # case sensitive input when pointing to a directory?
+    # nixvim.url = "path:./nixvim";
+    # nixvim.url = "/home/kba/code/dc-tec/nixvim/";
+    # nixvim.url = "github:dc-tec/nixvim"; # https://github.com/dc-tec/nixvim 30* cleanest so far pero walang q so dealbreaker
     # nixvim.url = "github:pete3n/nixvim-flake"; # https://github.com/pete3n/nixvim-flake 27* panget
-    nixvim.url = "github:dc-tec/nixvim"; # https://github.com/dc-tec/nixvim 30* cleanest so far pero walang q so dealbreaker
     # nixvim.url = "github:niksingh710/nvix"; # https://github.com/niksingh710/nvix 69* clickable folds, topbar depth map, wrong formatter, awful color
     # nixvim.url = "github:redyf/Neve"; # https://github.com/redyf/Neve 153* i want the clickable folds from niksingh710, reduce on-screen mess, proper indentation highlighting from dc-tec to here
     # nixvim.url = "github:elythh/nixvim"; # https://github.com/elythh/nixvim 155* panget
@@ -59,7 +63,7 @@
       anyrun,
       home-manager,
       nix-index-database,
-      # nixvim, # not using my own nixvim config just yet
+      nixvim, # not using my own nixvim config just yet
       alejandra,
       stylix,
       ...
@@ -70,6 +74,12 @@
       # ALL `outputs` inheritable
       inherit (self) outputs; # this makes outputs inheritable below
 
+      # stolen from ryan4yin/nix-config, for the scanPaths
+      inherit (inputs.nixpkgs) lib;
+      mylib = import ./lib { inherit lib; };
+      ## stolen
+
+      # yet to decipher
       # allSystemNames = [ "x86_64-linux" "aarch64-darwin" ];
       # forAllSystems = func: (nixpkgs.lib.genAttrs allSystemNames func);
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -96,6 +106,7 @@
           user
           hyprlandFlake
           anyrunFlake
+          mylib # pass mylib here # stolen
           ;
       };
       sharedModules = [
@@ -103,7 +114,7 @@
         # stylix.homeManagerModules.stylix # not sure if this would work alongside the nixos module
         home-manager.nixosModules.home-manager
         nix-index-database.nixosModules.nix-index
-        # nixvim.nixosModules.nixvim
+        nixvim.nixosModules.nixvim
         sops-nix.nixosModules.sops
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
@@ -116,7 +127,7 @@
         # 5700X3D 4080 Super Desktop
         Super = nixpkgs.lib.nixosSystem {
           modules = sharedModules ++ [ ./machines/Super/default.nix ];
-          specialArgs = inheritArgs;
+          specialArgs = inheritArgs; # this contains mylib
         };
 
         # Beelink Mini PC

@@ -21,27 +21,6 @@
     fullname = "Kenneth Balboa Aguirre";
     email = "aguirrekenneth@gmail.com";
     stateVersion = "24.05";
-    storage = {
-      zfs = {
-        enable = true;
-        zpool = {
-          name = "rpool";
-          dataset = {
-            # note that these datasets are always relative to the declared poolname
-            # do not include your selected poolname and no leading forward slash
-            cache = "local/cache";
-            data = "persist/data";
-          };
-        };
-      };
-      impermanence = {
-        enable = true;
-        # list of directories and files to persist in addition to defaults
-        # more options located in ../../modules/storage/impermanence/default.nix
-      };
-      dataPrefix = "/data";
-      cachePrefix = "/cache";
-    };
     core = {
       wireless = {
         enable = true;
@@ -58,20 +37,39 @@
       enable = true;
       # wallpaper = "home/kba/Pictures/aesthetic-wallpapers/images/chill.gif";
       # wallpaper = ../../assets/wallpaper.png;
-      wallpaper = ../../assets/wallpaper.gif;
+      wallpaper = ../../assets/wallpaper-green.png;
       sound = true;
       laptop = false;
       amd.enable = true;
       stylix.enable = true;
       hyprland = {
         enable = true;
-        # enable = false; # part of the refresh rate sanity check
         # use `hyprctl monitors` for info
-        # display = "HDMI-A-1, 3840x2160@119.88, 0x0, 1";
-        # display = "DP-2, 3840x2160@120, 0x0, 1"; # DP-2 attached to USB 4.0 port via adapter, steady connection
-        display = "DP-1, 3840x2160@100, 0x0, 1"; # kumukurap 'yung 120hz sa DP-1
+        display = "DP-2, 3840x2160@120, 0x0, 1"; # DP-2 attached to USB 4.0 port via adapter, steady connection
+        # display = "DP-1, 3840x2160@100, 0x0, 1"; # kumukurap 'yung 120hz sa DP-1, doesn't carry enough bandwidth
       };
       xdg.enable = true;
+    };
+    storage = {
+      zfs = {
+        enable = true;
+        zpool = {
+          name = "rpool";
+          dataset = {
+            # note that these datasets are always relative to the declared poolname
+            # do not include your selected poolname and no leading forward slash
+            cache = "local/cache";
+            data = "persist/data";
+          };
+        };
+      };
+      impermanence = {
+        enable = true;
+        # declarations for more files directories can be added here, for
+        # syntax, see ../../modules/storage/impermanence/default.nix
+      };
+      dataPrefix = "/data";
+      cachePrefix = "/cache";
     };
     nerdfont = {
       # font name reference:

@@ -25,15 +25,15 @@
         nixd.enable = true; # Nix
         clangd.enable = true; # C
         texlab.enable = true; # LaTeX
-        lua-ls.enable = true; # Lua
+        lua_ls.enable = true; # Lua
         pylsp.enable = true; # Python
         jsonls.enable = true; # JSON
         cssls.enable = true; # CSS
         tailwindcss.enable = true; # Tailwind CSS
         html.enable = true; # HTML
-        emmet-ls.enable = true; # Emmet
+        emmet_ls.enable = true; # Emmet
         sqls.enable = true; # SQL
-        ts-ls.enable = true; # TypeScript
+        ts_ls.enable = true; # TypeScript
         yamlls.enable = true; # YAML
       };
     };

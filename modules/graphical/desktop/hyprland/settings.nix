@@ -225,11 +225,13 @@ in
               "$mod ALT, v, exec, pkill fuzzel || cliphist list | fuzzel --match-mode=fzf --dmenu | cliphist decode | wl-copy"
 
               # screencap entire screen
-              "$mod SHIFT, s, exec, ${pkgs.grim}/bin/grim | wl-copy"
-              # "$mod SHIFT+ALT, s, exec, ${pkgs.grim}/bin/grim -g ${pkgs.slurp} - | ${pkgs.swappy}/bin/swappy -f -" # fucking broken
+              # "$mod SHIFT, s, exec, ${pkgs.grim}/bin/grim | wl-copy"
+
+              # screencap section of screen
+              "$mod SHIFT, 4, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp})\" - | ${pkgs.swappy}/bin/swappy -f -" # fucking broken
 
               # screencap region, autocopied to clipboard
-              "$mod SHIFT, 4, exec, ${pkgs.hyprshot}/bin/hyprshot -m region"
+              # "$mod SHIFT, 4, exec, ${pkgs.hyprshot}/bin/hyprshot -m region"
             ];
 
             bindm = [
@@ -251,11 +253,12 @@ in
             ];
 
             exec-once = [
-              # commented because it doubles with the enable
-              "${pkgs.waybar}/bin/waybar"
+              # commented because it doubles with the enable from home-manager config
+              # "${pkgs.waybar}/bin/waybar"
 
               "${pkgs.swww}/bin/swww-daemon"
-              "${pkgs.swww}/bin/swww img ${wallpaper}"
+              # "${pkgs.swww}/bin/swww img ${wallpaper}" # works in types.path form
+              "${pkgs.swww}/bin/swww img ~/Pictures/aesthetic-wallpapers/images/waterfall.gif" # works in types.str form
 
               "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
 

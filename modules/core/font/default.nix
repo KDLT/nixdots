@@ -81,7 +81,21 @@ with lib;
   };
 
   ## when enabled download the entire nerdfont package
-  config = mkIf (!config.kdlt.nerdfont.enable) {
-    fonts.packages = [ pkgs.jetbrains-mono ];
+  config = {
+    fonts = mkIf (!config.kdlt.nerdfont.enable) {
+      packages = with pkgs; [
+        jetbrains-mono
+        fira-code
+        iosevka
+      ];
+      fontconfig = {
+        defaultFonts = {
+          # testing all jetbrains
+          monospace = [ "JetbrainsMono" ];
+          serif = [ "JetbrainsMono" ];
+          sansSerif = [ "JetbrainsMono" ];
+        };
+      };
+    };
   };
 }

@@ -52,7 +52,7 @@
 }
 
 window#waybar {
-  /*background-color: transparent;*/
+  background-color: transparent;
   /* border: 2px solid alpha(@crust, 0.3); */
   /* border: 2px solid alpha(#1a1b26, 0.3); */
 }
@@ -69,8 +69,8 @@ window > box {
 }
 
 #workspaces {
-  padding-left: 5px;
-  padding-right: 5px;
+  /*padding-left: 5px;*/
+  /*padding-right: 5px;*/
 }
 
 #workspaces button {
@@ -112,7 +112,7 @@ tooltip label {
 }
 
 #mode,
-#clock,
+/*#clock,*/
 #memory,
 #temperature,
 #cpu,
@@ -121,13 +121,11 @@ tooltip label {
 #temperature,
 #backlight,
 #pulseaudio,
-#network,
+/*#network,*/
 #battery,
 #custom-powermenu {
-  /* padding-left: 10px; */
-  /* padding-right: 10px; */
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #memory {
@@ -140,6 +138,8 @@ tooltip label {
 
 #clock {
   /*color: @whiteish;*/
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 #idle_inhibitor {
@@ -186,6 +186,8 @@ tooltip label {
 
 #network {
   /*color: @tealish;*/
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #bluetooth {
@@ -202,7 +204,7 @@ tooltip label {
 }
 
 #tray {
-  padding-right: 8px;
+  padding-right: 10px;
   padding-left: 10px;
 }
 

@@ -7,6 +7,7 @@
   # schemeName = "onedark";
 in {
   programs.nixvim.colorschemes = {
+    # even if this is enabled, stylix takes over
     "${schemeName}" = {
       enable = true;
       settings = {

@@ -27,15 +27,15 @@
     "format": "{icon}",
     "on-click": "activate",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "5": "",
-      "6": "",
-      "7": "",
-      "8": "",
-      "9": "",
+      "1": " ",
+      "2": " ",
+      "3": " ",
+      "4": " ",
+      "5": " ",
+      "6": " ",
+      "7": " ",
+      "8": " ",
+      "9": " ",
       "10": "〇",
       "focused": "",
       "default": "",
@@ -50,13 +50,14 @@
     "format-alt": " {:%a %b %d, %G}",
   },
   "cpu": {
-    "format": "\udb80\udf5b {usage}%",
+    //"format": "\udb80\udf5b {usage}%",
+    "format": "󰻠 {usage}%",
     "interval": 1,
     "on-click-middle": "kitty btop",
     "on-click-right": "kitty btop",
   },
   "custom/launcher": {
-    "format": "\uf313 ",
+    "format": " ",
     "on-click": "$HOME/.config/hypr/scripts/menu",
     "on-click-middle": "exec default_wall",
     "on-click-right": "exec wallpaper_random",
@@ -71,13 +72,14 @@
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "\uf06e",
-      "deactivated": "\uf070",
+      "activated": " ",
+      "deactivated": " ",
     },
     "tooltip": false,
   },
   "memory": {
-    "format": "\udb83\udee0 {percentage}%",
+    //"format": "\udb83\udee0 {percentage}%",
+    "format": "  {percentage}%",
     "interval": 1,
     "states": {
       "warning": 85,
@@ -169,10 +171,31 @@
     "on-click-right": "pavucontrol",
     "smooth-scrolling-threshold": 1,
   },
+  // https://github.com/Alexays/Waybar/wiki/Module:-Temperature
   "temperature": {
-    "format": "\uf2c9 {temperatureC}\u00b0C",
-    "tooltip": false,
+    //"thermal-zone": 0, // /sys/class/thermal/thermal_zone0: acpitz
+    //"hwmon-path": "/sys/devices/virtual/thermal/thermal/_zone0/hwmon3/temp1_input", // acpitz: temp1
+    "hwmon-path": "/sys/devices/pci0000:00/0000:00:08.1/0000:c5:00.0/hwmon/hwmon2/temp1_input", // amdgpu: edge
+    "critical-threshold": 80,
+    "tooltip-format": "amdgpu",
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
   },
+  //"temperature#cpu": {
+  //  //"thermal-zone": 0, // /sys/class/thermal/thermal_zone0: acpitz
+  //  "hwmon-path": "/sys/devices/virtual/thermal/thermal/_zone0/hwmon3/temp1_input", // acpitz: temp1
+  //  "critical-threshold": 80,
+  //  "format": "{icon} {temperatureC}°C",
+  //  "format-icons": [
+  //    "",
+  //    "",
+  //    ""
+  //  ],
+  //},
   "backlight": {
     "format": "{icon} {percent}%",
     "format-icons": [
