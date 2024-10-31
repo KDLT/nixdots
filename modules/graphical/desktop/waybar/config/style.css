@@ -60,7 +60,7 @@ window#waybar {
 window > box {
   margin-left: 5px;
   margin-right: 5px;
-  margin-top: 5px;
+  /*margin-top: 5px;*/
   /*background-color: shade(@base, 0.9); */
   /*background-color: transparent;*/
   padding: 3px;
@@ -74,8 +74,8 @@ window > box {
 }
 
 #workspaces button {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  /*padding-top: 5px;*/
+  /*padding-bottom: 5px;*/
   padding-left: 6px;
   padding-right: 10px;
 }

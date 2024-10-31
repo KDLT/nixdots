@@ -1,6 +1,4 @@
+{ mylib, ... }:
 {
-  imports = [
-    ./gitsigns.nix
-    ./lazygit.nix
-  ];
+  imports = mylib.scanPaths ./.;
 }

@@ -64,6 +64,7 @@
       home-manager,
       nix-index-database,
       nixvim, # not using my own nixvim config just yet
+
       alejandra,
       stylix,
       ...

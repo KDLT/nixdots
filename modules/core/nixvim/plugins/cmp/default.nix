@@ -1,5 +1,4 @@
+{ mylib, ... }:
 {
-  imports = [
-    ./autopairs.nix
-  ];
+  imports = mylib.scanPaths ./.;
 }

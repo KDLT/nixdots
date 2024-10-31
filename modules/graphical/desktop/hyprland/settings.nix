@@ -55,7 +55,7 @@ in
             # gapss, screen tearing is on allegedly for latencty, jitter reduction
             general = {
               gaps_in = 6;
-              gaps_out = 21;
+              gaps_out = "6,21,21,21";
               border_size = 2;
               layout = "dwindle";
               allow_tearing = true;

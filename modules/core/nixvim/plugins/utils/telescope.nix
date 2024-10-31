@@ -3,6 +3,31 @@
     enable = true;
     keymaps = {
       # find files using telescope command line "sugar"
+      "<leader><space>" = {
+        action = "find_files";
+        options.desc = "Find project files";
+      };
+      "<leader>/" = {
+        action = "live_grep";
+        options.desc = "Grep (root dir)";
+      };
+      "<leader>:" = {
+        action = "command history";
+        options.desc = "Command History";
+      };
+      "<leader>gs" = {
+        action = "git_status";
+        options.desc = "Git Status";
+      };
+      "<leader>gc" = {
+        action = "git_commits";
+        options.desc = "Git Commits";
+      };
+      "<leader>sD" = {
+        action = "diagnostics";
+        options.desc = "Workspace Diagnostics";
+      };
+
       "<leader>ff" = {
         action = "find_files";
         options.desc = "Telescope Files from ./";

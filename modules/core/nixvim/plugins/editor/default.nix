@@ -1,8 +1,4 @@
+{ mylib, ... }:
 {
-  imports = [
-    ./markdown-preview.nix
-    ./oil.nix
-    ./treesitter.nix
-    ./undotree.nix
-  ];
+  imports = mylib.scanPaths ./.;
 }
