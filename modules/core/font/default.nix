@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  stylix = config.kdlt.graphical.stylix;
-in
 with lib;
 {
   options = {
@@ -22,12 +19,6 @@ with lib;
               type = str;
               default = "CommitMono";
             };
-            # package = mkOption {
-            #   type = package;
-            #   default = pkgs.nerdfonts.override {
-            #     fonts = [ name ];
-            #   };
-            # };
           };
         };
       };
@@ -38,12 +29,6 @@ with lib;
               type = str;
               default = "Go-Mono";
             };
-            # package = mkOption {
-            #   type = package;
-            #   default = pkgs.nerdfonts.override {
-            #     fonts = [ "GoMono" ];
-            #   };
-            # };
           };
         };
       };
@@ -54,12 +39,6 @@ with lib;
               type = str;
               default = "JetBrainsMono";
             };
-            # package = mkOption {
-            #   type = package;
-            #   default = pkgs.nerdfonts.override {
-            #     fonts = [ name ];
-            #   };
-            # };
           };
         };
       };
@@ -70,10 +49,6 @@ with lib;
               type = str;
               default = "Noto-Emoji";
             };
-            # package = mkOption {
-            #   type = package;
-            #   default = pkgs.noto-fonts-monochrome-emoji;
-            # };
           };
         };
       };

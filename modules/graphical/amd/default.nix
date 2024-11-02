@@ -1,12 +1,14 @@
 {
   lib,
+  mylib,
   ...
 }:
 with lib;
 {
-  imports = [
-    ./settings.nix
-  ];
+  imports = mylib.scanPaths ./.;
+  # imports = [
+  #   ./settings.nix
+  # ];
   options.kdlt.graphical = {
     amd.enable = mkEnableOption "amd gpu";
   };

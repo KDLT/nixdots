@@ -1,7 +1,14 @@
-{...}: {
-  imports = [
-    ./systemd
-    ./wireless
-    ./printing
-  ];
+{
+  mylib,
+  ...
+}:
+{
+  imports = mylib.scanPaths ./.;
 }
+# {...}: {
+#   imports = [
+#     ./systemd
+#     ./wireless
+#     ./printing
+#   ];
+# }

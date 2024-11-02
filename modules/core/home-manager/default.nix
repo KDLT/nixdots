@@ -5,7 +5,7 @@
   ...
 }:
 let
-  username = config.kdlt.username;
+  userName = config.kdlt.username;
 in
 {
   home-manager = {
@@ -13,12 +13,11 @@ in
     useUserPackages = true;
 
     users = {
-      ${username} = {
-        # imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+      ${userName} = {
         home = {
           stateVersion = config.kdlt.stateVersion;
 
-          homeDirectory = "/home/${username}";
+          homeDirectory = "/home/${userName}";
 
           packages = with pkgs; [
             libnotify # sends desktop notifs to notif daemon
@@ -26,7 +25,7 @@ in
             ventoy # endgame bootable usb
 
             fzf # command line fuzzy finder written in go
-            ripgrep
+            ripgrep # better grep entire directories
             gcc # gnu compiler collection
             fd # alternative to find
             xclip # tool to access clipboard from console

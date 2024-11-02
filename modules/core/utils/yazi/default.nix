@@ -1,7 +1,11 @@
 # ~/dotfiles/modules/core/utils/yazi/default.nix
-{config, ...}: {
+{ config, pkgs, ... }:
+{
   # you CANNOT omit the triple dot syntax when passing an input
   config = {
+    environment.systemPackages = [
+      pkgs.yazi
+    ];
     home-manager.users.${config.kdlt.username} = {
       programs.yazi = {
         enable = true;

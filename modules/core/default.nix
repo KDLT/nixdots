@@ -1,15 +1,16 @@
-{ ... }:
+{ mylib, ... }:
 {
-  imports = [
-    ./connectivity
-    ./font
-    ./home-manager
-    ./nix
-    ./nixvim # nixvim not working
-    ./shells
-    ./sops
-    ./system
-    ./users
-    ./utils
-  ];
+  imports = mylib.scanPaths ./.;
+  # imports = [
+  #   ./connectivity
+  #   ./font
+  #   ./home-manager
+  #   ./nix
+  #   ./nixvim
+  #   ./shells
+  #   ./sops
+  #   ./system
+  #   ./users
+  #   ./utils
+  # ];
 }

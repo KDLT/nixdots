@@ -10,10 +10,7 @@
   imports = mylib.scanPaths ./.;
   # commenting out my own nixvim declarations in favor of dc-tec's flake
   # imports = [
-  #   ./options.nix
-  #   ./keymaps.nix
-  #   ./colorscheme.nix
-  #   ./completions.nix
+  #   ./settings
   #   ./plugins
   # ];
 

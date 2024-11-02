@@ -21,6 +21,9 @@
     fullname = "Kenneth Balboa Aguirre";
     email = "aguirrekenneth@gmail.com";
     stateVersion = "24.05";
+
+    development.virtualization.docker.enable = true; # testing out docker
+
     core = {
       wireless = {
         enable = true;

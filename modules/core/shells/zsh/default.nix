@@ -9,7 +9,7 @@
 let
   username = config.kdlt.username;
   myAliases = {
-    ll = "eza --icons=always --color=always --long --git --no-filesize --no-time --no-permissions --no-user --tree --level=1";
+    ll = "eza --icons=always --color=always --long --group-directories-first --git --no-filesize --no-time --no-permissions --no-user --tree --level=1";
     cat = "bat";
     gitfetch = "onefetch";
     fetch = "disfetch";

@@ -2,15 +2,20 @@
   config,
   lib,
   ...
-}: {
+}:
+let
+  obsidian = config.kdlt.graphical.applications.obsidian;
+in
+with lib;
+{
   options = {
     kdlt = {
-      graphical.applications.obsidian.enable = lib.mkEnableOption "obsidian";
+      graphical.applications.obsidian.enable = mkEnableOption "obsidian";
     };
   };
 
-  config = lib.mkIf config.kdlt.graphical.applications.obsidian.enable {
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["obsidian"];
+  config = mkIf obsidian.enable {
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (getName pkg) [ "obsidian" ];
     # environment.systemPackages = [ pkgs.obsidian ];
   };
 }

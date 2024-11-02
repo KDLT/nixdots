@@ -1,15 +1,22 @@
-{lib, ...}:
-with lib; {
-  imports = [
-    ./ansible
-    ./aws-cli
-    ./git
-    ./go
-    ./powershell
-    ./python
-    ./virtualization
-    ./yaml
-  ];
+{
+  lib,
+  mylib,
+  ...
+}:
+with lib;
+{
+  imports = mylib.scanPaths ./.;
+  # imports = [
+  #   ./ansible
+  #   ./aws-cli
+  #   ./git
+  #   ./go
+  #   ./lua
+  #   ./powershell
+  #   ./python
+  #   ./virtualization
+  #   ./yaml
+  # ];
 
   # wonder what happens when the packages enable options are already declared here
   options = {
@@ -35,6 +42,7 @@ with lib; {
       ansible.enable = mkDefault false;
       aws-cli.enable = mkDefault false;
       git.enable = mkDefault true;
+      lua.enable = mkDefault true;
       go.enable = mkDefault true;
       powershell.enable = mkDefault false;
       python.enable = mkDefault true;

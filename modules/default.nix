@@ -1,9 +1,4 @@
-{ ... }:
+{ mylib, ... }:
 {
-  imports = [
-    ./core
-    ./development
-    ./graphical
-    ./storage
-  ];
+  imports = mylib.scanPaths ./.;
 }

@@ -1,22 +1,25 @@
 {
   config,
+  mylib,
   lib,
   ...
 }:
-with lib; {
-  imports = [
-    ./anyrun
-    ./fuzzel
-    ./hyprland
-    ./hyprlock
-    ./hyprpaper
-    ./key_management
-    ./swaync
-    ./swww
-    ./thunar
-    ./waybar
-    ./wlogout
-  ];
+with lib;
+{
+  imports = mylib.scanPaths ./.;
+  # imports = [
+  #   ./anyrun
+  #   ./fuzzel
+  #   ./hyprland
+  #   ./hyprlock
+  #   ./hyprpaper
+  #   ./key_management
+  #   ./swaync
+  #   ./swww
+  #   ./thunar
+  #   ./waybar
+  #   ./wlogout
+  # ];
 
   config = mkIf config.kdlt.graphical.enable {
     kdlt.graphical = {

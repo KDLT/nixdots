@@ -1,4 +1,5 @@
 {
+  mylib,
   config,
   lib,
   ...
@@ -6,17 +7,18 @@
 with lib;
 with types;
 {
-  imports = [
-    ./applications
-    ./desktop
-    ./gtk
-    ./nvidia
-    ./amd
-    ./sound
-    ./stylix # TODO: still infinite recursion when stylix is enabled
-    ./terminal
-    ./xdg
-  ];
+  imports = mylib.scanPaths ./.;
+  # imports = [
+  #   ./applications
+  #   ./desktop
+  #   ./gtk
+  #   ./nvidia
+  #   ./amd
+  #   ./sound
+  #   ./stylix
+  #   ./terminal
+  #   ./xdg
+  # ];
 
   options = {
     kdlt.graphical = {

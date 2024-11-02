@@ -1,15 +1,17 @@
 {
   config,
+  mylib,
   lib,
-  pkgs,
-  user,
   ...
-}: let
-in {
-  imports = [
-    ./lazy_git.nix
-    ./github.nix
-  ];
+}:
+let
+in
+{
+  imports = mylib.scanPaths ./.;
+  # imports = [
+  #   ./lazy_git.nix
+  #   ./github.nix
+  # ];
 
   options = {
     kdlt.development.git = {
@@ -49,9 +51,10 @@ in {
           # };
         };
       };
-    in {
+    in
+    {
       # see the multiple userspaces here
-      home-manager.users.${config.kdlt.username} = {...}: kdlt-git;
-      home-manager.users.root = {...}: kdlt-git;
+      home-manager.users.${config.kdlt.username} = { ... }: kdlt-git;
+      home-manager.users.root = { ... }: kdlt-git;
     };
 }

@@ -1,20 +1,24 @@
 {
   config,
   lib,
+  mylib,
   pkgs,
   hyprlandFlake,
   inputs,
   ...
 }:
 let
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  # uncomment pkgs below to replace succeeding pkgs calls with this version
+  # pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   hyprland = config.kdlt.graphical.hyprland;
   username = config.kdlt.username;
 in
 {
+
+  # imports = mylib.scanPaths ./.;
   imports = [
-    ./packages.nix
     ./nvidia.nix
+    ./packages.nix
     ./settings.nix
   ];
 

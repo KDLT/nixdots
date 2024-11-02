@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   # Where most declarations from configuration.nix reside, e.g., timezone, system packages
   options = {
     kdlt = {
@@ -37,7 +38,7 @@
         neovim # default editor
         kitty # openGL based terminal emulator
         disfetch # less complex fetching program
-        ranger # file explorer
+        yazi # file explorer
         zsh # shell
         bat # better cat
         eza # modern ls
@@ -146,7 +147,7 @@
         extraRules = [
           {
             # these users would not be required to enter passwords
-            users = ["${config.kdlt.username}"];
+            users = [ "${config.kdlt.username}" ];
             noPass = true;
           }
         ];

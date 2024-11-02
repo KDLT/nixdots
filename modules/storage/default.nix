@@ -1,12 +1,17 @@
 # ~/dotfiles/modules/core/storage/default.nix
-{ lib, ... }:
+{
+  lib,
+  mylib,
+  ...
+}:
 with lib;
 {
-  imports = [
-    ./zfs
-    ./btrfs
-    ./impermanence
-  ];
+  imports = mylib.scanPaths ./.;
+  # imports = [
+  #   ./btrfs
+  #   ./impermanence
+  #   ./zfs
+  # ];
 
   options.kdlt.storage = {
     dataPrefix = mkOption {
