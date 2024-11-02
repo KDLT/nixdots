@@ -19,6 +19,12 @@
       action = "<cmd>BufferLineCyclePrev<CR>";
       options.desc = "Cycle to Previous Buffer";
     }
+    {
+      mode = "n";
+      key = "<leader>bo";
+      action = "<cmd>BufferLineCloseOthers<CR>";
+      options.desc = "Close every other except the visible one";
+    }
     # TODO: the rest the relevant bufferline keymaps
   ];
 }

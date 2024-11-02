@@ -2,7 +2,6 @@
 {
   config,
   lib,
-  user,
   ...
 }:
 let
@@ -14,16 +13,16 @@ with lib;
   options = {
     kdlt.core.wireless = {
       enable = lib.mkEnableOption "wireless via nmtui, must add user to networkmanager group";
-      # enable = lib.mkOption {
-      #   default = true;
-      #   type = lib.types.bool;
-      #   description = "enable wireless, connect with nmtui";
-      # };
     };
   };
 
   config = mkIf config.kdlt.core.wireless.enable {
     networking.networkmanager.enable = true;
+
+    programs.nm-applet = {
+      enable = true;
+      indicator = true;
+    };
 
     environment.etc = mkIf impermanence {
       # difference between environment.etc declaration and ones that directly point to the directory to persist

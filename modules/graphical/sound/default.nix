@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   username = config.kdlt.username;
-in {
+in
+{
   options = {
     kdlt = {
       graphical.sound = lib.mkEnableOption "Sound On?";
@@ -29,7 +31,7 @@ in {
     };
 
     hardware = {
-      pulseaudio.enable = false; # true in the lifted config
+      pulseaudio.enable = false; # to use pipewire this must be set to false
       bluetooth = {
         enable = true;
         settings = {
@@ -54,29 +56,31 @@ in {
 
     services.playerctld.enable = true;
 
-    home-manager.users."${username}" = {...}: {
-      home.packages = with pkgs; [
-        pavucontrol # pulse audio volume control
-        playerctl # cli for MPRIS
-        pulsemixer # cli and curses for pulseaudio
-        imv # cli image viewer for tiling window managers
+    home-manager.users."${username}" =
+      { ... }:
+      {
+        home.packages = with pkgs; [
+          pavucontrol # pulse audio volume control
+          playerctl # cli for MPRIS
+          pulsemixer # cli and curses for pulseaudio
+          imv # cli image viewer for tiling window managers
 
-        nvtopPackages.full # neat videocard top
+          nvtopPackages.full # neat videocard top
 
-        cava # console based audio visualizer for alsa
-        libva-utils # collection of utilities for libva api
-        vdpauinfo
-        vulkan-tools
-        glxinfo
-      ];
+          cava # console based audio visualizer for alsa
+          libva-utils # collection of utilities for libva api
+          vdpauinfo
+          vulkan-tools
+          glxinfo
+        ];
 
-      programs = {
-        mpv = {
-          enable = true;
-          defaultProfiles = ["gpu-hq"];
-          scripts = [pkgs.mpvScripts.mpris];
+        programs = {
+          mpv = {
+            enable = true;
+            defaultProfiles = [ "gpu-hq" ];
+            scripts = [ pkgs.mpvScripts.mpris ];
+          };
         };
       };
-    };
   };
 }

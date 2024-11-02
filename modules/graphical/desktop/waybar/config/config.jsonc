@@ -2,7 +2,7 @@
   "position": "top",
   "layer": "top",
   "modules-left": [
-    "custom/launcher",
+    "custom/launcher", // TODO no script for custom launchers yet
     "temperature",
     "backlight",
     "hyprland/workspaces"
@@ -19,9 +19,9 @@
     "network",
     "bluetooth",
     "clock",
-    "idle_inhibitor",
+    "idle_inhibitor", // TODO no setup for this yet
     "tray",
-    "custom/powermenu",
+    "custom/powermenu" // TODO still haven't done the scripts for these
   ],
   "hyprland/workspaces": {
     "format": "{icon}",
@@ -38,52 +38,52 @@
       "9": " ",
       "10": "〇",
       "focused": "",
-      "default": "",
-    },
+      "default": ""
+    }
   },
   "clock": {
     "interval": 60,
     "align": 0,
     "rotate": 0,
     "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": " {:%H:%M}",
-    "format-alt": " {:%a %b %d, %G}",
+    "format": "{:%H:%M}",
+    "format-alt": "{:%a %b %d, %G}"
   },
   "cpu": {
     //"format": "\udb80\udf5b {usage}%",
     "format": "󰻠 {usage}%",
     "interval": 1,
     "on-click-middle": "kitty btop",
-    "on-click-right": "kitty btop",
+    "on-click-right": "kitty btop"
   },
   "custom/launcher": {
     "format": " ",
     "on-click": "$HOME/.config/hypr/scripts/menu",
     "on-click-middle": "exec default_wall",
     "on-click-right": "exec wallpaper_random",
-    "tooltip": false,
+    "tooltip": false
   },
   "custom/powermenu": {
     // "format": "\uf011",
     "format": " ",
     "on-click": "$HOME/.config/hypr/scripts/wlogout",
-    "tooltip": false,
+    "tooltip": false
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": " ",
-      "deactivated": " ",
+      "deactivated": " "
     },
-    "tooltip": false,
+    "tooltip": false
   },
   "memory": {
     //"format": "\udb83\udee0 {percentage}%",
     "format": "  {percentage}%",
     "interval": 1,
     "states": {
-      "warning": 85,
-    },
+      "warning": 85
+    }
   },
   "mpd": {
     "interval": 2,
@@ -94,7 +94,7 @@
     "format-stopped": "Stopped ",
     "state-icons": {
       "paused": "",
-      "playing": "",
+      "playing": ""
     },
     "tooltip-format": "MPD (connected)",
     "tooltip-format-disconnected": "MPD (disconnected)",
@@ -105,7 +105,7 @@
     "on-update": "",
     "on-scroll-up": "mpc seek +00:00:01",
     "on-scroll-down": "mpc seek -00:00:01",
-    "smooth-scrolling-threshold": 1,
+    "smooth-scrolling-threshold": 1
   },
   "custom/playerctl": {
     "format": "{icon}  <span>{}</span>",
@@ -117,26 +117,40 @@
     "on-click-right": "playerctl next",
     "format-icons": {
       "Paused": "<span foreground='#6dd9d9'></span>",
-      "Playing": "<span foreground='#82db97'></span>",
-    },
+      "Playing": "<span foreground='#82db97'></span>"
+    }
   },
   "network": {
     "interval": 5,
     //"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
-    "format-wifi": "  {essid}",
-    "format-ethernet": " {ipaddr}/{cidr}",
-    "format-linked": " {ifname} (No IP)",
-    "format-disconnected": "睊 Disconnected",
-    "format-disabled": "睊 Disabled",
-    "format-alt": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
-    "tooltip-format": " {ifname} via {gwaddr}",
-    "on-click-middle": "nm-connection-editor", // TODO: better connection editor
-    "on-click-right": "kitty nmtui",
+    "format-wifi": "{icon}",
+    "format-icons": [
+      "󰤫 ",
+      "󰤟 ",
+      "󰤥 ",
+      "󰖩 "
+    ],
+    "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+    "format-linked": "󰌘 {ifname} (No IP)",
+    "format-disconnected": "󰖪 ",
+    "format-disabled": "󰌙 ",
+    "format-alt": " {ipaddr}  {bandwidthUpBytes} |  {bandwidthDownBytes}",
+    "tooltip-format": "{essid}   {ifname} via {gwaddr}",
+    "on-click-middle": "nm-connection-editor", // TODO: find a better connection interface
+    "on-click-right": "kitty nmtui"
   },
   "bluetooth": {
-    "format": " {status}",
+    //"format": " {status}",
     "format-connected": " {device_alias}",
-    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    //"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "format-connected-battery": " {device_alias} {icon}",
+    "format-icons": [
+      "󰤾 ",
+      "󰥀 ",
+      "󰥂 ",
+      "󰥅 ",
+      "󰥈 "
+    ],
     // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
@@ -163,13 +177,13 @@
         "",
         "",
         ""
-      ],
+      ]
     },
     "scroll-step": 2.0,
     // Commands to execute on events
     "on-click": "amixer set Master toggle",
     "on-click-right": "pavucontrol",
-    "smooth-scrolling-threshold": 1,
+    "smooth-scrolling-threshold": 1
   },
   // https://github.com/Alexays/Waybar/wiki/Module:-Temperature
   "temperature": {
@@ -183,7 +197,7 @@
       "",
       "",
       ""
-    ],
+    ]
   },
   //"temperature#cpu": {
   //  //"thermal-zone": 0, // /sys/class/thermal/thermal_zone0: acpitz
@@ -208,11 +222,11 @@
       "",
       "",
       ""
-    ],
+    ]
   },
   "tray": {
     "icon-size": 15,
-    "spacing": 5,
+    "spacing": 5
   },
   "battery": {
     "bat": "BAT0",
@@ -220,7 +234,7 @@
     "interval": 60,
     "states": {
       "warning": 30,
-      "critical": 15,
+      "critical": 15
     },
     "max-length": 20,
     "format": "{icon} {capacity}%",
@@ -236,6 +250,6 @@
       " ",
       " ",
       " "
-    ],
-  },
+    ]
+  }
 }

@@ -5,17 +5,19 @@
   config,
   hyprlandFlake,
   ...
-}: let
+}:
+let
   username = config.kdlt.username;
   myAliases = {
-    ll = "eza --icons -lTa -L=1";
+    ll = "eza --icons=always --color=always --long --git --no-filesize --no-time --no-permissions --no-user --tree --level=1";
     cat = "bat";
     gitfetch = "onefetch";
     fetch = "disfetch";
     icat = "kitten icat";
   };
-in {
-  options = {};
+in
+{
+  options = { };
   config = {
     # kdlt.core.zfs = lib.mkMerge [
     #   (lib.mkIf config.kdlt.core.persistence.enable {
@@ -89,8 +91,12 @@ in {
           loginExtra = "${hyprlandFlake.hyprland}/bin/Hyprland";
         };
 
-        programs.bash = {shellAliases = myAliases;};
-        programs.fish = {shellAliases = myAliases;};
+        programs.bash = {
+          shellAliases = myAliases;
+        };
+        programs.fish = {
+          shellAliases = myAliases;
+        };
       };
     };
   };

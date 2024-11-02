@@ -36,8 +36,8 @@
 
 @keyframes blink_red {
   to {
-    /*background-color: @red;*/
-    /*color: @crust;*/
+    background-color: #f7768e;
+    color: #1a1b26;
   }
 }
 
@@ -53,46 +53,44 @@
 
 window#waybar {
   background-color: transparent;
-  /* border: 2px solid alpha(@crust, 0.3); */
-  /* border: 2px solid alpha(#1a1b26, 0.3); */
+  border: none
 }
 
-window > box {
-  margin-left: 5px;
-  margin-right: 5px;
-  /*margin-top: 5px;*/
-  /*background-color: shade(@base, 0.9); */
-  /*background-color: transparent;*/
-  padding: 3px;
-  padding-left: 8px;
-  border: 2px none @blue;
+window>box {
+  /* top, right, bottom, left */
+  margin: 12px 21px 6px 21px;
+  padding: 5px;
+  background-color: alpha(#000, 0.49);
+  border: none;
+  border-radius: 15px;
+  /* same as hyprland's rounding setting */
 }
 
 #workspaces {
-  /*padding-left: 5px;*/
-  /*padding-right: 5px;*/
+  padding-left: 20px;
+  padding-right: 20px;
+  /*border: 2px solid red;*/
+  border: none;
 }
 
 #workspaces button {
-  /*padding-top: 5px;*/
-  /*padding-bottom: 5px;*/
-  padding-left: 6px;
+  padding-left: 10px;
   padding-right: 10px;
 }
 
 #workspaces button.active {
-  /*background-color: #b5e8e0; */
-  /*background-color: @mantle;*/
-  /*color: #1a1826;*/
+  /*color: transparent;*/
+  background-color: #414868;
+  color: #fff;
 }
 
 #workspaces button.urgent {
-  /*color: #1a1826;*/
+  color: #f7768e;
 }
 
 #workspaces button:hover {
-  /*background-color: @blueish;*/
-  /*color: #1a1826;*/
+  background-color: #c0caf5;
+  color: #000;
 }
 
 tooltip {
@@ -101,66 +99,42 @@ tooltip {
 
 tooltip label {
   /*color: #d9e0ee;*/
+  border: none;
 }
 
 #custom-launcher {
   font-size: 20px;
-  padding-left: 8px;
-  /* padding-right: 6px; */
+  padding-left: 15px;
   padding-right: 20px;
   /*color: #b5e8e0;*/
 }
 
 #mode,
-/*#clock,*/
 #memory,
 #temperature,
 #cpu,
 #mpd,
 #custom-wall,
-#temperature,
 #backlight,
 #pulseaudio,
-/*#network,*/
 #battery,
 #custom-powermenu {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-#memory {
-  /*color: @teal;*/
-}
-
-#cpu {
-  /*color: @violet;*/
-}
-
-#clock {
-  /*color: @whiteish;*/
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-#idle_inhibitor {
-  /*color: @sand;*/
-  /* padding-right: 8px; */
-  padding-right: 16px;
+  /*padding-left: 10px;*/
+  /*padding-right: 10px;*/
+  border: none;
 }
 
 #battery {
   min-width: 55px;
-  /*color: @blueish;*/
 }
 
 #battery.charging,
 #battery.full,
 #battery.plugged {
-  /*color: @green;*/
+  border: none;
 }
 
 #battery.critical:not(.charging) {
-  /*color: @red;*/
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -169,48 +143,24 @@ tooltip label {
 }
 
 #custom-wall {
-  /*color: @blueish;*/
+  border: none;
 }
 
 #temperature {
-  /*color: @grayish;*/
-}
-
-#backlight {
-  /*color: @sand;*/
-}
-
-#pulseaudio {
-  /*color: @whiteish;*/
-}
-
-#network {
-  /*color: @tealish;*/
+  border: none;
   padding-left: 20px;
   padding-right: 20px;
 }
 
-#bluetooth {
-  /*color: @blue;*/
+#backlight {
+  border: none;
 }
 
-#network.disconnected {
-  /*color: @text;*/
-}
-
-#custom-powermenu {
-  /*color: @red;*/
-  padding-right: 8px;
-}
-
-#tray {
-  padding-right: 10px;
-  padding-left: 10px;
+#mpd {
+  border: none;
 }
 
 #mpd.paused {
-  /*color: #414868; */
-  /*color: @base;*/
   font-style: italic;
 }
 
@@ -218,7 +168,55 @@ tooltip label {
   background: transparent;
 }
 
-#mpd {
-  /*color: #c0caf5; */
-  /*color: @mantle;*/
+#pulseaudio {
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#memory {
+  padding-right: 20px;
+  padding-left: 10px;
+  border: none;
+}
+
+#cpu {
+  border: none;
+  padding-right: 20px;
+}
+
+#network {
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+#network.disconnected {
+  border: none;
+  color: #f7768e;
+}
+
+#bluetooth {
+  border: none;
+  padding-left: 0px;
+  padding-right: 20px;
+}
+
+#clock {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#idle_inhibitor {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#tray {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+#custom-powermenu {
+  /*color: @red;*/
+  padding-right: 15px;
 }
