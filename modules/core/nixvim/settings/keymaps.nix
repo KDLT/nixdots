@@ -88,23 +88,24 @@
                 desc = "Save Buffer";
               };
 
-              "<leader>h" = {
+              "<C-h>" = {
                 action = "<C-w>h";
                 desc = "Navigate to Left window";
               };
-              "<leader>j" = {
-                action = "<C-w>j";
-                desc = "Navigate to Bottom window";
-              };
-              "<leader>k" = {
-                action = "<C-w>k";
-                desc = "Navigate to Top window";
-              };
-              "<leader>l" = {
+              "<C-l>" = {
                 action = "<C-w>l";
                 desc = "Navigate to Right window";
               };
-
+              # even though C-j and C-k are the same keybinds for picking autosuggests, those happen in insert mode
+              # but i don't think i'll bother splitting vertically
+              "<C-j>" = {
+                action = "<C-w>j";
+                desc = "Navigate to Bottom window";
+              };
+              "<C-k>" = {
+                action = "<C-w>k";
+                desc = "Navigate to Top window";
+              };
               "<C-Up>" = {
                 action = ":resize +2<CR>";
                 desc = "grow horizontal current window";
