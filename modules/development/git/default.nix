@@ -24,11 +24,33 @@ in
   config =
     # git config in a let binding to allow declaration in multiple userspaces
     let
+      gitAliases = {
+        s = "status";
+        a = "add"; # specific files
+        A = "add -A"; # add all
+        c = "commit -m";
+        ac = "commit -am"; # add and commit combo
+      };
+
       kdlt-git = {
         programs.git = {
           enable = true;
           userName = config.kdlt.username;
           userEmail = config.kdlt.email;
+          aliases = gitAliases;
+          ignores = [
+            ".*/" # ignore all dot folders but include files
+            "!/.gitignore" # do not ignore .gitignore
+          ];
+
+          # better diff
+          delta = {
+            enable = true;
+            options = {
+              side-by-side = true;
+              hyperlinks = true;
+            };
+          };
 
           # TODO: git configs i'm not familiar with yet so commented out
           # extraConfig = {

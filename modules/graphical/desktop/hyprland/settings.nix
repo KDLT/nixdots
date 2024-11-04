@@ -28,7 +28,8 @@ in
         wayland.windowManager.hyprland = {
           enable = true;
           # TODO-COMPLETE: check if this would work uncommented, it does but zlogin must be correct
-          package = hyprlandFlake.hyprland;
+          package = pkgs.hyprland; # default
+          # package = hyprlandFlake.hyprland;
           xwayland.enable = true;
           systemd = {
             enable = true;

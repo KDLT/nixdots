@@ -88,7 +88,9 @@ in
           envExtra = ''${pkgs.disfetch}/bin/disfetch'';
           # to know the specific binary, nix build ${}
           # loginExtra is prepended to zlogin, this gets called upon login, wow
-          loginExtra = "${hyprlandFlake.hyprland}/bin/Hyprland";
+
+          loginExtra = "${pkgs.hyprland}/bin/Hyprland"; # this is the default flake
+          # loginExtra = "${hyprlandFlake.hyprland}/bin/Hyprland";
         };
 
         programs.bash = {
