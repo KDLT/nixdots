@@ -9,24 +9,6 @@ in
 # dataPrefix = "${config.kdlt.dataPrefix}";
 {
   config = {
-    # kdlt.core.zfs = lib.mkMerge [
-    #   (lib.mkIf config.kdlt.core.persistence.enable {
-    #     homeDataLinks = [
-    #       {
-    #         directory = ".ssh";
-    #         mode = "0700";
-    #       }
-    #     ];
-    #     systemDataLinks = [
-    #       {
-    #         directory = "/root/.ssh/";
-    #         mode = "0700";
-    #       }
-    #     ];
-    #   })
-    #   (lib.mkIf (!config.kdlt.core.persistence.enable))
-    # ];
-
     home-manager.users.${username} = {
       programs.ssh =
         let
@@ -41,18 +23,6 @@ in
             AddKeysToAgent = "yes";
             IdentityFile = defaultIdentity;
           };
-
-          # i think these are unnecessary whether or not impermanence is activated
-          # on account of how, on my config by default, the ~/.ssh directory persists
-          # IdentityFile =
-          #   if
-          #     config.kdlt.storage.impermanence.enable
-          #   # then "${dataPrefix}/home/${username}/.ssh/id_ed25519"
-          #   then
-          #     "${dataPrefix}/home/${username}/.ssh/id_ed25519_K-Super"
-          #   # else "${username}/home/.ssh/id_rsa_K-Super";
-          #   else
-          #     "${username}/home/.ssh/id_ed25519_K-Super";
 
           # matchBlocks is per Host settings similar to how ~/.ssh/config is
           # Since I am setting this up for multiple machines, I am going for

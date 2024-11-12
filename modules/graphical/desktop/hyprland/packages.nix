@@ -38,7 +38,7 @@ in
         swappy # screenshot editor???
         wf-recorder # screen recording
 
-        mako # notification daemon, dunst alt
+        # mako # notification daemon, dunst alt, disabled to test swaync
         yad # gui dialog for shell scripts
 
         # audio

@@ -229,7 +229,8 @@ in
               # "$mod SHIFT, s, exec, ${pkgs.grim}/bin/grim | wl-copy"
 
               # screencap section of screen
-              "$mod SHIFT, s, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp})\" - | ${pkgs.swappy}/bin/swappy -f -" # fucking broken
+              # "$mod SHIFT, s, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp})\" - | ${pkgs.swappy}/bin/swappy -f -" # fucking broken
+              "$mod ALT, w, exec, ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f -" # fucking broken
 
               # screencap region, autocopied to clipboard
               # "$mod SHIFT, 4, exec, ${pkgs.hyprshot}/bin/hyprshot -m region"

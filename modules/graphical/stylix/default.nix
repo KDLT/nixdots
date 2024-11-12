@@ -62,7 +62,7 @@ with lib;
         };
         sizes = {
           terminal = 16;
-          applications = 16;
+          applications = 14; # 16 is too extra
           popups = 18;
           desktop = 16;
         };

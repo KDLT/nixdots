@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   ...
@@ -6,6 +7,7 @@
 let
   dataDir = config.kdlt.storage.dataPrefix + "/transmission";
   userName = config.kdlt.username;
+  impermanence = config.kdlt.storage.impermanence;
 in
 {
   config = {
@@ -24,10 +26,15 @@ in
 
     services.transmission = {
       enable = true; # enable transmission daemon
-      user = "transmission";
-      group = "transmission";
-      home = dataDir;
-      downloadDirPermissions = "0700"; # same as chmod u+rwx,g+rwx
+      # user = "transmission"; # default
+      # group = "transmission"; # default
+      home =
+        if impermanence.enable then
+          "${dataDir}" # assign to a certain persistent directory
+        else
+          "/var/lib/transmission"; # land on the default directory
+
+      downloadDirPermissions = "770"; # same as chmod u+rwx,g+rwx
 
       openRPCPort = true; # open firewall for rpc, still from wiki
       openPeerPorts = true;
@@ -40,16 +47,16 @@ in
 
         # separate directory for incomplete downloads
         incomplete-dir-enabled = true;
-        incomplete-dir = "${dataDir}/incomplete";
-        download-dir = "${dataDir}/downloads";
+        # incomplete-dir = "${config.services.transmission.home}/.incomplete";
+        # download-dir = "${config.services.transmission.home}/Downloads";
 
         # watch given directory for torrent files, automatically add those
         watch-dir-enabled = true;
-        watch-dir = "${dataDir}/watch";
+        # watch-dir = "${dataDir}/watch";
 
-        # download torrents <download-queue-size> at a time
+        # download <download-queue-size> torrents at a time
         download-queue-enabled = true;
-        download-queue-size = 1;
+        download-queue-size = 3;
 
         # when <queue-stalled-minutes> have passed, torrent is designated stalled and
         # would no longer count towards <download-queue-size>

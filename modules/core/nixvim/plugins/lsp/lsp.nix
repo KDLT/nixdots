@@ -13,11 +13,19 @@
         nil_ls = {
           # nix language server
           enable = true;
-          settings.nix.flake = {
-            autoArchive = true; # removes the warning about no autocompletion
-            autoEvalInputs = true; # this one adds the suggestmentses
+          settings.nix = {
+            # with nix-index-database installed, i used `nix-locate "bin/nix" | grep nix.out`
+            # verified upon rebuild that this points to the correct path
+            binary = "${pkgs.nix}/bin/nix"; # i wonder if this would be correct
+            maxMemoryMB = null; # default is null and null means no limit
+            flake = {
+              autoArchive = true; # removes the warning about no autocompletion, uses network
+              autoEvalInputs = true; # this one adds the suggestmentses
+            };
           };
         };
+        bashls.enable = true; # bash lsp
+        dockerls.enable = true; # dockerfile lsp
         marksman.enable = true; # markdown lsp
         pyright.enable = true;
         gopls.enable = true; # google golang lsp

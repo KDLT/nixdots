@@ -4,11 +4,16 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
     kdlt.graphical.thunar.enable = lib.mkEnableOption "thunar";
   };
   config = lib.mkIf config.kdlt.graphical.thunar.enable {
+    services = {
+      gvfs.enable = true;
+    };
+
     programs.thunar = {
       enable = true;
       plugins = with pkgs.xfce; [

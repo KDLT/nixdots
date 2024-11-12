@@ -17,11 +17,25 @@
           enable = true;
           settings = {
             main = {
-              terminal = "${pkgs.kitty}/bin/kitty";
+              width = "55";
+              terminal = "${pkgs.kitty}/bin/kitty -e";
               layer = "overlay";
-              prompt = " ";
-              # font = "CommitMono Nerd Font:size=36";
-              # icon-theme = "Papirus-Dark";
+              prompt = "λ  ";
+              font = lib.mkForce "CommitMono Nerd Font:size=30";
+              icon-theme = "Papirus-Dark";
+              horizontal-pad = "65";
+              vertical-pad = "25";
+              inner-pad = "6";
+            };
+
+            # same as from hyprland config
+            border = {
+              radius = "15";
+              width = "2";
+            };
+
+            dmenu = {
+              exit-immediately-if-empty = "yes";
             };
 
             # commented colors out because of stylix conflicting definitions
@@ -34,15 +48,6 @@
             #   match = "ed8796ff";
             #   selection-match = "ed8796ff";
             # };
-
-            border = {
-              radius = "10";
-              width = "1";
-            };
-
-            dmenu = {
-              exit-immediately-if-empty = "yes";
-            };
           };
         };
       };

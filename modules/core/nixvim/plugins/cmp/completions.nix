@@ -43,7 +43,9 @@
             "<C-f>" = "cmp.mapping.scroll_docs(4)";
             "<C-Space>" = "cmp.mapping.complete()";
             "<C-e>" = "cmp.mapping.close()";
-            "<CR>" = "cmp.mapping.confirm({ select = true })";
+
+            # this fucking sucks when it autocompletes the last word on a line so i set it to false
+            "<CR>" = "cmp.mapping.confirm({ select = false })";
           };
 
           autoEnableSources = true;
