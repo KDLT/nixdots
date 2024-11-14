@@ -23,7 +23,6 @@ with types;
   options = {
     kdlt.graphical = {
       enable = mkEnableOption "Graphical Environment";
-      laptop = mkEnableOption "Laptop config";
       wallpaper = mkOption {
         description = "path to wallpaper";
         type = either str path;
@@ -35,7 +34,6 @@ with types;
 
   config = mkIf config.kdlt.graphical.enable {
     kdlt.graphical = {
-      laptop = mkDefault false;
       sound = mkDefault true;
       terminal.enable = mkDefault true;
       xdg.enable = mkDefault true;

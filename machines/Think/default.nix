@@ -19,29 +19,23 @@
     development.virtualization.docker.enable = true; # testing out docker
 
     core = {
-      wireless = {
-        enable = true;
-      };
-      nix = {
-        enableDirenv = false;
-        # unfreePackages = [];
-      };
-      nixvim = {
-        enable = true;
-      };
+      wireless.enable = true;
+      nix.enableDirenv = false; # unfreePackages = [];
+      nixvim.enable = true;
+      laptop = true; # pending configs for laptop mode
+      server = true; # server mode configs
     };
     graphical = {
-      enable = true;
+      enable = true; # try disabling
       wallpaper = ../../assets/wallpaper-green.png;
       sound = true;
-      laptop = true; # pending configs for laptop mode
-      amd.enable = true;
       stylix.enable = true;
       hyprland = {
         enable = true;
-        # use `hyprctl monitors` for info
-        display = "DP-2, 3840x2160@120, 0x0, 1"; # DP-2 attached to USB 4.0 port via adapter, steady connection
-        # display = "DP-1, 3840x2160@100, 0x0, 1"; # kumukurap 'yung 120hz sa DP-1, doesn't carry enough bandwidth
+        # use `hyprctl monitors` for info display info
+        # LG 4K120hz screen connected via HDMI 2.1 cable to thinkpad
+        # display = "HDMI-A-2, 3840x2160@30, 0x0, 1";
+        display = "eDP-1, 1920x1080@60, 0x0, 1"; # native thinkpad display
       };
       xdg.enable = true;
     };
@@ -80,6 +74,7 @@
   # pending transfer to its own module
   services.keyd = {
     enable = true;
+
     keyboards.t480 = {
       ids = [ "0001:0001" ];
       settings = {

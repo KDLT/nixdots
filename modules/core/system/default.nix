@@ -4,6 +4,10 @@
   pkgs,
   ...
 }:
+let
+  laptop = config.kdlt.core.laptop;
+  server = config.kdlt.core.server;
+in
 {
   # Where most declarations from configuration.nix reside, e.g., timezone, system packages
   options = {
@@ -153,6 +157,15 @@
         ];
       };
       polkit.enable = true;
+    };
+
+    # laptop behavior when interacting with lid and switch
+    services.logind = lib.mkIf laptop {
+      lidSwitch = if server then "ignore" else "halt"; # not plugged in
+      lidSwitchDocked = if server then "ignore" else "suspend"; # when external display is connected
+      lidSwitchExternalPower = if server then "ignore" else "lock"; # when plugged in
+      powerKey = "ignore";
+      powerKeyLongPress = "reboot";
     };
 
     # dbus services that allows applications to update firmware

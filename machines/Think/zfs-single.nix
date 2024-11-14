@@ -12,7 +12,7 @@ let
   poolName = config.kdlt.storage.zfs.zpool.name;
   poolData = config.kdlt.storage.zfs.zpool.dataset.data;
   poolCache = config.kdlt.storage.zfs.zpool.dataset.cache;
-  poolMedia = poolData + "/data";
+  poolMedia = poolData + "/media";
   blankRootSnap = poolName + "/local/root@blank";
 in
 # blankRootSnap = "rpool/local/root@blank";

@@ -55,7 +55,6 @@ with lib;
     };
   };
 
-  ## when enabled download the entire nerdfont package
   config = {
     fonts = mkIf (!config.kdlt.nerdfont.enable) {
       packages = with pkgs; [

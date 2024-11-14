@@ -3,11 +3,12 @@
   pkgs,
   lib,
   config,
-  hyprlandFlake,
   ...
 }:
 let
   username = config.kdlt.username;
+  graphical = config.kdlt.graphical;
+  hyprland = config.kdlt.graphical.hyprland;
   myAliases = {
     ll = "eza --icons=always --color=always --long --group-directories-first --git --no-filesize --no-time --no-permissions --no-user --tree --level=1";
     cat = "bat";
@@ -86,11 +87,8 @@ in
 
           # envextra is appended to zshenv, this gets called when spawning new terminals
           envExtra = ''${pkgs.disfetch}/bin/disfetch'';
-          # to know the specific binary, nix build ${}
           # loginExtra is prepended to zlogin, this gets called upon login, wow
-
-          loginExtra = "${pkgs.hyprland}/bin/Hyprland"; # this is the default flake
-          # loginExtra = "${hyprlandFlake.hyprland}/bin/Hyprland";
+          loginExtra = lib.mkIf (graphical.enable && hyprland.enable) "${pkgs.hyprland}/bin/Hyprland";
         };
 
         programs.bash = {

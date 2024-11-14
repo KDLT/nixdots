@@ -7,7 +7,7 @@
 }:
 let
   stylix = config.kdlt.graphical.stylix;
-  laptop = config.kdlt.graphical.laptop;
+  laptop = config.kdlt.core.laptop;
 in
 # wallpaper = config.kdlt.graphical.wallpaper;
 # userName = config.kdlt.username;

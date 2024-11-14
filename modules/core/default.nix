@@ -1,16 +1,23 @@
-{ mylib, ... }:
+{
+  lib,
+  mylib,
+  ...
+}:
+with lib;
 {
   imports = mylib.scanPaths ./.;
-  # imports = [
-  #   ./connectivity
-  #   ./font
-  #   ./home-manager
-  #   ./nix
-  #   ./nixvim
-  #   ./shells
-  #   ./sops
-  #   ./system
-  #   ./users
-  #   ./utils
-  # ];
+
+  options = {
+    kdlt.core = {
+      laptop = mkEnableOption "Laptop config";
+      server = mkEnableOption "Server mode";
+    };
+  };
+
+  config = {
+    kdlt.core = {
+      laptop = mkDefault false;
+      server = mkDefault false;
+    };
+  };
 }
