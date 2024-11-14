@@ -17,7 +17,7 @@ in
         {
           enable = true;
           userKnownHostsFile = "/home/${username}/.ssh/known_hosts";
-          hashKnownHosts = true; # hashes the known contents of know_hosts file
+          hashKnownHosts = false; # hashes the known contents of know_hosts file
 
           extraOptionOverrides = {
             AddKeysToAgent = "yes";

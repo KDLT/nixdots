@@ -32,7 +32,7 @@ in
         }
         {
           # path = "${dataPrefix}" + "/ssh/ssh_host_K-Link_rsa_key";
-          path = "/ssh/ssh_host_rsa_key";
+          path = "/etc/ssh/ssh_host_rsa_key";
           type = "rsa";
           bits = 4096;
         }

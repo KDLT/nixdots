@@ -95,7 +95,7 @@
           user
           hyprlandFlake
           anyrunFlake
-          mylib # pass (notreally) mylib here
+          mylib # custom lib for scanPaths
           ;
       };
       sharedModules = [
@@ -122,9 +122,14 @@
         Link = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inheritArgs;
-          modules = sharedModules ++ [
-            ./machines/Link/default.nix
-          ];
+          modules = sharedModules ++ [ ./machines/Link/default.nix ];
+        };
+
+        # Beelink Mini PC
+        Think = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = inheritArgs;
+          modules = sharedModules ++ [ ./machines/Think/default.nix ];
         };
       };
     };

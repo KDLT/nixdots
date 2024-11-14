@@ -33,12 +33,12 @@ let
   ] ++ config.kdlt.storage.impermanence.persist.systemFiles;
 
   persistentHomeDirs = [
+    "nixdots" # this must be the directory name of nixos configuration files
     "Downloads"
     "Music"
     "Pictures"
     "Documents"
     "Videos"
-    "nixdots"
     "code"
     {
       directory = ".ssh";
@@ -63,9 +63,11 @@ let
   ] ++ config.kdlt.storage.impermanence.persist.homeFiles;
 
   PersistentCacheDirs = [
-    ".cache/epiphany"
+    # this is a gtk remnant
+    # ".cache/tracker3"
+    # ".cache/epiphany"
+    ".cache/cliphist"
     ".cache/mozilla"
-    ".cache/tracker3"
     ".cache/mesa_shader_cache_db"
   ] ++ config.kdlt.storage.impermanence.persist.cacheDirs;
 

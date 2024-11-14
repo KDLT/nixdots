@@ -7,6 +7,7 @@
 }:
 let
   stylix = config.kdlt.graphical.stylix;
+  laptop = config.kdlt.graphical.laptop;
 in
 # wallpaper = config.kdlt.graphical.wallpaper;
 # userName = config.kdlt.username;
@@ -30,17 +31,14 @@ with lib;
       polarity = "dark";
       image = ../../../assets/wallpaper-blue.png;
       # somewhere in /nix/store/ is the base16 scheme directory, the yaml filenames are the options
-      # base16Scheme = "${pkgs.base16-schemes}/share/themes/twilight.yaml";
-      # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-      # base16Scheme = "${pkgs.base16-schemes}/share/themes/saga.yaml";
-      # base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+      # use nix-locate
       base16Scheme = "${pkgs.base16-schemes}/share/themes/primer-dark.yaml";
       # see generated color scheme in /etc/stylix/generated.json
 
       cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Ice";
-        size = 24;
+        size = if laptop then 16 else 24;
       };
 
       fonts = {
@@ -61,28 +59,12 @@ with lib;
           package = pkgs.noto-fonts-color-emoji;
         };
         sizes = {
-          terminal = 16;
-          applications = 14; # 16 is too extra
-          popups = 18;
-          desktop = 16;
+          terminal = if laptop then 12 else 16;
+          applications = if laptop then 11 else 14;
+          popups = if laptop then 13 else 18;
+          desktop = if laptop then 12 else 16;
         };
       };
     };
-
-    # this conflicts with home-manager's nixosModule
-    # home-manager.users.${userName} = {
-    #   stylix = {
-    #     enable = true;
-    #     autoEnable = true;
-    #
-    #     opacity = {
-    #       applications = 1.0;
-    #       desktop = 1.0;
-    #       popups = 1.0;
-    #       terminal = 1.0;
-    #       polarity = "dark";
-    #     };
-    #   };
-    # };
   };
 }
