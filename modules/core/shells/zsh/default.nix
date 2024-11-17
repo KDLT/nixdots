@@ -15,6 +15,7 @@ let
     gitfetch = "onefetch";
     fetch = "disfetch";
     icat = "kitten icat";
+    dots = "z ~/nixdots; v flake.nix";
   };
 in
 {

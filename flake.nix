@@ -5,6 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
+    nixos-hardware.url = "github:nixOS/nixos-hardware/master";
+
     sops-nix.url = "github:Mic92/sops-nix"; # secrets management
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -45,6 +47,7 @@
     {
       self,
       nixpkgs,
+      nixos-hardware,
       impermanence,
       disko,
       sops-nix,
@@ -129,7 +132,10 @@
         Think = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inheritArgs;
-          modules = sharedModules ++ [ ./machines/Think/default.nix ];
+          modules = sharedModules ++ [
+            ./machines/Think/default.nix
+            nixos-hardware.nixosModules.lenovo-thinkpad-t480
+          ];
         };
       };
     };
