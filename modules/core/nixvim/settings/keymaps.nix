@@ -83,10 +83,6 @@
                 action = ":w<CR>";
                 desc = "Save Buffer";
               };
-              "<C-s>" = {
-                action = ":w<CR>";
-                desc = "Save Buffer";
-              };
 
               "<C-h>" = {
                 action = "<C-w>h";

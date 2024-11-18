@@ -1,19 +1,15 @@
-# This example uses YAML anchors which allows reuse of multiple keys
-# without having to repeat yourself.
-# Also see https://github.com/Mic92/dotfiles/blob/master/nixos/.sops.yaml
-# for a more complex example.
-# keys:
-#   - &kba age1rvqxhe7nzyaxqhx2qu9ekerph5wnfxxg04rwtyc9xpgk7wmdfujsstm9je
 keys:
-  - &users:
-    - &kbassh age1rvqxhe7nzyaxqhx2qu9ekerph5wnfxxg04rwtyc9xpgk7wmdfujsstm9je
-    - &kbadev age1jja7gk37n4z805fd4yxelxjsv0ehd9rfkzuwml6etp54pcyxws4s9gcgr5
-  - &hosts:
-    - &K-Super age1egkrnunrcw23ujzaazr0yssz4egcy253przvphkd2sl2tjqkgyqqmxv3fd
+    # &ta is generated using a standalone dev access key via
+    # `age-keygen -o ~/.config/sops/age/key.txt`
+    # the keygen file is located in ~/.config/sops/age/keys.txt
+  - &user_kba age1nmme05nwxp8xw5z0zt764nrwhn8edf8rrwwxp47fchxy3mhjjuuqxcwexs
+    # &guppy is generated using the host ssh_ed25519 key via ssh-to-age
+    # `cat /data/ssh/ssh_host_rsa_key.pub | ssh-to-age`
+    # the specific ssh key for this system is located in /data/ssh/ssh_host_ed25519_key.pub
+  - &host_Link age1arw46ar8dr5573u57h7k9zddl4w5qc4dadywuaazkwzrhs9zgclq7e0cd4
 creation_rules:
-  - path_regex: secrets/secrets.yaml$
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
-      - *kbassh
-      - *kbadev
-      - *K-Super
+      - *user_kba
+      - *host_Link
