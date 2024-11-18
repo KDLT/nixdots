@@ -1,6 +1,7 @@
 {
   imports = [ ./hardware.nix ];
 
+  # NOTE: Configs here are so outdated, refer to the either Link or Think defaults
   networking = {
     hostName = "K-Super";
     # hostId = "";

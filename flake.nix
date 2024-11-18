@@ -24,12 +24,7 @@
     nixvim.url = "github:nix-community/nixvim"; # for unstable channel
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-    # another attempt to use the stated url from the wiki, no follows
-    # WARNING: this might break rebuild, reporting back, it rebuilt and rebooted
     hyprland.url = "github:hyprwm/Hyprland";
-
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    # hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprlock.url = "github:hyprwm/hyprlock";
     hyprlock.inputs.nixpkgs.follows = "hyprland";
@@ -38,7 +33,6 @@
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
     stylix.url = "github:danth/stylix";
-    # stylix.inputs.nixpkgs.follows = "nixpkgs-stable"; # testing this commented out
 
     nur.url = "github:nix-community/NUR"; # nix user repository
   };

@@ -22,34 +22,23 @@
     email = "aguirrekenneth@gmail.com";
     stateVersion = "24.05";
 
-    development.virtualization.docker.enable = true; # testing out docker
-
     core = {
-      wireless = {
-        enable = true;
-      };
-      nix = {
-        enableDirenv = false;
-        # unfreePackages = [];
-      };
-      nixvim = {
-        enable = true;
-      };
+      wireless.enable = true;
+      nix.enableDirenv = false;
+      nixvim.enable = true;
+      laptop = false;
+      server = false;
     };
     graphical = {
       enable = true;
-      # wallpaper = "home/kba/Pictures/aesthetic-wallpapers/images/chill.gif";
-      # wallpaper = ../../assets/wallpaper.png;
       wallpaper = ../../assets/wallpaper-green.png;
       sound = true;
-      laptop = false;
       amd.enable = true;
       stylix.enable = true;
       hyprland = {
         enable = true;
         # use `hyprctl monitors` for info
         display = "DP-2, 3840x2160@120, 0x0, 1"; # DP-2 attached to USB 4.0 port via adapter, steady connection
-        # display = "DP-1, 3840x2160@100, 0x0, 1"; # kumukurap 'yung 120hz sa DP-1, doesn't carry enough bandwidth
       };
       xdg.enable = true;
     };
@@ -83,12 +72,5 @@
       sansSerif.name = "JetbrainsMono";
       emoji.name = "Noto-Emoji";
     };
-    # nerdfont = {
-    #   enable = true;
-    #   monospace.fontName = "CommitMono";
-    #   serif.fontName = "Go-Mono";
-    #   sansSerif.fontName = "JetBrainsMono";
-    #   emoji.fontName = "Noto-Emoji";
-    # };
   };
 }

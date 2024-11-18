@@ -1,7 +1,13 @@
 # ~/dotfiles/modules/core/utils/yazi/default.nix
-{ config, pkgs, ... }:
 {
-  # you CANNOT omit the triple dot syntax when passing an input
+  config,
+  pkgs,
+  ...
+}:
+let
+  userName = config.kdlt.username;
+in
+{
   config = {
     environment.systemPackages = [
       pkgs.yazi
@@ -10,6 +16,9 @@
       programs.yazi = {
         enable = true;
         enableZshIntegration = true;
+        # initLua = ./init.lua;
+        shellWrapperName = "y";
+
         settings = {
           log = {
             enabled = true;
@@ -21,7 +30,28 @@
             sort_reverse = true;
           };
         };
-        shellWrapperName = "y";
+
+        keymap = {
+          manager.prepend_keymap = [
+            {
+              on = [
+                "g"
+                "r"
+              ];
+              run = "cd /run/media/${userName}";
+              desc = "Cd to mounted removeable drive";
+            }
+            {
+              on = [
+                "m"
+                "i"
+              ];
+              run = "linemode size_and_mtime";
+              desc = "Set linemode to size_and_mtime (custom function)";
+            }
+          ];
+        };
+
       };
     };
   };

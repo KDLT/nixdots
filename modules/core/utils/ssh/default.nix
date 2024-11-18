@@ -33,8 +33,13 @@ in
               user = "git";
               identityFile = "~/.ssh/id-${username}-github";
             };
-            K-Nixpad = {
+            K-Thinkpad = {
               hostname = "192.168.1.54";
+              user = username;
+              identityFile = defaultIdentity;
+            };
+            K-Link = {
+              hostname = "192.168.1.40";
               user = username;
               identityFile = defaultIdentity;
             };

@@ -21,7 +21,6 @@ in
 
           packages = with pkgs; [
             libnotify # sends desktop notifs to notif daemon
-            wireguard-tools # secure tunneling whatever that means
             ventoy # endgame bootable usb
 
             fzf # command line fuzzy finder written in go

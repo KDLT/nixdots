@@ -20,6 +20,4 @@ in
       services.hyprpaper.enable = lib.mkIf (stylix.enable) (lib.mkForce false);
     };
   };
-  # lib.mkIf config.kdlt.graphical.hyprpaper.enable {
-  # };
 }
