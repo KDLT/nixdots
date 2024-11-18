@@ -18,6 +18,8 @@ in
       programs.kitty = {
         enable = true;
         settings = {
+          font_family = "CommitMono Nerd Font Mono";
+
           background_opacity = lib.mkForce "0.89";
           window_padding_width = "12";
           enabled_layouts = "fat:bias=80, tall, splits";

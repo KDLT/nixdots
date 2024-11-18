@@ -88,8 +88,10 @@ in
 
           # envextra is appended to zshenv, this gets called when spawning new terminals
           envExtra = ''${pkgs.disfetch}/bin/disfetch'';
-          # loginExtra is prepended to zlogin, this gets called upon login, wow
-          loginExtra = lib.mkIf (graphical.enable && hyprland.enable) "${pkgs.hyprland}/bin/Hyprland";
+
+          # loginExtra is PREpended to zlogin, this gets called upon login, wow
+          # commented out in favor of uwsm = universal wayland session manager
+          # loginExtra = lib.mkIf (graphical.enable && hyprland.enable) "${pkgs.hyprland}/bin/Hyprland";
         };
 
         programs.bash = {

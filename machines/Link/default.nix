@@ -69,7 +69,7 @@
       enable = true;
       monospace.name = "CommitMono";
       serif.name = "Go-Mono";
-      sansSerif.name = "JetbrainsMono";
+      sansSerif.name = "JetBrainsMono";
       emoji.name = "Noto-Emoji";
     };
   };

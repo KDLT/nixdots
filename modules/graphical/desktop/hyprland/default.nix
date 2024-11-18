@@ -46,6 +46,16 @@ in
       # hyprlock.enable = true;
     };
 
+    # systemd startup for hyprland
+    programs.uwsm = {
+      enable = true;
+      waylandCompositors.hyprland = {
+        binPath = "/run/current-system/sw/bin/Hyprland";
+        comment = "Hyprland session managed by uwsm";
+        prettyName = "Hyprland";
+      };
+    };
+
     services = {
       ## AMD GPU instructs xserver be enabled as per https://nixos.wiki/wiki/AMD_GPU
       xserver.enable = lib.mkIf config.kdlt.graphical.amd.enable true;

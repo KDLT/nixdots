@@ -19,6 +19,10 @@ with lib;
               type = str;
               default = "CommitMono";
             };
+            package = mkOption {
+              type = package;
+              default = [ (pkgs.nerdfonts.override { fonts = [ "CommitMono" ]; }) ];
+            };
           };
         };
       };
@@ -28,6 +32,10 @@ with lib;
             name = mkOption {
               type = str;
               default = "Go-Mono";
+            };
+            package = mkOption {
+              type = package;
+              default = [ (pkgs.nerdfonts.override { fonts = [ "Go-Mono" ]; }) ];
             };
           };
         };
@@ -39,6 +47,10 @@ with lib;
               type = str;
               default = "JetBrainsMono";
             };
+            package = mkOption {
+              type = package;
+              default = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
+            };
           };
         };
       };
@@ -48,6 +60,10 @@ with lib;
             name = mkOption {
               type = str;
               default = "Noto-Emoji";
+            };
+            package = mkOption {
+              type = package;
+              default = [ "noto-fonts-emoji" ];
             };
           };
         };
@@ -61,13 +77,15 @@ with lib;
         jetbrains-mono
         fira-code
         iosevka
+        noto-fonts-color-emoji
       ];
       fontconfig = {
         defaultFonts = {
           # testing all jetbrains
-          monospace = [ "JetbrainsMono" ];
-          serif = [ "JetbrainsMono" ];
-          sansSerif = [ "JetbrainsMono" ];
+          monospace = [ "Jetbrains Mono" ];
+          serif = [ "Jetbrains Mono" ];
+          sansSerif = [ "Jetbrains Mono" ];
+          emoji = [ "Noto Color Emoji" ];
         };
       };
     };
