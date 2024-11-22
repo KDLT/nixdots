@@ -54,6 +54,9 @@ in
         # rebind vertical and horizontal split
         bind-key "|" split-window -h -c "#{pane_current_path}"
         bind-key "-" split-window -v -c "#{pane_current_path}"
+
+        # transfer tmux status bar to top
+        set-option -g status-position top
       '';
 
       tmuxp.enable = true; # tmux session manager

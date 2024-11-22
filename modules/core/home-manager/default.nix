@@ -18,6 +18,7 @@ in
           stateVersion = config.kdlt.stateVersion;
 
           homeDirectory = "/home/${userName}";
+          sessionPath = [ "/home/${userName}/.local/bin" ];
 
           packages = with pkgs; [
             libnotify # sends desktop notifs to notif daemon

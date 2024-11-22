@@ -39,7 +39,7 @@ in
           userEmail = config.kdlt.email;
           aliases = gitAliases;
           ignores = [
-            ".*/" # ignore all dot folders but include files
+            # ".*/" # ignore all dot folders but include files, DO not ignore all dot folders since .github/ is required for actions
             "!/.gitignore" # do not ignore .gitignore
           ];
 

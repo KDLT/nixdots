@@ -1,9 +1,9 @@
-keys:
-    # &ta is generated using a standalone dev access key via
+keys: # these are generated in K-Link
+    # generated using a standalone dev access key via
     # `age-keygen -o ~/.config/sops/age/key.txt`
     # the keygen file is located in ~/.config/sops/age/keys.txt
   - &user_kba age1nmme05nwxp8xw5z0zt764nrwhn8edf8rrwwxp47fchxy3mhjjuuqxcwexs
-    # &guppy is generated using the host ssh_ed25519 key via ssh-to-age
+    # generated using the host ssh_ed25519 key via ssh-to-age
     # `cat /data/ssh/ssh_host_rsa_key.pub | ssh-to-age`
     # the specific ssh key for this system is located in /data/ssh/ssh_host_ed25519_key.pub
   - &host_Link age1arw46ar8dr5573u57h7k9zddl4w5qc4dadywuaazkwzrhs9zgclq7e0cd4
