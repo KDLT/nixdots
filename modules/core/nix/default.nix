@@ -9,21 +9,13 @@ in
 {
   options = {
     kdlt.core.nix = {
-      enableDirenv = lib.mkOption { default = true; };
+      direnv.enable = lib.mkOption { default = true; };
       unfreePackages = lib.mkOption { default = [ ]; };
     };
   };
 
   config = {
-    # kdlt.core.zfs = lib.mkMerge [
-    #   (lib.mkIf config.kdlt.persistence.enable {
-    #     homeCacheLinks = [ "local/share/direnv" ];
-    #     systemCacheLinks = [ "/root/.local/share/direnv" ];
-    #     systemDataLinks = [ "/var/lib/nixos" ];
-    #   })
-    #   (lib.mkIf (!config.kdlt.core.persistence.enable) {})
-    # ];
-
+    # nixos helper, saner looking rebuilds
     programs.nh = {
       enable = true;
       clean.enable = false;

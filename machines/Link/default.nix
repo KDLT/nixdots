@@ -24,7 +24,7 @@
 
     core = {
       wireless.enable = true;
-      nix.enableDirenv = false;
+      nix.direnv.enable = true;
       nixvim.enable = true;
       laptop = false;
       server = false;

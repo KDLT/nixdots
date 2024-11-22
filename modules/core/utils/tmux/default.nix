@@ -59,7 +59,7 @@ in
         set-option -g status-position top
       '';
 
-      tmuxp.enable = true; # tmux session manager
+      # tmuxp.enable = true; # tmux session manager
       # tmuxinator.enable = true; # the session manager with more stars
 
       plugins = with pkgs.tmuxPlugins; [
@@ -68,6 +68,8 @@ in
         # dracula
         tmux-floax
         {
+          # consistent pane navigation between tmux and neovim
+          # needs setup on neovim side, too
           plugin = vim-tmux-navigator;
           extraConfig = ''
             set -g @plugin 'christoomey/vim-tmux-navigator'
@@ -77,7 +79,6 @@ in
             set -g @vim_navigator_mapping_down "C-j"
             set -g @vim_navigator_mapping_prev ""  # removes the C-\ binding
           '';
-
         }
         {
           plugin = tokyo-night-tmux;
@@ -88,8 +89,13 @@ in
           '';
         }
         {
+          # prefix, ctrl-s to save; prefix, ctrl-r to reload
           plugin = resurrect;
-          extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+          # explicityly state resurrect-dir, might be wiped on reboot
+          extraConfig = ''
+            set -g @resurrect-strategy-nvim 'session'
+            set -g @resurrect-dir '~/.local/share/tmux/resurrect'
+          '';
         }
         {
           plugin = continuum;

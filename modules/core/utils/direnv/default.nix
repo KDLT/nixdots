@@ -5,13 +5,19 @@
   user,
   ...
 }:
+let
+  userName = config.kdlt.username;
+  direnv = config.kdlt.core.nix.direnv;
+in
+with lib;
 {
   config = {
-    home-manager.users.${config.kdlt.username} = {
+    home-manager.users.${userName} = {
       programs.direnv = {
-        enable = lib.mkIf config.kdlt.core.nix.enableDirenv true;
+        enable = mkIf direnv.enable true;
+        # this takes care of the shell hook in .zshrc
         enableZshIntegration = true;
-        nix-direnv.enable = lib.mkIf config.kdlt.core.nix.enableDirenv true;
+        nix-direnv.enable = mkIf direnv.enable true;
       };
     };
   };
