@@ -66,8 +66,27 @@ in
         cpu
         # catppuccin
         # dracula
-        tokyo-night-tmux
         tmux-floax
+        {
+          plugin = vim-tmux-navigator;
+          extraConfig = ''
+            set -g @plugin 'christoomey/vim-tmux-navigator'
+            set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
+            set -g @vim_navigator_mapping_right "C-Right C-l"
+            set -g @vim_navigator_mapping_up "C-k"
+            set -g @vim_navigator_mapping_down "C-j"
+            set -g @vim_navigator_mapping_prev ""  # removes the C-\ binding
+          '';
+
+        }
+        {
+          plugin = tokyo-night-tmux;
+          extraConfig = ''
+            set -g @tokyo-night-tmux_window_id_style none
+            set -g @tokyo-night-tmux_pane_id_style hsquare
+            set -g @tokyo-night-tmux_zoom_id_style dsquare
+          '';
+        }
         {
           plugin = resurrect;
           extraConfig = "set -g @resurrect-strategy-nvim 'session'";

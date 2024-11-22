@@ -71,14 +71,33 @@ with lib;
     };
   };
 
-  config = {
-    fonts = mkIf (!config.kdlt.nerdfont.enable) {
-      packages = with pkgs; [
-        jetbrains-mono
-        fira-code
-        iosevka
-        noto-fonts-color-emoji
-      ];
+  config = with pkgs; {
+    fonts = {
+      packages =
+        if (config.kdlt.nerdfont.enable) then
+          [
+            # as per nixos wiki, specification of nerdfonts override must also occur in fonts.packages as well
+            # https://nixos.wiki/wiki/Fonts
+            (nerdfonts.override {
+              fonts = [
+                "Go-Mono"
+                "CommitMono"
+                "JetBrainsMono"
+              ];
+            })
+            noto-fonts
+            noto-fonts-extra
+            noto-fonts-emoji
+            noto-fonts-color-emoji
+          ]
+        # these are the defaults when nerdfonts is not installed
+        else
+          [
+            jetbrains-mono
+            fira-code
+            iosevka
+            noto-fonts-color-emoji
+          ];
       fontconfig = {
         defaultFonts = {
           # testing all jetbrains

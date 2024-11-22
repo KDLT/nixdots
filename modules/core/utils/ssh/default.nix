@@ -33,7 +33,7 @@ in
               user = "git";
               identityFile = "~/.ssh/id-${username}-github";
             };
-            K-Thinkpad = {
+            K-Think = {
               hostname = "192.168.1.54";
               user = username;
               identityFile = defaultIdentity;
@@ -46,6 +46,11 @@ in
             K-Mac = {
               hostname = "192.168.1.59";
               user = username;
+              identityFile = defaultIdentity;
+            };
+            A-Mac = {
+              hostname = "192.168.1.44";
+              user = "a";
               identityFile = defaultIdentity;
             };
           };
