@@ -59,7 +59,7 @@ in
         set-option -g status-position top
       '';
 
-      # tmuxp.enable = true; # tmux session manager
+      tmuxp.enable = true; # tmux session manager
       # tmuxinator.enable = true; # the session manager with more stars
 
       plugins = with pkgs.tmuxPlugins; [

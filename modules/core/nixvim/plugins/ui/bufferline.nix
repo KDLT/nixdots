@@ -10,6 +10,8 @@
         buffer_close_icon = "󰱝 ";
         modified_icon = "󰔯 ";
 
+        always_show_bufferline = false;
+
         offsets = [
           {
             filetype = "neo-tree";

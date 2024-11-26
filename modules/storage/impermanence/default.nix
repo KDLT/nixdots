@@ -56,6 +56,10 @@ let
       directory = ".local/share";
       mode = "0700";
     }
+    {
+      directory = ".local/state";
+      mode = "0700";
+    }
   ] ++ config.kdlt.storage.impermanence.persist.homeDirs;
 
   persistentHomeFiles = [
