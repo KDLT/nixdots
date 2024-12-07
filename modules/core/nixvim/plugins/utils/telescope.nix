@@ -23,11 +23,6 @@
         action = "git_commits";
         options.desc = "Git Commits";
       };
-      "<leader>sD" = {
-        action = "diagnostics";
-        options.desc = "Workspace Diagnostics";
-      };
-
       "<leader>ff" = {
         action = "find_files";
         options.desc = "Telescope Files from ./";
