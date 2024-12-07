@@ -11,7 +11,7 @@ in
 {
   environment.systemPackages = with pkgs; [
     tmux # terminal multiplexer
-    tmuxp # tmux session manager
+    # tmuxp # tmux session manager
   ];
 
   programs.tmux = {
@@ -61,7 +61,7 @@ in
       '';
 
       # tmuxinator.enable = true; # the session manager with more stars
-      tmuxp.enable = true; # tmux session manager with less stars
+      # tmuxp.enable = true; # tmux session manager with less stars
 
       plugins = with pkgs.tmuxPlugins; [
         cpu
@@ -92,10 +92,19 @@ in
         {
           # prefix, ctrl-s to save; prefix, ctrl-r to reload
           plugin = resurrect;
-          # explicityly state resurrect-dir, might be wiped on reboot
+          # explicityly state resurrect-dir
           extraConfig = ''
+            resurrect_dir="~/.config/tmux/resurrect"
+
+            # for neovim
             set -g @resurrect-strategy-nvim 'session'
-            set -g @resurrect-dir '~/.local/share/tmux/resurrect'
+
+            set -g @resurrect-dir $resurrect_dir
+            set -g @resurrect-processes 'ssh btop'
+
+            # post save hook
+            # this relies on nixos wrapper for nvim resurrect to start with /nix/store and end with -init.lua
+            set -g @resurrect-hook-post-save-all 'target=$(readlink -f $resurrect_dir/last); sed "s|/nix/store/.*-init.lua|nvim|g" $target | sponge $target'
           '';
         }
         {
