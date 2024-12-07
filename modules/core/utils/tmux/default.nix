@@ -1,5 +1,6 @@
 # leaving blank for now
 {
+  lib,
   pkgs,
   config,
   ...
@@ -59,8 +60,8 @@ in
         set-option -g status-position top
       '';
 
-      tmuxp.enable = true; # tmux session manager
       # tmuxinator.enable = true; # the session manager with more stars
+      tmuxp.enable = true; # tmux session manager with less stars
 
       plugins = with pkgs.tmuxPlugins; [
         cpu
@@ -106,5 +107,17 @@ in
         }
       ];
     };
+
+    # previously i used home.sessionVariables, i changed to programs.zsh as
+    # instructions stated variable must be exported to zshrc or bashrc
+    programs.zsh =
+      let
+        tmuxp = config.home-manager.users.${username}.programs.tmux.tmuxp;
+      in
+      {
+        sessionVariables = lib.mkIf tmuxp.enable {
+          TMUXP_CONFIGDIR = "$XDG_CONFIG_HOME/tmuxp";
+        };
+      };
   };
 }

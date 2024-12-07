@@ -40,7 +40,7 @@ in
 
         programs = {
           zsh.enable = true;
-          bash.enable = true;
+          bash.enable = false;
           fish.enable = false;
           zoxide.enable = true;
           fzf.enable = true;
