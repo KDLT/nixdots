@@ -10,12 +10,6 @@
     # nameservers = ["" ""];
   };
 
-  # sanity check that the display is not the problem re: low refresh rate
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
   kdlt = {
     username = "kba";
     fullname = "Kenneth Balboa Aguirre";
@@ -29,6 +23,12 @@
       laptop = false;
       server = false;
     };
+
+    development = {
+      virtualization.docker.enable = true;
+      nodejs.enable = true;
+    };
+
     graphical = {
       enable = true;
       wallpaper = ../../assets/wallpaper-green.png;

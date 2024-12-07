@@ -16,15 +16,19 @@
     email = "aguirrekenneth@gmail.com";
     stateVersion = "24.05";
 
-    development.virtualization.docker.enable = true; # testing out docker
-
     core = {
       wireless.enable = true;
-      nix.enableDirenv = false; # unfreePackages = [];
+      nix.direnv.enable = false; # unfreePackages = [];
       nixvim.enable = true;
       laptop = true; # pending configs for laptop mode
       server = true; # server mode configs
     };
+
+    development = {
+      virtualization.docker.enable = true; # for plex
+      nodejs.enable = true; # for mesh central
+    };
+
     graphical = {
       enable = true; # try disabling
       wallpaper = ../../assets/wallpaper-green.png;

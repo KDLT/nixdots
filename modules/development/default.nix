@@ -14,6 +14,7 @@ with lib;
       git.enable = mkDefault true;
       lua.enable = mkDefault true;
       go.enable = mkDefault true;
+      nodejs.enable = mkDefault false;
       powershell.enable = mkDefault false;
       python.enable = mkDefault true;
       yamlls.enable = mkDefault true;
