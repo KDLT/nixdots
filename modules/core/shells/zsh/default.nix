@@ -82,12 +82,11 @@ in
           initExtra = ''
             # match dotfiles without explicitly specifying the dot
             setopt GLOB_DOTS
+            # runs disfetch on new terminal instances
+            ${pkgs.disfetch}/bin/disfetch
           '';
 
           shellAliases = myAliases;
-
-          # envextra is appended to zshenv, this gets called when spawning new terminals
-          envExtra = ''${pkgs.disfetch}/bin/disfetch'';
 
           # loginExtra is PREpended to zlogin, this gets called upon login, wow
           # commented out in favor of uwsm = universal wayland session manager
