@@ -1,21 +1,18 @@
 # modules/core/shells/zsh/default.nix
 {
   pkgs,
-  lib,
   config,
   ...
 }:
 let
   username = config.kdlt.username;
-  graphical = config.kdlt.graphical;
-  hyprland = config.kdlt.graphical.hyprland;
   myAliases = {
     ll = "eza --icons=always --color=always --long --group-directories-first --git --no-filesize --no-time --no-permissions --no-user --tree --level=1";
     cat = "bat";
     gitfetch = "onefetch";
     fetch = "disfetch";
     icat = "kitten icat";
-    dots = "z ~/nixdots; v flake.nix";
+    dots = "z ~/nixdots; v"; # z is alias for zoxide, v is for neovim
   };
 in
 {

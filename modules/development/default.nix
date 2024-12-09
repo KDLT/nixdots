@@ -17,6 +17,7 @@ with lib;
       nodejs.enable = mkDefault false;
       powershell.enable = mkDefault false;
       python.enable = mkDefault true;
+      tailscale.enable = mkDefault false;
       yamlls.enable = mkDefault true;
       virtualization = {
         docker.enable = mkDefault false;

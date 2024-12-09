@@ -25,8 +25,8 @@
     };
 
     development = {
+      tailscale.enable = true;
       virtualization.docker.enable = true; # for plex
-      nodejs.enable = true; # for mesh central
     };
 
     graphical = {
