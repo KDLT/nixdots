@@ -62,6 +62,8 @@
       };
       dataPrefix = "/data";
       cachePrefix = "/cache";
+      share.nfs.enable = true;
+      share.samba.enable = true;
     };
     nerdfont = {
       # font name reference:

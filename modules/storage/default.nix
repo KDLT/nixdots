@@ -7,11 +7,6 @@
 with lib;
 {
   imports = mylib.scanPaths ./.;
-  # imports = [
-  #   ./btrfs
-  #   ./impermanence
-  #   ./zfs
-  # ];
 
   options.kdlt.storage = {
     dataPrefix = mkOption {
@@ -31,5 +26,7 @@ with lib;
   config.kdlt.storage = {
     btrfs.enable = mkDefault false;
     zfs.enable = mkDefault false;
+    share.nfs.enable = mkDefault false;
+    share.samba.enable = mkDefault false;
   };
 }
