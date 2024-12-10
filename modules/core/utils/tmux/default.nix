@@ -57,7 +57,7 @@ in
         bind-key "-" split-window -v -c "#{pane_current_path}"
 
         # transfer tmux status bar to top
-        set-option -g status-position top
+        # set-option -g status-position top
       '';
 
       # tmuxinator.enable = true; # the session manager with more stars
