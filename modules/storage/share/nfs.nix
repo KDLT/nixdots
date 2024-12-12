@@ -8,31 +8,44 @@ let
   nfs = config.kdlt.storage.share.nfs;
   impermanence = config.kdlt.storage.impermanence;
   dataPrefix = config.kdlt.storage.dataPrefix;
+  userName = config.kdlt.username;
 in
 {
   options.kdlt.storage = {
     share.nfs.enable = lib.mkEnableOption "NFS server";
   };
+
+  # Config reference: https://nixos.wiki/wiki/NFS
   config = lib.mkIf nfs.enable {
+    users.users."${userName}".extraGroups = [ "nogroup" ];
+
     environment.systemPackages = [ pkgs.nfs-utils ];
 
-    # must explicitly add directory to persist if it's a top level sibling
-    # this case it's /export
+    # bind-mount approach from https://nixos.wiki/wiki/NFS
+    # this would be the default method if NOT using impermanence
+    fileSystems = lib.mkIf (!impermanence.enable) {
+      "/mnt/nfs" = {
+        # directory below will be created by the system if it did not exist prior to declaration here
+        device = "/mnt/nfs";
+        # will default to root:root ownership
+        options = [ "bind" ];
+      };
+    };
+
+    # explicitly add directory to persist if it's a top level directory
+    # user and group will match only if the directory is declaratively created here
+    # otherwise, manually chown it
     environment.persistence."${dataPrefix}".directories = lib.mkIf impermanence.enable [
-      # NOTE: user and group declaration will only take effect if
-      # the directory is created declaratively through here
       {
-        directory = "/export";
+        directory = "/mnt/nfs";
+        user = "nobody";
+        group = "nogroup";
         mode = "2770";
-        user = "nobody";
-        group = "nogroup";
       }
-      {
-        directory = "/export/backup";
-        # user and group aren't automatically inherited from parent
-        user = "nobody";
-        group = "nogroup";
-      }
+      "/mnt/nfs/public"
+      "/mnt/nfs/backup"
+      "/mnt/nfs/backup/proxmox"
+      "/mnt/nfs/backup/think"
     ];
 
     services.nfs.server = {
@@ -45,10 +58,11 @@ in
       extraNfsdConfig = '''';
 
       # 192.168.1.0/24 exposes these directories to the local network
-      # these would not be automatically created if these did not exist pre-declaration
+      # exported directories must exist beforehand, these won't be created by the NFS share
       exports = ''
-        /export         192.168.1.0/24(rw,fsid=0,no_subtree_check)
-        /export/backup  192.168.1.0/24(rw,nohide,insecure,no_subtree_check)
+        /mnt/nfs/public          192.168.1.0/24(rw,fsid=0,no_subtree_check)
+        /mnt/nfs/backup/proxmox  192.168.1.56(rw,nohide,insecure,no_subtree_check) # only proxmox host can access this
+        /mnt/nfs/backup/think    192.168.1.54(rw,nohide,insecure,no_subtree_check) # only thinkpad host can access this
       '';
 
       # rw = allow both read and write requests on this NFS subvolume, default is disallow any
@@ -56,19 +70,6 @@ in
       # insecure = allows clients with NFS implementations that don't use a reserved port for NFS
       # no_subtree_check = don't bother checking if the accessed file is in the apporporiate filesystem and it is in the exported tree
 
-      # exports below exposes specific shares to 2 local ips 56->proxmox 54->think
-      # /export         192.168.1.56(rw,fsid=0,no_subtree_check) 192.168.1.54(rw,fsid=0,no_subtree_check)
-      # /export/kotomi  192.168.1.56(rw,nohide,insecure,no_subtree_check) 192.168.1.54(rw,nohide,insecure,no_subtree_check)
-      # /export/mafuyu  192.168.1.56(rw,nohide,insecure,no_subtree_check) 192.168.1.54(rw,nohide,insecure,no_subtree_check)
-      # /export/tomoyo  192.168.1.56(rw,nohide,insecure,no_subtree_check) 192.168.1.54(rw,nohide,insecure,no_subtree_check)
-    };
-
-    # testing the bind-mount approach from https://nixos.wiki/wiki/NFS
-    fileSystems."/export/tomoyo" = {
-      # directory below will be created by the system if it did not exist prior to declaration here
-      device = "/mnt/tomoyo";
-      # will default to root:root ownership
-      options = [ "bind" ];
     };
 
     # with firewall active, NFS needs open ports for NFSv4
