@@ -2,14 +2,13 @@
   config,
   lib,
   pkgs,
-  hyprlandFlake,
+  # hyprlandFlake,
   ...
 }:
 with lib;
 let
   username = config.kdlt.username;
   hyprland = config.kdlt.graphical.hyprland;
-  wallpaper = config.kdlt.graphical.wallpaper;
 in
 {
   options = {

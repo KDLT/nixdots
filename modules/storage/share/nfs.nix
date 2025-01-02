@@ -9,6 +9,7 @@ let
   impermanence = config.kdlt.storage.impermanence;
   dataPrefix = config.kdlt.storage.dataPrefix;
   userName = config.kdlt.username;
+  mountPath = "/mnt/nfs";
 in
 {
   options.kdlt.storage = {
@@ -24,9 +25,9 @@ in
     # bind-mount approach from https://nixos.wiki/wiki/NFS
     # this would be the default method if NOT using impermanence
     fileSystems = lib.mkIf (!impermanence.enable) {
-      "/mnt/nfs" = {
+      ${mountPath} = {
         # directory below will be created by the system if it did not exist prior to declaration here
-        device = "/mnt/nfs";
+        device = mountPath;
         # will default to root:root ownership
         options = [ "bind" ];
       };
@@ -37,15 +38,16 @@ in
     # otherwise, manually chown it
     environment.persistence."${dataPrefix}".directories = lib.mkIf impermanence.enable [
       {
-        directory = "/mnt/nfs";
+        directory = mountPath;
         user = "nobody";
         group = "nogroup";
         mode = "2770";
       }
-      "/mnt/nfs/public"
-      "/mnt/nfs/backup"
-      "/mnt/nfs/backup/proxmox"
-      "/mnt/nfs/backup/think"
+      (mountPath + "/public")
+      (mountPath + "/backup")
+      (mountPath + "/backup/proxmox-wifi")
+      (mountPath + "/backup/proxmox-wired")
+      (mountPath + "/backup/think")
     ];
 
     services.nfs.server = {
@@ -60,8 +62,9 @@ in
       # 192.168.1.0/24 exposes these directories to the local network
       # exported directories must exist beforehand, these won't be created by the NFS share
       exports = ''
-        /mnt/nfs/public          192.168.1.0/24(rw,fsid=0,no_subtree_check)
-        /mnt/nfs/backup/proxmox  192.168.1.56(rw,nohide,insecure,no_subtree_check) # only proxmox host can access this
+        /mnt/nfs/public                 192.168.1.0/24(rw,fsid=0,no_subtree_check)
+        /mnt/nfs/backup/proxmox-wired   192.168.1.56(rw,nohide,insecure,no_subtree_check) # only proxmox host can access this
+        /mnt/nfs/backup/proxmox-wifi    192.168.1.56(rw,nohide,insecure,no_subtree_check) # only proxmox host can access this
         /mnt/nfs/backup/think    192.168.1.54(rw,nohide,insecure,no_subtree_check) # only thinkpad host can access this
       '';
 

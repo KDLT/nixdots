@@ -21,8 +21,11 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixvim.url = "github:nix-community/nixvim"; # for unstable channel
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # nixvim.url = "github:nix-community/nixvim"; # for unstable channel
+    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
+    ## moving to my own nixvim flake
+    nixvim.url = "github:KDLT/nixvim";
 
     hyprland.url = "github:hyprwm/Hyprland";
 
@@ -49,8 +52,7 @@
       anyrun,
       home-manager,
       nix-index-database,
-      nixvim, # not using my own nixvim config just yet
-
+      nixvim,
       stylix,
       ...
     }@inputs:
@@ -82,7 +84,7 @@
         email = "aguirrekenneth@gmail.com";
       };
 
-      hyprlandFlake = hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+      # hyprlandFlake = hyprland.packages.${pkgs.stdenv.hostPlatform.system};
       anyrunFlake = anyrun.packages.${pkgs.system};
 
       inheritArgs = {
@@ -90,7 +92,7 @@
           inputs
           outputs
           user
-          hyprlandFlake
+          # hyprlandFlake
           anyrunFlake
           mylib # custom lib for scanPaths
           ;
@@ -99,7 +101,7 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         nix-index-database.nixosModules.nix-index
-        nixvim.nixosModules.nixvim
+        # nixvim.nixosModules.nixvim
         sops-nix.nixosModules.sops
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
@@ -122,7 +124,7 @@
           modules = sharedModules ++ [ ./machines/Link/default.nix ];
         };
 
-        # Beelink Mini PC
+        # Thinkpad
         Think = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inheritArgs;

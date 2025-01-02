@@ -43,7 +43,7 @@ in
         rpc-bind-address = "0.0.0.0"; # bind to own ip
         # whitelist local device access
         rpc-whitelest-enabled = true;
-        rpc-whitelist = "127.0.0.1,192.168.*.*"; # wildcards allowed
+        rpc-whitelist = "127.0.0.1,192.168.*.*,100.124.149.26"; # wildcards allowed
 
         # separate directory for incomplete downloads
         incomplete-dir-enabled = true;

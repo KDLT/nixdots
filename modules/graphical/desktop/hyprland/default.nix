@@ -3,7 +3,7 @@
   lib,
   mylib,
   pkgs,
-  hyprlandFlake,
+  # hyprlandFlake,
   inputs,
   ...
 }:

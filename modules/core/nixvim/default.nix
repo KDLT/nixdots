@@ -1,62 +1,34 @@
 # Reference: https://github.com/GaetanLepage/nix-config/tree/master/home/modules/tui/neovim
 {
+  inputs,
   config,
-  lib, # still have to import this
-  mylib, # it doesn't come with lib
+  lib,
   ...
 }:
+let
+  userName = config.kdlt.username;
+in
 {
-  # testing out scanPaths
-  imports = mylib.scanPaths ./.;
-  # commenting out my own nixvim declarations in favor of dc-tec's flake
-  # imports = [
-  #   ./settings
-  #   ./plugins
-  # ];
-
   options = {
     kdlt.core.nixvim.enable = lib.mkEnableOption "nixvim";
   };
 
   config = lib.mkIf config.kdlt.core.nixvim.enable {
-    home-manager.users.${config.kdlt.username} = {
+    home-manager.users.${userName} = {
       home = {
-        # use dc-tec's nixvim flake while i haven't properly set up mine yet
-        # nixvim url declared in flake.nix
-        # packages = [
-        #   inputs.nixvim.packages.${pkgs.system}.default
-        # ];
+        packages = [
+          # this ought to be my own nixvim configuration from inputs, see flake.nix
+          inputs.nixvim.packages.x86_64-linux.default
+        ];
+
         sessionVariables = {
           EDITOR = "nvim";
         };
+
         shellAliases = {
           v = "nvim";
         };
       };
     };
-
-    # commenting out my own nixvim declarations in favor of dc-tec's flake
-    programs.nixvim = {
-      enable = true;
-      enableMan = true; # enable nixvim manual
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      luaLoader.enable = true;
-
-      # cmd [[hi Normal guibg=NONE ctermbg=NONE]]
-      # performance = {
-      #   combinePlugins = {
-      #     enable = true;
-      #     standalonePlugins = [
-      #       "hmts.nvim"
-      #       "nvim-treesitter"
-      #       "lualine.nvim"
-      #     ];
-      #   };
-      #   byteCompileLua.enable = true;
-      # };
-    };
   };
-  # };
 }
