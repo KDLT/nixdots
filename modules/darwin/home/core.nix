@@ -1,7 +1,8 @@
 # Lifted from https://github.com/ryan4yin/nix-darwin-kickstarter/blob/main/rich-demo/home/core.nix
 { config, lib, inputs, username, ...}: {
   imports = [
-    ../../core/shells/zsh/default.nix
+    # not a good fit for tmux if zsh via home-manager is imported
+    # ../../core/shells/zsh/default.nix
   ];
 
   config = {

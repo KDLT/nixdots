@@ -8,6 +8,7 @@
 let
   myAliases = {
     ll = "eza --icons=always --color=always --long --group-directories-first --git --no-filesize --no-time --no-permissions --no-user --tree --level=1";
+    lg = "lazygit";
     cat = "bat";
     gitfetch = "onefetch";
     fetch = "disfetch";

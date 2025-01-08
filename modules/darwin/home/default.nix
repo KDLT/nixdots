@@ -1,11 +1,6 @@
-{username, ...}:
+{username, mylib, ...}:
 {
-  imports = [
-    ./core.nix
-    ./git.nix
-    ./ssh.nix
-    ./tmux.nix
-  ];
+  imports = mylib.scanPaths ./.;
 
   home-manager = {
     useGlobalPkgs = true;

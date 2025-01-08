@@ -28,12 +28,11 @@
 		screensaver.askForPasswordDelay = 10;
   };
 
-
+  # temporarily comment out all zsh related darwin system settings
   # create /etc/zshrc that loads the nix-darwin environment
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];
-  # explicitly set zsh as default shell
-  users.users.${username}.shell = pkgs.zsh;
+  users.users.${username}.shell = pkgs.zsh; # explicitly set zsh as default shell
 
 	# karabiner is broken as a system service in darwin, use homebrew
 	# services.karabiner-elements = {
@@ -77,6 +76,7 @@
   environment.systemPackages = with pkgs;
     [
       obsidian # the last note taking app
+      btop # system monitoring
 
       # archives
       zip

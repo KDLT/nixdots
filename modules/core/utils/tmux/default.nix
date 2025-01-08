@@ -1,20 +1,17 @@
-# leaving blank for now
 {
   lib,
+  username,
   pkgs,
   config,
   ...
 }:
-let
-  username = config.kdlt.username;
-in
 {
   environment.systemPackages = with pkgs; [
     tmux # terminal multiplexer
     # tmuxp # tmux session manager
   ];
 
-  programs.tmux = {
+  programs.tmux = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     enable = true;
     keyMode = "vi"; # vi keybindings
     baseIndex = 1; # index starts at 1 instead of 0
