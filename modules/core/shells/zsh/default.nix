@@ -1,11 +1,11 @@
 # modules/core/shells/zsh/default.nix
 {
+  username,
   pkgs,
   config,
   ...
 }:
 let
-  username = config.kdlt.username;
   myAliases = {
     ll = "eza --icons=always --color=always --long --group-directories-first --git --no-filesize --no-time --no-permissions --no-user --tree --level=1";
     cat = "bat";
@@ -36,7 +36,6 @@ in
         ];
 
         programs = {
-          zsh.enable = true;
           bash.enable = false;
           fish.enable = false;
           zoxide.enable = true;
@@ -46,6 +45,7 @@ in
         };
 
         programs.zsh = {
+          enable = true;
           dotDir = ".config/zsh"; # path relative to $HOME
 
           history = {

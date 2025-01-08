@@ -1,11 +1,9 @@
 {
   config,
+  username,
   lib,
   ...
 }:
-let
-  userName = config.kdlt.username;
-in
 {
   options = {
     kdlt.core.nix = {
@@ -19,7 +17,7 @@ in
     programs.nh = {
       enable = true;
       clean.enable = false;
-      flake = "/home/${userName}/nixdots";
+      flake = "/home/${username}/nixdots";
     };
 
     nixpkgs.config = {
@@ -29,7 +27,7 @@ in
     nix = {
       settings = {
         trusted-users = [
-          userName
+          username
           "@wheel"
         ];
         experimental-features = [
@@ -54,7 +52,7 @@ in
 
       nixPath = [
         "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-        "nixos-config=/home/${userName}/nixdots"
+        "nixos-config=/home/${username}/nixdots"
         "/nix/var/nix/profiles/per-user/root/channels"
       ];
     };

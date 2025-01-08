@@ -79,9 +79,9 @@
         "aarch64-darwin"
       ];
 
-        username = "kba";
-        userfullname = "Kenneth B. Aguirre";
-        useremail = "aguirrekenneth@gmail.com";
+      username = "kba";
+      userfullname = "Kenneth B. Aguirre";
+      useremail = "aguirrekenneth@gmail.com";
 
       inheritArgs = {
         inherit
@@ -94,10 +94,10 @@
           ;
       };
 
-      # darwinModules = [
-      #   home-manager.darwinModules.home-manager
-      #   ./modules/darwin
-      # ];
+      darwinModules = [
+        home-manager.darwinModules.home-manager
+        ./modules/darwin
+      ];
 
       sharedModules = [
         stylix.nixosModules.stylix
@@ -112,11 +112,12 @@
       ];
     in
     {
-      # darwinConfigurations = {
-      #   K-Mac-Pro = nix-darwin.lib.darwinSystem {
-      #     modules = darwinModules ++ [ ./machines/MacbookPro/default.nix ];
-      #   };
-      # };
+      darwinConfigurations = {
+        K-MBP = nix-darwin.lib.darwinSystem {
+          modules = darwinModules ++ [ ./machines/MBP/default.nix ];
+          specialArgs = inheritArgs;
+        };
+      };
 
       nixosConfigurations = {
         # 5700X3D 4080 Super Desktop
