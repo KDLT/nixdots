@@ -2,7 +2,7 @@
   lib,
   config,
   inputs,
-  anyrunFlake,
+  # anyrunFlake, # anyrunFlake is deleted, i don't use this anyway
   ...
 }: let
   username = config.kdlt.username;
@@ -27,14 +27,14 @@ in {
       programs.anyrun = {
         enable = true;
         config = {
-          plugins = with anyrunFlake; [
-            applications
-            randr
-            rink
-            shell
-            symbols
-            translate
-          ];
+          # plugins = with anyrunFlake; [
+          #   applications
+          #   randr
+          #   rink
+          #   shell
+          #   symbols
+          #   translate
+          # ];
 
           width.fraction = 0.3;
           y.absolute = 15;

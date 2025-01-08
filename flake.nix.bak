@@ -21,15 +21,11 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-
     # nixvim.url = "github:nix-community/nixvim"; # for unstable channel
     # nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     ## moving to my own nixvim flake
     nixvim.url = "github:KDLT/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
 
@@ -56,7 +52,6 @@
       anyrun,
       home-manager,
       nix-index-database,
-      nix-darwin,
       nixvim,
       stylix,
       ...
@@ -70,6 +65,7 @@
       # stolen from ryan4yin/nix-config, for the scanPaths
       inherit (inputs.nixpkgs) lib;
       mylib = import ./lib { inherit lib; };
+      ## stolen
 
       # yet to decipher
       # allSystemNames = [ "x86_64-linux" "aarch64-darwin" ];
@@ -79,26 +75,28 @@
         "aarch64-darwin"
       ];
 
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      user = {
         username = "kba";
-        userfullname = "Kenneth B. Aguirre";
-        useremail = "aguirrekenneth@gmail.com";
+        fullname = "Kenneth B. Aguirre";
+        email = "aguirrekenneth@gmail.com";
+      };
+
+      # hyprlandFlake = hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+      anyrunFlake = anyrun.packages.${pkgs.system};
 
       inheritArgs = {
         inherit
           inputs
           outputs
-          username
-          useremail
-          userfullname
+          user
+          # hyprlandFlake
+          anyrunFlake
           mylib # custom lib for scanPaths
           ;
       };
-
-      # darwinModules = [
-      #   home-manager.darwinModules.home-manager
-      #   ./modules/darwin
-      # ];
-
       sharedModules = [
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
@@ -112,12 +110,6 @@
       ];
     in
     {
-      # darwinConfigurations = {
-      #   K-Mac-Pro = nix-darwin.lib.darwinSystem {
-      #     modules = darwinModules ++ [ ./machines/MacbookPro/default.nix ];
-      #   };
-      # };
-
       nixosConfigurations = {
         # 5700X3D 4080 Super Desktop
         Super = nixpkgs.lib.nixosSystem {

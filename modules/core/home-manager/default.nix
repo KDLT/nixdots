@@ -1,24 +1,22 @@
 # ~/dotfiles/modules/core/home-manager/default.nix
 {
   config,
+username,
   pkgs,
   ...
 }:
-let
-  userName = config.kdlt.username;
-in
 {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
 
     users = {
-      ${userName} = {
+      ${username} = {
         home = {
           stateVersion = config.kdlt.stateVersion;
 
-          homeDirectory = "/home/${userName}";
-          sessionPath = [ "/home/${userName}/.local/bin" ];
+          homeDirectory = "/home/${username}";
+          sessionPath = [ "/home/${username}/.local/bin" ];
 
           packages = with pkgs; [
             libnotify # sends desktop notifs to notif daemon
