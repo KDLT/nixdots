@@ -1,22 +1,14 @@
-{username, mylib, ...}:
+{username, stateVersion, mylib, ...}:
 {
   imports = mylib.scanPaths ./.;
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-
-    users.${username} = {
+  config = {
+    programs.home-manager.enable = true;
+    home-manager.users.${username} = {
+      # stateVersion is hard declared here for now
+      # plan to move this to machines/MBP
+      home.stateVersion = stateVersion;
       xdg.enable = true;
-
-      home = {
-        stateVersion = "24.11";
-        username = username;
-        homeDirectory = "/Users/" + username;
-      };
-
-      # Let home manager install and manage itself
-      programs.home-manager.enable = true;
     };
   };
 }

@@ -2,19 +2,17 @@
 {
   inputs,
   config,
+  username,
   lib,
   ...
 }:
-let
-  userName = config.kdlt.username;
-in
 {
   options = {
     kdlt.core.nixvim.enable = lib.mkEnableOption "nixvim";
   };
 
   config = lib.mkIf config.kdlt.core.nixvim.enable {
-    home-manager.users.${userName} = {
+    home-manager.users.${username} = {
       home = {
         packages = [
           # this ought to be my own nixvim configuration from inputs, see flake.nix

@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 {
-  imports = [ ../../core/utils/tmux ];
+  imports = [ ../../nixos/core/utils/tmux ];
   config = {
     programs.tmux = lib.optionalAttrs pkgs.stdenv.hostPlatform.isMacOS {
       enable = true;

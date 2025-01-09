@@ -1,6 +1,6 @@
 { ... }:
 {
-  imports = [ ../../core/shells/zsh ];
+  imports = [ ../../nixos/core/shells/zsh ];
   config = {
     # kdlt.core.zfs = lib.mkMerge [
     #   (lib.mkIf config.kdlt.core.persistence.enable {

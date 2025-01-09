@@ -82,6 +82,7 @@
       username = "kba";
       userfullname = "Kenneth B. Aguirre";
       useremail = "aguirrekenneth@gmail.com";
+      stateVersion = "24.05";
 
       inheritArgs = {
         inherit
@@ -90,6 +91,7 @@
           username
           useremail
           userfullname
+          stateVersion
           mylib # custom lib for scanPaths
           ;
       };
@@ -97,9 +99,10 @@
       darwinModules = [
         home-manager.darwinModules.home-manager
         ./modules/darwin
+        ./modules/base # base modules apply to any system
       ];
 
-      sharedModules = [
+      nixosModules = [
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         nix-index-database.nixosModules.nix-index
@@ -108,7 +111,8 @@
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
 
-        ./modules # this points to default.nix that imports storage, core, development, graphical
+        ./modules/nixos # this points to default.nix that imports storage, core, development, graphical
+        ./modules/base # base modules apply to any system
       ];
     in
     {
@@ -122,7 +126,7 @@
       nixosConfigurations = {
         # 5700X3D 4080 Super Desktop
         Super = nixpkgs.lib.nixosSystem {
-          modules = sharedModules ++ [ ./machines/Super/default.nix ];
+          modules = nixosModules ++ [ ./machines/Super/default.nix ];
           specialArgs = inheritArgs; # this contains mylib
         };
 
@@ -130,14 +134,14 @@
         Link = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inheritArgs;
-          modules = sharedModules ++ [ ./machines/Link/default.nix ];
+          modules = nixosModules ++ [ ./machines/Link/default.nix ];
         };
 
         # Thinkpad
         Think = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inheritArgs;
-          modules = sharedModules ++ [
+          modules = nixosModules ++ [
             ./machines/Think/default.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-t480
           ];

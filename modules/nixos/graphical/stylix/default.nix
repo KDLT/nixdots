@@ -33,7 +33,7 @@ with lib;
       autoEnable = true;
       targets.nixvim.enable = false; # don't style nixvim
       polarity = "dark";
-      image = ../../../assets/wallpaper-blue.png;
+      image = ../../../../assets/wallpaper-blue.png;
       # somewhere in /nix/store/ is the base16 scheme directory, the yaml filenames are the options
       # use nix-locate
       base16Scheme = "${pkgs.base16-schemes}/share/themes/primer-dark.yaml";

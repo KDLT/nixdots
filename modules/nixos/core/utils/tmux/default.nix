@@ -6,11 +6,10 @@
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    tmux # terminal multiplexer
-    # tmuxp # tmux session manager
-  ];
+  environment.systemPackages = [ pkgs.tmux ];
 
+  # programs.tmux attributeset below is not compatible with nix-darwin
+  # lib.optionalAttrs will only allow reading of the attributes if it evaluates to true
   programs.tmux = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     enable = true;
     keyMode = "vi"; # vi keybindings
@@ -22,6 +21,7 @@
     extraConfig = '''';
   };
 
+  # i still want home-manager to define the rest of the tmux config
   home-manager.users.${username} = {
     programs.tmux = {
       enable = true;
@@ -56,9 +56,6 @@
         # transfer tmux status bar to top
         # set-option -g status-position top
       '';
-
-      # tmuxinator.enable = true; # the session manager with more stars
-      # tmuxp.enable = true; # tmux session manager with less stars
 
       plugins = with pkgs.tmuxPlugins; [
         cpu
@@ -113,17 +110,5 @@
         }
       ];
     };
-
-    # previously i used home.sessionVariables, i changed to programs.zsh as
-    # instructions stated variable must be exported to zshrc or bashrc
-    programs.zsh =
-      let
-        tmuxp = config.home-manager.users.${username}.programs.tmux.tmuxp;
-      in
-      {
-        sessionVariables = lib.mkIf tmuxp.enable {
-          TMUXP_CONFIGDIR = "$XDG_CONFIG_HOME/tmuxp";
-        };
-      };
   };
 }
