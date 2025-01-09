@@ -1,11 +1,11 @@
 { pkgs, username, ... }:
 {
-  # enable touch id authentication
-  security.pam.enableSudoTouchIdAuth = true;
-
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
+
+  # enable touch id authentication
+  security.pam.enableSudoTouchIdAuth = true;
 
   # MacOS System preferences
   system.defaults = {
@@ -28,16 +28,13 @@
 		screensaver.askForPasswordDelay = 10;
   };
 
-  # temporarily comment out all zsh related darwin system settings
   # create /etc/zshrc that loads the nix-darwin environment
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];
   users.users.${username}.shell = pkgs.zsh; # explicitly set zsh as default shell
 
 	# karabiner is broken as a system service in darwin, use homebrew
-	# services.karabiner-elements = {
-	# 	enable = false;
-	# };
+	# services.karabiner-elements.enable = false;
 
   # Fonts
   fonts = {

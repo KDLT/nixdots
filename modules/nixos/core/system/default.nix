@@ -10,22 +10,6 @@ let
   server = config.kdlt.core.server;
 in
 {
-  # now declared in ../../../base/system.nix
-  # options = {
-  #   kdlt = {
-  #     stateVersion = lib.mkOption {
-  #       example = "24.05";
-  #     };
-  #     # these are declared in ../storage/
-  #     # dataPrefix = lib.mkOption {
-  #     #   example = "/data";
-  #     # };
-  #     # cachePrefix = lib.mkOption {
-  #     #   example = "/cache";
-  #     # };
-  #   };
-  # };
-
   config = {
     system = {
       stateVersion = stateVersion;
@@ -37,53 +21,56 @@ in
       # };
     };
 
-    environment = {
-      systemPackages = with pkgs; [
-        # ============== nixos ONLY base packages start ==============
-        # transferred from ../../../base/system.nix
-        disfetch # less complex fetching program
-        age # modern encryption tool with small explicit keys LINUX only
-        jdk # open source java development kit LINUX only
-        lshw # provide detailed info on hardware config of machine LINUX only
-        ssh-to-age # convertsssh private keys in ed25519 format to age keys LINUX only
-
-        # networking tools
-        dnsutils # `dig` + `nslookup`
-
-
-        ## system call monitoring
-        ltrace # library call tracer LINUX only
-
-        # ebpf tools, run sandboxed programs in privileged context
-        # https://github.com/bpftrace/bpftrace
-        bpftrace # high level tracing language for linux eBPF
-        bpftop # dynamic real time view of running eBPF programs
-        bpfmon # BPF based visual packet rate monitor
-
-        ## system monitoring
-        iotop # tool to find the processes doing the most IO
-        nmon # AIX & Linux performance monitoring tool
-
-        # systemtools
-        psmisc # killall/pstree/prtstat/fuser etc.
-        udiskie # removable disk automounter for udisks
-        lm_sensors # tool for reading hardware sensors
-        ethtool # network drivers Utility
-        hdparm # diskperformance
-        dmidecode # reads info about system hardware
-        parted # create, resize, destroy, check, copy, disk partitions
-        # ============== nixos ONLY base packages end ==============
-
-        # inputs.nixvim.packages.x86_64-linux.default
-      ];
-
-      # declared in ../../../base/system.nix
-      # variables = {
-      #   EDITOR = "nvim";
-      #   VISUAL = "nvim";
-      #   DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
-      # };
+    environment.variables = {
+      DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
     };
+
+    # these packages are ONLY compatible with nixos
+    environment.systemPackages = with pkgs; [
+      # ============== nixos ONLY base packages start ==============
+      firefox # web browser i use
+      disfetch # less complex fetching program
+      age # modern encryption tool with small explicit keys LINUX only
+      jdk # open source java development kit LINUX only
+      lshw # provide detailed info on hardware config of machine LINUX only
+      ssh-to-age # convertsssh private keys in ed25519 format to age keys LINUX only
+      ventoy # endgame bootable usb
+
+      # networking tools
+      dnsutils # `dig` + `nslookup`
+
+      # system monitoring
+      sysstat # performance monitoring tools for linux
+
+      # system tools
+      usbutils # lsusb
+
+      ## system call monitoring
+      ltrace # library call tracer LINUX only
+      strace # diagnostcic, instructional and debuggin tool for linux kernel
+
+      # ebpf tools, run sandboxed programs in privileged context
+      # https://github.com/bpftrace/bpftrace
+      bpftrace # high level tracing language for linux eBPF
+      bpftop # dynamic real time view of running eBPF programs
+      bpfmon # BPF based visual packet rate monitor
+
+      ## system monitoring
+      iotop # tool to find the processes doing the most IO
+      nmon # AIX & Linux performance monitoring tool
+
+      # systemtools
+      psmisc # killall/pstree/prtstat/fuser etc.
+      udiskie # removable disk automounter for udisks
+      lm_sensors # tool for reading hardware sensors
+      ethtool # network drivers Utility
+      hdparm # diskperformance
+      dmidecode # reads info about system hardware
+      parted # create, resize, destroy, check, copy, disk partitions
+      # ============== nixos ONLY base packages end ==============
+
+      # inputs.nixvim.packages.x86_64-linux.default
+    ];
 
     # declared in ../../../base/system.nix
     # time.timeZone = "Asia/Manila";

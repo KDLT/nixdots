@@ -10,7 +10,8 @@
       enableSensible = true;
       extraConfig = ''
         # set-option -g default-command "exec /run/current-system/sw/bin/zsh -l"
-        # this forces the spawning of login shells, this is crucial as fuck for MacOS
+        # this forces the spawning of login shells
+        # without this MacOS opens the default -sh for root user
         set-option -g default-command "exec $(which zsh) -l"
       '';
     };

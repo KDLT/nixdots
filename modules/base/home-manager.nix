@@ -21,7 +21,6 @@
 
         packages = with pkgs; [
           libnotify # sends desktop notifs to notif daemon
-          ventoy # endgame bootable usb
 
           fzf # command line fuzzy finder written in go
           ripgrep # better grep entire directories

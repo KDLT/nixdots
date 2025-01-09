@@ -1,5 +1,4 @@
 {
-  stateVersion,
   lib,
   pkgs,
   ...
@@ -12,10 +11,6 @@
   };
 
   config = {
-    system = {
-      stateVersion = stateVersion;
-    };
-
     time.timeZone = "Asia/Manila";
 
     # these packages are used by BOTH nixos and nix-darwin
@@ -33,11 +28,9 @@
       bat # better cat
       eza # modern ls
       just # save & run project specific commands
-      firefox # web browser i use
 
       # system tools
       pciutils # lspci
-      usbutils # lsusb
 
       # archives
       zip # creating, modifying zip files
@@ -66,13 +59,11 @@
       ipcalc # it is a calculator for the IPv4/v6 addresses
 
       # system monitoring
-      sysstat # performance monitoring tools for linux
       iftop # display an interface's bandwidth usage
       btop # resource monitor. C++ version and continuation of bashtop and bpytop
       sysbench # system performance benchmark tool
 
       # system call monitoring
-      strace # diagnostcic, instructional and debuggin tool for linux kernel
       tcpdump # command line packet analyzer
       lsof # utility to list open files
 
@@ -84,8 +75,6 @@
       gnutar # gnu implementation of tar archiver
       rsync # fast incremental file transfer utility
 
-      # TODO transfer the linux only packages to the corresonding location in nixos subdir
-      # additions, checking if compatible with macos
       coreutils # gnu core utilities
       moreutils # collection of unix tools nobody thought to write long ago when unix was young
       util-linux # set of system utilities for linux
@@ -101,7 +90,6 @@
     environment.variables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
     };
 
   };

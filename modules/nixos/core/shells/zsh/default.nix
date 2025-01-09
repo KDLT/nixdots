@@ -11,7 +11,7 @@ let
     lg = "lazygit";
     cat = "bat";
     gitfetch = "onefetch";
-    fetch = "disfetch";
+    fetch = "fastfetch";
     icat = "kitten icat";
     dots = "z ~/nixdots; v"; # z is alias for zoxide, v is for neovim
   };
@@ -81,7 +81,8 @@ in
             # match dotfiles without explicitly specifying the dot
             setopt GLOB_DOTS
             # runs disfetch on new terminal instances
-            ${pkgs.disfetch}/bin/disfetch
+            # ${pkgs.disfetch}/bin/disfetch
+            ${pkgs.fastfetch}/bin/fastfetch
           '';
 
           shellAliases = myAliases;
