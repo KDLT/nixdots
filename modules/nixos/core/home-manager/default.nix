@@ -2,7 +2,6 @@
 {
   username,
   stateVersion,
-  pkgs,
   ...
 }:
 {

@@ -13,7 +13,6 @@
     programs.git = {
       enable = true;
       lfs.enable = true;
-
       userName = username;
       userEmail = useremail;
 
@@ -50,6 +49,7 @@
         co = "checkout";
         a = "add";
         s = "status";
+        gfs = "git fetch; git status";
         ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
         ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
         cm = "commit -m";
