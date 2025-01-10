@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  username,
   ...
 }:
 {
@@ -9,7 +10,7 @@
   };
 
   config = lib.mkIf config.kdlt.graphical.waybar.enable {
-    home-manager.users.${config.kdlt.username} = {
+    home-manager.users.${username} = {
       # better run waybar from hyprland's exec-start where configs are intact
       programs.waybar = {
         enable = true;

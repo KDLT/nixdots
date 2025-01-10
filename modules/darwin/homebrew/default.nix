@@ -10,12 +10,15 @@
     # You need to install all these Apps manually first so that your apple account have records for them.
     # otherwise Apple Store will refuse to install them.
     # For details, see https://github.com/mas-cli/mas
+    # `mas search "app name"` -> use the 10-digit code from the first column
     masApps = {
-      # proton-pass-password-manager = 6443490629;
+      Tailscale = 1475387142; # this is version 1.78.1 because the more recent on does nothing
+      "Proton Pass for Safari" = 6502835663;
     };
 
     taps = [
       "homebrew/services"
+      "nikitabobko/tap" # this tap declaration here allows the aerospace cask to be "found"
     ];
 
     # `brew install`
@@ -24,7 +27,8 @@
       #  https://github.com/tailscale/tailscale/wiki/Tailscaled-on-macOS#run-the-tailscaled-daemon
       # 1. `sudo tailscaled install-system-daemon`
       # 2. `tailscale up --accept-routes`
-      "tailscale" # tailscale
+      # "tailscale" # tailscale # i prefer the official app
+
       "mas" # mac app store utility
 
       "wget" # https, http, ftp file retrieval
@@ -43,6 +47,10 @@
 
     # `brew install --cask` are GUI apps
     casks = [
+      "proton-pass" # password manager
+      "proton-mail"
+      "proton-drive"
+      "protonvpn"
       "karabiner-elements" # sane remaps for ANSI keyboard
       # { # testing what happens when home-manager AND homebrew installs kitty
       #   name = "kitty";
@@ -52,8 +60,8 @@
       # "google-chrome" # give me reason
       # "visual-studio-code" # give me a reason, too
       "zed" # zed editor, i'm zed curious
-      "nikitabobko/tap/aerospace" # an i3-like tiling window manager for macOS
-      "hot" # menu bar app to display cpu temps
+
+      "aerospace" # this is an unknown cask, nikitabobko/tap has to be declared for this to work
 
       # https://joplinapp.org/help/
       # "joplin" # note taking app
