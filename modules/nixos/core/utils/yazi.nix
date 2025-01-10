@@ -9,9 +9,6 @@ let
 in
 {
   config = {
-    environment.systemPackages = [
-      pkgs.yazi
-    ];
     home-manager.users.${config.kdlt.username} = {
       programs.yazi = {
         enable = true;

@@ -23,7 +23,6 @@
         enable = true;
       };
       nix = {
-        enableDirenv = false;
         # unfreePackages = [];
       };
       nixvim = {

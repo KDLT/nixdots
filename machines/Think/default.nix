@@ -18,7 +18,6 @@
 
     core = {
       wireless.enable = true;
-      nix.direnv.enable = false; # unfreePackages = [];
       nixvim.enable = true;
       laptop = true; # pending configs for laptop mode
       server = true; # server mode configs

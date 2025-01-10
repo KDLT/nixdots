@@ -38,6 +38,9 @@ in
 
       # networking tools
       dnsutils # `dig` + `nslookup`
+      wget # https, http, ftp file retrieval
+      curl # cli tool for retrieving file with url syntax
+      aria2 # A lightweight multi-protocol & multi-source command-line download utility
 
       # system monitoring
       sysstat # performance monitoring tools for linux

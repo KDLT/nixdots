@@ -67,7 +67,7 @@
     EDITOR = "nvim";
   };
 
-  # List packages installed in system profile. To search by name, run:
+  # List packages installed in MacOS system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   # these packages are available to all users
   environment.systemPackages = with pkgs;
@@ -85,7 +85,6 @@
       bat # better cat
       just # save & run project specific commands
 
-      wget
       git
 
       # utils
@@ -94,7 +93,6 @@
       jq # lightweight cli JSON processor
       yq-go # yaml processor
 
-      aria2 # lightweight multi-protocol & multi-source cli download util
       socat # replacement of openbsd-netcat
       nmap # for network discovery, security auditing
 

@@ -12,6 +12,7 @@
       ];
 
       programs = {
+        # separate kitty declaration for macos only
        kitty = {
           enable = true;
           settings = {
@@ -19,13 +20,21 @@
             window_padding_width = 12;
             background_opacity = "0.89";
             background_blur = 20;
-            hide_window_decorations = "titlebar-only"; # hides title bar and window border
+            hide_window_decorations = "titlebar-only"; # hides title bar but not window border
+            # tab settings
+            tab_bar_style = "powerline";
+            tab_powerline_style = "round";
           };
         };
 
-        # for zsh config for darwin also uses modules/core/shells/zsh
-
         lazygit.enable = true;
+
+        # direnv and nix-direnv
+        programs.direnv = {
+          enable = true;
+          enableZshIntegration = true;
+          nix-direnv.enable = true;
+        };
 
         # modern ls
         eza = {
@@ -35,15 +44,18 @@
           enableZshIntegration = true;
         };
 
-        # terminal file manager
+        # yazi terminal file manager configs for macos
         yazi = {
           enable = true;
           shellWrapperName = "y";
           enableZshIntegration = true;
           settings = {
+            log.enabled = true;
             manager = {
               show_hidden = true;
+              sort_by = "modified";
               sort_dir_first = true;
+              sort_reverse = true;
             };
           };
         };

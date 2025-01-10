@@ -1,11 +1,9 @@
 {
   config,
+  username,
   lib,
   ...
 }:
-let
-  nerdfont = config.kdlt.nerdfont;
-in
 {
   options = {
     kdlt = {
@@ -14,7 +12,7 @@ in
   };
 
   config = lib.mkIf config.kdlt.graphical.terminal.enable {
-    home-manager.users.${config.kdlt.username} = {
+    home-manager.users.${username} = {
       programs.kitty = {
         enable = true;
         settings = {
