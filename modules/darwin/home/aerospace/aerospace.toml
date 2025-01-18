@@ -1,5 +1,5 @@
 # straight up lifted from
-#l https://github.com/AlexNabokikh/nix-config/blob/master/home/modules/darwin-aerospace.nix
+# https://github.com/AlexNabokikh/nix-config/blob/master/home/modules/darwin-aerospace.nix
 # Start AeroSpace at login
 start-at-login = true
 
@@ -21,6 +21,19 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Automatically unhide macOS hidden apps
 automatically-unhide-macos-hidden-apps = true
 
+# main is LG C3 via HDMI2.1; built-in = Macbook display
+[workspace-to-monitor-force-assignment]
+1 = 'main' # kitty
+2 = 'built-in' # firefox
+3 = 'main' # safari/firefox
+4 = 'main' # messages,discord
+5 = 'built-in' # finder
+6 = 'built-in' # activity monitor, system settings
+7 = 'main' # spotify/applemusic
+8 = 'main'
+9 = 'main'
+0 = 'main'
+
 # Key mapping preset
 [key-mapping]
 preset = 'qwerty'
@@ -37,65 +50,61 @@ outer.right =      13
 # Main mode bindings
 [mode.main.binding]
 # Launch applications
-alt-shift-enter = 'exec-and-forget open -na kitty'
+alt-shift-enter = 'exec-and-forget open -na kitty' # -na is [n]ew instance of [a]pplication
 alt-shift-b = 'exec-and-forget open -a firefox'
-alt-shift-t = 'exec-and-forget open -a "Telegram"'
-alt-shift-f = 'exec-and-forget open -a Finder'
+alt-shift-m = 'exec-and-forget open -a Messages'
+alt-shift-e = 'exec-and-forget open -na kitty --args yazi' # immediately opens yazi in a new kitty terminal
 
 # Window management
 alt-q = "close"
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
-alt-m = 'fullscreen'
+cmd-shift-f = 'fullscreen'
 
 # Focus movement
-cmd-h = 'focus left'
-cmd-j = 'focus down'
-cmd-k = 'focus up'
-cmd-l = 'focus right'
-# alt-h = 'focus left'
-# alt-j = 'focus down'
-# alt-k = 'focus up'
-# alt-l = 'focus right'
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
 
 # Window movement
-cmd-shift-h = 'move left'
-cmd-shift-j = 'move down'
-cmd-shift-k = 'move up'
-cmd-shift-l = 'move right'
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
 
 # Resize windows
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
-# Workspace management
+# Navigate to workspace
 cmd-1 = 'workspace 1'
 cmd-2 = 'workspace 2'
 cmd-3 = 'workspace 3'
 cmd-4 = 'workspace 4'
 cmd-5 = 'workspace 5'
 cmd-6 = 'workspace 6'
-# alt-7 = 'workspace 7'
-# alt-8 = 'workspace 8'
-# alt-9 = 'workspace 9'
+cmd-7 = 'workspace 7'
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
 
 # Move windows to workspaces
-cmd-alt-1 = 'move-node-to-workspace 1'
-cmd-alt-2 = 'move-node-to-workspace 2'
-cmd-alt-3 = 'move-node-to-workspace 3'
-cmd-alt-4 = 'move-node-to-workspace 4'
-cmd-alt-5 = 'move-node-to-workspace 5'
-cmd-alt-6 = 'move-node-to-workspace 6'
-# alt-shift-7 = 'move-node-to-workspace 7'
-# alt-shift-8 = 'move-node-to-workspace 8'
-# alt-shift-9 = 'move-node-to-workspace 9'
+cmd-alt-1 = ['move-node-to-workspace 1', 'workspace 1']
+cmd-alt-2 = ['move-node-to-workspace 2', 'workspace 2']
+cmd-alt-3 = ['move-node-to-workspace 3', 'workspace 3']
+cmd-alt-4 = ['move-node-to-workspace 4', 'workspace 4']
+cmd-alt-5 = ['move-node-to-workspace 5', 'workspace 5']
+cmd-alt-6 = ['move-node-to-workspace 6', 'workspace 6']
+cmd-alt-7 = ['move-node-to-workspace 7', 'workspace 7']
+cmd-alt-8 = ['move-node-to-workspace 8', 'workspace 8']
+cmd-alt-9 = ['move-node-to-workspace 9', 'workspace 9']
 
 # Workspace navigation
 alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # Enter service mode
-alt-shift-semicolon = 'mode service'
+cmd-alt-semicolon = 'mode service'
 
 # Service mode bindings
 [mode.service.binding]
@@ -112,28 +121,40 @@ f = ['layout floating tiling', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
 
 # Join with adjacent windows
-alt-shift-h = ['join-with left', 'mode main']
-alt-shift-j = ['join-with down', 'mode main']
-alt-shift-k = ['join-with up', 'mode main']
-alt-shift-l = ['join-with right', 'mode main']
+alt-ctrl-h = ['join-with left', 'mode main']
+alt-ctrl-j = ['join-with down', 'mode main']
+alt-ctrl-k = ['join-with up', 'mode main']
+alt-ctrl-l = ['join-with right', 'mode main']
 
 # Window detection rules
-[[on-window-detected]]
-if.app-id = 'com.firefox.Browser'
-run = 'move-node-to-workspace 2'
+# [[on-window-detected]]
+# if.app-id = 'net.kovidgoyal.kitty'
+# run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-id = 'org.kitty'
-run = 'move-node-to-workspace 1'
+if.app-id = 'org.mozilla.firefox'
+run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-id = 'com.tdesktop.Telegram'
-run = 'move-node-to-workspace 3'
+if.app-id = 'com.apple.Safari'
+run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-id = 'com.obsproject.obs-studio'
-run = 'move-node-to-workspace 4'
+if.app-id = 'com.hnc.Discord'
+run = ['move-node-to-workspace 4']
 
 [[on-window-detected]]
-if.app-id = 'us.zoom.xos'
-run = 'move-node-to-workspace 5'
+if.app-id = 'com.apple.MobileSMS'
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = ['move-node-to-workspace 6']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = ['layout tiling', 'move-node-to-workspace 6']

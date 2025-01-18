@@ -1,4 +1,4 @@
-{username, ...}:
+{ username, ... }:
 {
   homebrew = {
     enable = true;
@@ -14,6 +14,9 @@
     masApps = {
       Tailscale = 1475387142; # this is version 1.78.1 because the more recent on does nothing
       "Proton Pass for Safari" = 6502835663;
+      # "Proton Pass" = 6443490629; # no native mac app store version, cask cannot autofill so manual install
+      "DaVinci Resolve" = 571213070; # free version, version 19.1.2, 1.94GB
+      "CapCut - Photo & Video Editor" = 1500855883;
     };
 
     taps = [
@@ -47,7 +50,8 @@
 
     # `brew install --cask` are GUI apps
     casks = [
-      "proton-pass" # password manager
+      "aldente" # menu bar tool to limit battery charging percentage
+      # "proton-pass" # no native mac app store version, cask cannot autofill so manual install
       "proton-mail"
       "proton-drive"
       "protonvpn"
@@ -59,7 +63,7 @@
       "firefox" # my preferred browser
       # "google-chrome" # give me reason
       # "visual-studio-code" # give me a reason, too
-      "zed" # zed editor, i'm zed curious
+      # "zed" # zed editor, i'm zed curious, not anymore
 
       "aerospace" # this is an unknown cask, nikitabobko/tap has to be declared for this to work
 
@@ -76,8 +80,12 @@
       # "shadowsocksx-ng" # proxy tool
       "blender@lts" # 3D creation suite
       "iina" # video player
+
+      # manually add these to login items for auto-start
+      # System Settings > General > Login Items & Extensions
       "raycast" # (HotKey: alt/option + space)search, calculate and run scripts(with many plugins)
       "stats" # beautiful system status monitor in menu bar
+
       # "reaper"  # audio editor
       # "sonic-pi" # music programming
       # "tencent-lemon" # macOS cleaner

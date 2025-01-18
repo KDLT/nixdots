@@ -3,6 +3,9 @@
   home-manager.users.${username}.programs = {
     kitty = {
       enable = true;
+      font = {
+        name = "CommitMono Nerd Font";
+      };
       settings = {
         font_size = 20;
         window_padding_width = 12;
