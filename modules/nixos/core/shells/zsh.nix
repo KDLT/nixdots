@@ -1,5 +1,6 @@
 # modules/core/shells/zsh/default.nix
 {
+  lib,
   username,
   pkgs,
   config,
@@ -41,13 +42,12 @@ in
           fish.enable = false;
           zoxide.enable = true;
           fzf.enable = true;
-          thefuck.enable = true;
           direnv.enable = true;
         };
 
         programs.zsh = {
           enable = true;
-          dotDir = ".config/zsh"; # path relative to $HOME
+          # dotDir = ".config/zsh"; # path relative to $HOME # now deprecated
 
           history = {
             size = 10000;
@@ -59,30 +59,35 @@ in
 
           autosuggestion.enable = true;
 
-          initExtraBeforeCompInit = ''
-            # set directory for storing zinit and plugins
-            ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
-            [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-            [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+          initContent = lib.mkMerge [
+            (lib.mkOrder 550 ''
+              # set directory for storing zinit and plugins
+              ZINIT_HOME="$XDG_DATA_HOME/zinit/zinit.git"
+              [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+              [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
-            # source/load zinit
-            source "$ZINIT_HOME/zinit.zsh"
+              # source/load zinit
+              source "$ZINIT_HOME/zinit.zsh"
 
-            # let zinit handle syntax highlight and autocomplete
-            zinit light zdharma-continuum/fast-syntax-highlighting
-            zinit light marlonrichert/zsh-autocomplete
-          '';
+              # let zinit handle syntax highlight and autocomplete
+              zinit light zdharma-continuum/fast-syntax-highlighting
+              zinit light marlonrichert/zsh-autocomplete
+
+              # Docker completion from official repo
+              zinit ice as"completion"
+              zinit snippet https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
+            '')
+            (lib.mkOrder 1000 ''
+              # match dotfiles without explicitly specifying the dot
+              setopt GLOB_DOTS
+              # runs disfetch on new terminal instances
+              # ${pkgs.disfetch}/bin/disfetch
+              ${pkgs.fastfetch}/bin/fastfetch
+            '')
+          ];
 
           completionInit = ''
             autoload -U compinit && compinit -d $HOME/.config/zsh/zcompdump
-          '';
-
-          initExtra = ''
-            # match dotfiles without explicitly specifying the dot
-            setopt GLOB_DOTS
-            # runs disfetch on new terminal instances
-            # ${pkgs.disfetch}/bin/disfetch
-            ${pkgs.fastfetch}/bin/fastfetch
           '';
 
           shellAliases = myAliases;

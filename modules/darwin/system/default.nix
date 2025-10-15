@@ -5,7 +5,11 @@
   system.stateVersion = 5;
 
   # enable touch id authentication
-  security.pam.enableSudoTouchIdAuth = true;
+  # security.pam.enableSudoTouchIdAuth = true; # deprecated syntax
+  security.pam.services.sudo_local.touchIdAuth = true;
+
+  # new declaration to continue using system defaults
+  system.primaryUser = "kba";
 
   # MacOS System preferences
   system.defaults = {
@@ -170,6 +174,7 @@
   environment.shellAliases = {
     v = "nvim";
     ta = "tmux a";
+    aero = "cat ~/.config/aerospace/aerospace.toml";
   };
 
   environment.variables = {

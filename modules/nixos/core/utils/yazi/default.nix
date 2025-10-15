@@ -18,7 +18,7 @@ in
         log = {
           enabled = true;
         };
-        manager = {
+        mgr = {
           show_hidden = true;
           sort_by = "mtime"; # mtime is the new properer syntax instead of modified
           sort_dir_first = true;
@@ -28,7 +28,7 @@ in
       };
 
       keymap = {
-        manager.prepend_keymap = [
+        mgr.prepend_keymap = [
           {
             on = [
               "g"

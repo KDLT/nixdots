@@ -17,7 +17,7 @@
     environment.systemPackages = with pkgs; [
       # core tools
       neovim # default editor (vanilla neovim)
-      kitty # openGL based terminal emulator
+      # kitty # openGL based terminal emulator
       fastfetch # info rich fetch
       just # justfile
       zsh # the shell i use
@@ -53,7 +53,7 @@
       ldns # replacement of `dig`, it provide the command `drill`
       socat # replacement of openbsd-netcat
       nmap # A utility for network discovery and security auditing
-      ipcalc # it is a calculator for the IPv4/v6 addresses
+      # ipcalc # it is a calculator for the IPv4/v6 addresses # depends on ruby, gives error on rebuild
 
       # system monitoring
       iftop # display an interface's bandwidth usage

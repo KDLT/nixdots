@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, lib, ... }:
 {
   homebrew = {
     enable = true;
@@ -16,11 +16,11 @@
       "Proton Pass for Safari" = 6502835663;
       # "Proton Pass" = 6443490629; # no native mac app store version, cask cannot autofill so manual install
       "DaVinci Resolve" = 571213070; # free version, version 19.1.2, 1.94GB
-      "CapCut - Photo & Video Editor" = 1500855883;
+      # "CapCut - Photo & Video Editor" = 1500855883; # temporarily disable
     };
 
     taps = [
-      "homebrew/services"
+      # "homebrew/services" # deprecated, now included in brew
       "nikitabobko/tap" # this tap declaration here allows the aerospace cask to be "found"
     ];
 
@@ -33,6 +33,9 @@
       # "tailscale" # tailscale # i prefer the official app
 
       "mas" # mac app store utility
+      "gh" # github cli
+
+      "unar" # unarchiver
 
       "wget" # https, http, ftp file retrieval
       "curl" # cli tool for retrieving file with url syntax
@@ -46,6 +49,12 @@
       # commands like `gsed` `gtar` are required by some tools
       "gnu-sed"
       "gnu-tar"
+
+      # for containers--requires docker cask for macOS
+      "colima"
+
+      # for javascript, includes npm
+      "node"
     ];
 
     # `brew install --cask` are GUI apps
@@ -86,12 +95,18 @@
       "raycast" # (HotKey: alt/option + space)search, calculate and run scripts(with many plugins)
       "stats" # beautiful system status monitor in menu bar
 
+      # 3D Printing
+      "orcaslicer"
+      "superslicer"
+      "autodesk-fusion"
+
       # "reaper"  # audio editor
       # "sonic-pi" # music programming
       # "tencent-lemon" # macOS cleaner
       # "neteasemusic" # music
 
       # Development
+      "docker-desktop" # previously docker
       # "mitmproxy" # HTTP/HTTPS traffic inspector
       # "insomnia" # REST client
       # "wireshark" # network analyzer
@@ -105,7 +120,8 @@
   # eval "$(/opt/homebrew/bin/brew shellenv)"
 
   home-manager.users.${username} = {
-    programs.zsh.initExtra = ''
+    # programs.zsh.initExtra = ''
+    programs.zsh.initContent = lib.mkOrder 1000 ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
   };
