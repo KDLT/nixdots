@@ -55,12 +55,20 @@
 
       # for javascript, includes npm
       "node"
+
+      "fswatch" # monitor directory for changes, run command
+      "jq" # lightweight command line json processor
+
+      "yt-dlp" # youtube dl fork, can get transcripts
+      "ffmpeg" # yt-dlp needs this
     ];
 
     # `brew install --cask` are GUI apps
     casks = [
       "aldente" # menu bar tool to limit battery charging percentage
       # "proton-pass" # no native mac app store version, cask cannot autofill so manual install
+
+      "claude-code" # prefer brew install over npm
       "proton-mail"
       "proton-drive"
       "protonvpn"
