@@ -25,6 +25,7 @@
   home-manager.users.${username} = {
     programs.tmux = {
       enable = true;
+      terminal = "tmux-256color";
       keyMode = "vi";
       baseIndex = 1;
       mouse = true; # mouse support
@@ -33,6 +34,8 @@
       shortcut = "Space";
       clock24 = true;
       extraConfig = ''
+        # Enable RGB colour if running in xterm
+        set -ag terminal-overrides ",xterm-256color:RGB"
         # re-source the config
         unbind r
         bind r source-file ~/.config/tmux/tmux.conf \; display "Tmux Reloaded!"

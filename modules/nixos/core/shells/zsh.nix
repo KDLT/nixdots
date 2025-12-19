@@ -57,7 +57,8 @@ in
             ignoreAllDups = true; # ignore all duplicates
           };
 
-          autosuggestion.enable = true;
+          # Disable home-manager's autosuggestion to avoid conflict with zsh-autocomplete
+          autosuggestion.enable = false;
 
           initContent = lib.mkMerge [
             (lib.mkOrder 550 ''
@@ -69,9 +70,17 @@ in
               # source/load zinit
               source "$ZINIT_HOME/zinit.zsh"
 
-              # let zinit handle syntax highlight and autocomplete
-              zinit light zdharma-continuum/fast-syntax-highlighting
+              # Performance tuning for zsh-autocomplete to prevent high CPU usage
+              zstyle ':autocomplete:*' delay 0.1  # slight delay before fetching completions
+              zstyle ':autocomplete:*' min-input 2  # require 2 chars before showing completions
+              zstyle ':autocomplete:*' timeout 1.0  # max 1 second wait for completion
+
+              # Load zsh-autocomplete FIRST (creates ZLE widgets)
               zinit light marlonrichert/zsh-autocomplete
+
+              # Load syntax highlighting AFTER autocomplete
+              # Redirect stderr to suppress harmless widget warnings from fast-syntax-highlighting
+              zinit light zdharma-continuum/fast-syntax-highlighting 2>/dev/null
 
               # Docker completion from official repo
               zinit ice as"completion"
@@ -86,9 +95,9 @@ in
             '')
           ];
 
-          completionInit = ''
-            autoload -U compinit && compinit -d $HOME/.config/zsh/zcompdump
-          '';
+          # Remove completionInit - zsh-autocomplete handles compinit internally
+          # Having both causes conflicts and can lead to performance issues
+          completionInit = "";
 
           shellAliases = myAliases;
 

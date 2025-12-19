@@ -1,4 +1,9 @@
-{ lib, username, useremail, ... }:
+{
+  lib,
+  username,
+  useremail,
+  ...
+}:
 {
   home-manager.users.${username} = {
     # `programs.git` will generate the config file: ~/.config/git/config
@@ -13,53 +18,40 @@
     programs.git = {
       enable = true;
       lfs.enable = true;
-      userName = username;
-      userEmail = useremail;
 
-      # dunno what this is
-      # includes = [
-      #   {
-      #     # use diffrent email & name for work
-      #     path = "~/work/.gitconfig";
-      #     condition = "gitdir:~/work/";
-      #   }
-      # ];
+      settings = {
+        user.name = username;
+        user.email = useremail;
 
-      extraConfig = {
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
         pull.rebase = true;
-      };
 
-      # signing = {
-      #   key = "xxx";
-      #   signByDefault = true;
-      # };
+        alias = {
+          # common aliases
+          br = "branch";
+          co = "checkout";
+          a = "add";
+          s = "status";
+          gfs = "git fetch; git status";
+          ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
+          ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
+          cm = "commit -m";
+          ca = "commit -am";
+          dc = "diff --cached";
+          amend = "commit --amend -m";
 
-      delta = {
-        enable = true;
-        options = {
-          features = "side-by-side";
+          # aliases for submodule
+          update = "submodule update --init --recursive";
+          foreach = "submodule foreach";
         };
       };
-
-      aliases = {
-        # common aliases
-        br = "branch";
-        co = "checkout";
-        a = "add";
-        s = "status";
-        gfs = "git fetch; git status";
-        ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
-        ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
-        cm = "commit -m";
-        ca = "commit -am";
-        dc = "diff --cached";
-        amend = "commit --amend -m";
-
-        # aliases for submodule
-        update = "submodule update --init --recursive";
-        foreach = "submodule foreach";
+    };
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        features = "side-by-side";
       };
     };
   };

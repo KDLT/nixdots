@@ -35,6 +35,8 @@
       "mas" # mac app store utility
       "gh" # github cli
 
+      "gemini-cli" # gemini-cli
+
       "unar" # unarchiver
 
       "wget" # https, http, ftp file retrieval
@@ -61,12 +63,16 @@
 
       "yt-dlp" # youtube dl fork, can get transcripts
       "ffmpeg" # yt-dlp needs this
+
+      "terminal-notifier" # send macOS notifications from command line
     ];
 
     # `brew install --cask` are GUI apps
     casks = [
       "aldente" # menu bar tool to limit battery charging percentage
       # "proton-pass" # no native mac app store version, cask cannot autofill so manual install
+
+      "affinity" # affinity studio for MacOS
 
       "claude-code" # prefer brew install over npm
       "proton-mail"
