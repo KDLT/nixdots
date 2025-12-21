@@ -70,28 +70,18 @@
     # `brew install --cask` are GUI apps
     casks = [
       "aldente" # menu bar tool to limit battery charging percentage
-      # "proton-pass" # no native mac app store version, cask cannot autofill so manual install
-
       "affinity" # affinity studio for MacOS
 
-      "claude-code" # prefer brew install over npm
+      # proton
       "proton-mail"
       "proton-drive"
       "protonvpn"
+      # "proton-pass" # no native mac app store version, cask cannot autofill so manual install
+
+      # macOS sanity
       "karabiner-elements" # sane remaps for ANSI keyboard
-      # { # testing what happens when home-manager AND homebrew installs kitty
-      #   name = "kitty";
-      #   args = { appdir = "~/Applications"; };
-      # }
       "firefox" # my preferred browser
-      # "google-chrome" # give me reason
-      # "visual-studio-code" # give me a reason, too
-      # "zed" # zed editor, i'm zed curious, not anymore
-
-      "aerospace" # this is an unknown cask, nikitabobko/tap has to be declared for this to work
-
-      # https://joplinapp.org/help/
-      # "joplin" # note taking app
+      "backdrop" # test animated wallpapers
 
       # IM & audio & remote desktop & meeting
       "telegram" # messaging app allegedly focused on speed and security
@@ -108,6 +98,7 @@
       # System Settings > General > Login Items & Extensions
       "raycast" # (HotKey: alt/option + space)search, calculate and run scripts(with many plugins)
       "stats" # beautiful system status monitor in menu bar
+      "aerospace" # this is an unknown cask, nikitabobko/tap has to be declared for this to work
 
       # 3D Printing
       "orcaslicer"
@@ -116,17 +107,14 @@
 
       # "reaper"  # audio editor
       # "sonic-pi" # music programming
-      # "tencent-lemon" # macOS cleaner
       # "neteasemusic" # music
 
       # Development
       "docker-desktop" # previously docker
+      "claude-code" # i prefer brew install over npm
       # "mitmproxy" # HTTP/HTTPS traffic inspector
       # "insomnia" # REST client
       # "wireshark" # network analyzer
-      # "jdk-mission-control" # Java Mission Control
-      # "google-cloud-sdk" # Google Cloud SDK
-      # "miniforge" # Miniconda's community-driven distribution
     ];
   };
 
