@@ -992,11 +992,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1766221323,
-        "narHash": "sha256-Gil4QGb/5EcNNyNTK3FhpnNtK1t+aPpalWYu+jvjtSo=",
+        "lastModified": 1766301147,
+        "narHash": "sha256-5yWKX02NOar5guhGlF0r5C4r4sTT1rFBM2hyVAvL9lA=",
         "owner": "KDLT",
         "repo": "nixvim",
-        "rev": "ab841d5c6baad58bb05ef438100f02a64a119b97",
+        "rev": "339a5c4a567a4c2440eaceea344c876cdbdcd417",
         "type": "github"
       },
       "original": {

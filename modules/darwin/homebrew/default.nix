@@ -33,37 +33,13 @@
       # "tailscale" # tailscale # i prefer the official app
 
       "mas" # mac app store utility
-      "gh" # github cli
-
       "gemini-cli" # gemini-cli
-
-      "unar" # unarchiver
-
-      "wget" # https, http, ftp file retrieval
-      "curl" # cli tool for retrieving file with url syntax
-      "aria2" # A lightweight multi-protocol & multi-source command-line download utility
-      "httpie" # user friendly curl replacement
 
       # https://github.com/rgcr/m-cli
       "m-cli" #  Swiss Army Knife for macOS
       # "proxychains-ng" # proxy to obfuscate internet traffic, yet to learn
 
-      # commands like `gsed` `gtar` are required by some tools
-      "gnu-sed"
-      "gnu-tar"
-
-      # for containers--requires docker cask for macOS
-      "colima"
-
-      # for javascript, includes npm
-      "node"
-
-      "fswatch" # monitor directory for changes, run command
-      "jq" # lightweight command line json processor
-
-      "yt-dlp" # youtube dl fork, can get transcripts
-      "ffmpeg" # yt-dlp needs this
-
+      # "colima" # for containers--requires docker cask for macOS -> moved to darwin/development/default.nix
       "terminal-notifier" # send macOS notifications from command line
     ];
 

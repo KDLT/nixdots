@@ -82,6 +82,22 @@
       tlrc # official tldr client written in rust
       yq # yaml, json, xml, csv and properties documents from the CLI
       openssl # cryptographic library that implements the ssl and tls protocols
+
+      # moved over from homebrew
+      gh # github CLI
+      unar # unarchiver
+      wget # file retrieval
+      curl # url file transfer
+      aria2 # download utility
+      httpie # user-friendly curl
+      fswatch # file system monitor
+      yt-dlp # youtube downloader
+      ffmpeg # media processing
+
+      # development
+      # python3 # python
+      nodejs # brew: node
+      bun # Incredibly fast JavaScript runtime, bundler, transpiler and package manager
     ];
 
     environment.variables = {

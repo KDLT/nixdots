@@ -152,10 +152,14 @@ Edit `machines/<hostname>/default.nix` to configure machine-specific settings. M
 
 ### Working with nixvim
 
-The repository uses a custom nixvim flake currently pointed to a local development path (flake.nix:33). When making nixvim changes:
-1. Modify the local nixvim repository at `/Users/kba/github/KDLT/nixvim`
-2. Rebuild the system configuration to test changes
-3. When ready, update the flake input to point to the GitHub repository
+The repository uses a custom nixvim flake at `github:KDLT/nixvim` (flake.nix:31).
+
+**To test local nixvim changes:**
+1. Test modifications directly: `nix run ~/github/KDLT/nixvim/. <test-file>`
+   - Where `<test-file>` is the relevant file type you're testing (e.g., a .js file for JavaScript LSP changes)
+2. When satisfied, commit and push changes to remote nixvim repo
+3. Update nixdots flake lock: `nix flake update nixvim` (run in nixdots directory)
+4. Rebuild system to use updated nixvim: `darwin-rebuild switch --flake .#K-MBP`
 
 ## Important Notes
 
@@ -163,4 +167,9 @@ The repository uses a custom nixvim flake currently pointed to a local developme
 - **State version** is pinned to "24.05" across all systems
 - **Timezone** is set to "Asia/Manila" in base system config
 - The repository uses impermanence on some systems - check `kdlt.storage.dataPrefix` and `cachePrefix` for persistent paths
-- When adding packages, prefer adding to module-specific configs rather than the base system.nix unless truly universal
+- **Package management philosophy**:
+  - Prefer Nix over homebrew for cross-platform tools (allows version pinning, rollback, and availability across all machines)
+  - Cross-platform packages go in `modules/base/system.nix` (e.g., gh, wget, nodejs, bun, ffmpeg)
+  - macOS-only utilities can stay in homebrew for better macOS integration (e.g., mas, m-cli, terminal-notifier)
+  - Only add to `base/system.nix` if the package is truly needed across all systems
+- **Kitty theming**: Uses `themeFile` from kitty-themes package with optional `background` color override in `settings` section

@@ -22,6 +22,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = true
 
 # main is LG C3 via HDMI2.1; built-in = Macbook display
+# "main" must be set in System Settings > Displays > Use as
 [workspace-to-monitor-force-assignment]
 1 = 'main' # kitty
 2 = 'built-in' # firefox
@@ -136,16 +137,20 @@ if.app-id = 'org.mozilla.firefox'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Safari'
+if.app-id = 'md.obsidian'
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
+if.app-id = 'com.apple.Safari'
 run = ['move-node-to-workspace 4']
 
 [[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = ['move-node-to-workspace 7']
+
+[[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
-run = ['move-node-to-workspace 4']
+run = ['move-node-to-workspace 7']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
