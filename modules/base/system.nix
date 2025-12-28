@@ -98,6 +98,19 @@
       # python3 # python
       nodejs # brew: node
       bun # Incredibly fast JavaScript runtime, bundler, transpiler and package manager
+
+      # rust development
+      rustc # rust compiler
+      cargo # rust package manager
+      rustfmt # rust code formatter
+      clippy # rust linter
+      rust-analyzer # rust language server for IDE support
+      cargo-watch # auto-recompile on file changes
+      cargo-edit # cargo add/rm/upgrade commands
+
+      # rust build dependencies (common for web frameworks like actix-web)
+      pkg-config # helper tool for compiling applications and libraries
+      openssl # cryptographic library (required by many rust web crates)
     ];
 
     environment.variables = {
