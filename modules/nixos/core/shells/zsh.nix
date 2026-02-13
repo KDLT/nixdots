@@ -48,6 +48,7 @@ in
         programs.zsh = {
           enable = true;
           # dotDir = ".config/zsh"; # path relative to $HOME # now deprecated
+          dotDir = "${config.home-manager.users.${username}.xdg.configHome}/zsh";
 
           history = {
             size = 10000;
