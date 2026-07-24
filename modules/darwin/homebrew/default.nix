@@ -3,7 +3,8 @@
   homebrew = {
     enable = true;
 
-    onActivation.autoUpdate = false;
+    # onActivation.autoUpdate = false;
+    onActivation.autoUpdate = true;
     onActivation.cleanup = "zap"; # 'zap': uninstalls all formulae(and related files) not listed here.
 
     # Applications to install from Mac App Store using mas.
@@ -16,12 +17,22 @@
       "Proton Pass for Safari" = 6502835663;
       # "Proton Pass" = 6443490629; # no native mac app store version, cask cannot autofill so manual install
       "DaVinci Resolve" = 571213070; # free version, version 19.1.2, 1.94GB
-      # "CapCut - Photo & Video Editor" = 1500855883; # temporarily disable
+      "Capcut" = 1500855883;
+      "Dark Reader for Safari" = 1438243180;
+      "GarageBand" = 682658836;
+      "iMovie" = 408981434;
+      "Keynote" = 409183694;
+      "Numbers" = 409203825;
+      "Pages" = 409201541;
     };
 
     taps = [
       # "homebrew/services" # deprecated, now included in brew
-      "nikitabobko/tap" # this tap declaration here allows the aerospace cask to be "found"
+      # "nikitabobko/tap"
+      {
+        name = "nikitabobko/tap";
+        trusted = true;
+      } # trusted=true required since Homebrew 6.0.0's HOMEBREW_REQUIRE_TAP_TRUST default
     ];
 
     # `brew install`
@@ -88,6 +99,7 @@
       # Development
       "docker-desktop" # previously docker
       "claude-code" # i prefer brew install over npm
+      "framer" # for prototyping ui/ux
       # "mitmproxy" # HTTP/HTTPS traffic inspector
       # "insomnia" # REST client
       # "wireshark" # network analyzer

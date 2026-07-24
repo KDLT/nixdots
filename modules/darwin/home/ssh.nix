@@ -15,6 +15,12 @@ in
         # Since I am setting this up for multiple machines, I am going for
         # a standard identityFile naming scheme: id-kba-ed25519
         matchBlocks = {
+          "hostinger-kvm2" = {
+            hostname = "72.60.209.79";
+            user = username;
+            identityFile = "~/.ssh/id_ed25519_hostinger_kvm2";
+            addKeysToAgent = "yes";
+          };
           "git@github.com" = {
             hostname = "github.com";
             user = "git";
