@@ -95,10 +95,12 @@ in
           pkgs.fetchFromGitHub {
             owner = "yazi-rs";
             repo = "flavors";
-            rev = "main";
-            # sha256 = "sha256-placeholder"; # replace with actual hash using
-            # `nix-prefetch-url --unpack https://github.com/yazi-rs/flavors/archive/main.tar.gz`
-            sha256 = "1ahfr4k5cxf07n59385ln3f03wp4icxywxgzv1pa3ijkgv84idks";
+            # Pinned to a commit, not `main` -- tracking the branch makes this
+            # hash go stale on every upstream push. Bump both together:
+            #   git ls-remote https://github.com/yazi-rs/flavors main
+            #   nix-prefetch-url --unpack https://github.com/yazi-rs/flavors/archive/<rev>.tar.gz
+            rev = "20b47bfd78880c2674899597fd26bc01b21ff48c";
+            hash = "sha256-NGnfrQdsnQITKCZ0oh6DCxeCR2ozJoPAZetsi3ghHAI=";
           }
           + "/${flavor}.yazi";
       };
@@ -107,9 +109,9 @@ in
         autosession = pkgs.fetchFromGitHub {
           owner = "barbanevosa";
           repo = "autosession.yazi";
-          rev = "main";
-          # `nix-prefetch-url --unpack https://github.com/barbanevosa/autosession.yazi/archive/main.tar.gz`
-          sha256 = "1bnzapfs3fgn6clr5krkimf0xapbbp95wrlgscc77s3xrz6da53a";
+          # pinned to a commit, not `main` (see the flavors note above)
+          rev = "7a12b201898a83395dc9981d63a204ac1e103416";
+          hash = "sha256-ahTVzM996HMY049mXtJd66oOXI0zz5IpM/a5od1V364=";
         };
       };
     };
