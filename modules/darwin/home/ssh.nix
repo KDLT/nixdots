@@ -21,12 +21,16 @@ in
             identityFile = "~/.ssh/id_ed25519_hostinger_kvm2";
             addKeysToAgent = "yes";
           };
-          "git@github.com" = {
-            hostname = "github.com";
+          "github.com" = {
             user = "git";
-            identityFile = defaultIdentity;
+            # try both: ed25519 on most hosts, the older RSA key on K-MBA
+            identityFile = [
+              defaultIdentity
+              "~/.ssh/id_rsa-mac"
+            ];
             userKnownHostsFile = "~/.ssh/known_hosts";
             addKeysToAgent = "yes";
+            extraOptions.UseKeychain = "yes"; # load passphrases from the macOS keychain
           };
           NeoVaderon = {
             hostname = "192.168.1.34";
