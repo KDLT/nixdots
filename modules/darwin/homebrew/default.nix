@@ -19,8 +19,8 @@
       "DaVinci Resolve" = 571213070; # free version, version 19.1.2, 1.94GB
       "Capcut" = 1500855883;
       "Dark Reader for Safari" = 1438243180;
-      "GarageBand" = 682658836;
-      "iMovie" = 408981434;
+      # "GarageBand" = 682658836;
+      # "iMovie" = 408981434;
       "Keynote" = 409183694;
       "Numbers" = 409203825;
       "Pages" = 409201541;
@@ -58,6 +58,14 @@
     casks = [
       "aldente" # menu bar tool to limit battery charging percentage
       "affinity" # affinity studio for MacOS
+      "vorssaint" # multi-purpose menu bar app
+
+      # google
+      "google-drive"
+      "google-gemini"
+
+      # screenshotter
+      "shottr"
 
       # proton
       "proton-mail"
@@ -75,6 +83,7 @@
       "discord" # desktop app might be too RAM crazy, on probation
       "moonlight" # open source game streaming client https://moonlight-stream.org
       "rustdesk" # fast open-source remote access software https://rustdesk.com
+      "superwhisper" # ai voice dictation
 
       # Misc
       # "shadowsocksx-ng" # proxy tool

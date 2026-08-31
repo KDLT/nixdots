@@ -1,4 +1,9 @@
-{ username, userfullname, lib, ...}:
+{
+  username,
+  userfullname,
+  lib,
+  ...
+}:
 let
   hostname = "K-MBP";
 in
@@ -14,4 +19,6 @@ in
     home = "/Users/${username}";
     description = userfullname;
   };
+
+  services.tailscale.enable = true;
 }

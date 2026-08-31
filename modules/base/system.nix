@@ -82,6 +82,7 @@
       tlrc # official tldr client written in rust
       yq # yaml, json, xml, csv and properties documents from the CLI
       openssl # cryptographic library that implements the ssl and tls protocols
+      csvlens # scrollable, vim-like csv viewer for the terminal
 
       # moved over from homebrew
       gh # github CLI
