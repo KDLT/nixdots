@@ -1,4 +1,10 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  username,
+  ...
+}:
 let
   cfg = config.kdlt.darwin.bundles.dev;
 in
@@ -9,5 +15,6 @@ in
     formula -- so each machine declares that in its own config'';
 
   config = lib.mkIf cfg.enable {
+    home-manager.users.${username}.home.packages = [ pkgs.colima ];
   };
 }

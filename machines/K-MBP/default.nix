@@ -20,5 +20,28 @@ in
     description = userfullname;
   };
 
-  services.tailscale.enable = true;
+  # My main machine: everything on.
+  kdlt.darwin.bundles = {
+    interface.enable = true;
+    proton.enable = true;
+    creative.enable = true;
+    printing3d.enable = true;
+    chat.enable = true;
+    dev.enable = true;
+  };
+
+  homebrew.casks = [
+    "docker-desktop" # docker engine (K-MBA uses the CLI formula instead)
+
+    # not yet sorted into a bundle -- K-MBP-only for now
+    "google-drive"
+    "google-gemini"
+    "shottr" # screenshot tool
+    "superwhisper" # AI voice dictation
+  ];
+
+  # keeping the Mac App Store Tailscale alongside the daemon (networking module)
+  homebrew.masApps = {
+    Tailscale = 1475387142; # v1.78.1 -- newer versions do nothing
+  };
 }

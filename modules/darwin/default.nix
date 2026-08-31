@@ -2,9 +2,9 @@
 {
   imports = [
     ./bundles
-    ./development
     ./home
     ./homebrew
+    ./networking
     ./nix
     ./system
   ];

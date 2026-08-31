@@ -46,78 +46,32 @@ in
   # through Determinate's own tooling).
   nix.gc.automatic = lib.mkForce false;
 
-  # --- K-MBA's own Homebrew list ---
-  # Keep Homebrew management on (unlike a full opt-out) so the interface
-  # (Aerospace, Kitty, jankyborders, GUI defaults) stays identical to K-MBP.
-  # This machine runs primarily headless/remote though, so it gets its own
-  # explicit, fully-confirmed brews/casks/masApps/taps -- not K-MBP's list
-  # minus some exclusions. Nothing here is inherited by accident; every
-  # entry below was explicitly named to stay.
-  homebrew.taps = lib.mkForce [
-    {
-      name = "nikitabobko/tap"; # required for the aerospace cask
-      trusted = true;
-    }
-  ];
-
-  homebrew.brews = lib.mkForce [
-    "mas" # mac app store utility -- required for masApps below to install
-    "gemini-cli"
-    "m-cli" # swiss army knife for macOS
-    "terminal-notifier" # send macOS notifications from command line
-
-    # pre-existing on this machine, kept explicitly
-    "docker" # CLI/daemon formula (not the docker-desktop GUI cask)
-    "transmission-cli"
-    # NOTE: brew's "tailscale" formula was dropped in favor of
-    # services.tailscale.enable below (nix-managed daemon, auto-starts on
-    # boot) -- keeping both would just be two competing tailscaled installs.
-  ];
-
-  homebrew.casks = lib.mkForce [
-    # proton suite
-    "proton-mail"
-    "proton-drive"
-    "protonvpn"
-
-    # interface parity with K-MBP
-    "karabiner-elements"
-    "aerospace"
-
-    # productivity
-    "raycast"
-    "stats"
-
-    # AI assist
-    "claude"
-    "claude-code"
-    "antigravity"
-    "antigravity-cli"
-
-    "firefox"
-
-    # utilities
-    "vorssaint"
-    "aldente"
-  ];
-
-  # Explicit, not just inherited from K-MBP's base module: since the list
-  # above is now complete and intentional for this machine, let cleanup
-  # actually remove/deep-clean anything not in it.
-  homebrew.onActivation.cleanup = "zap";
-
-  homebrew.masApps = lib.mkForce {
-    Tailscale = 1475387142;
-    "Proton Pass for Safari" = 6502835663;
-    "Dark Reader for Safari" = 1438243180;
+  # --- Bundles ---
+  # Primarily headless/remote, but keeps interface parity with K-MBP so it
+  # is usable when sat in front of. No creative / printing3d / chat here.
+  kdlt.darwin.bundles = {
+    interface.enable = true;
+    proton.enable = true;
+    dev.enable = true;
   };
 
+  # --- This machine's extra Homebrew, on top of the always-on layer and the
+  # bundles above. Every entry is deliberate. ---
+  homebrew.brews = [
+    "docker" # docker engine as the CLI formula (K-MBP uses docker-desktop)
+    "transmission-cli"
+  ];
+
+  homebrew.casks = [
+    # AI assist beyond the always-on claude-code
+    "claude"
+    "antigravity"
+    "antigravity-cli"
+  ];
+
   # --- Remote access ---
-  # This machine runs unattended, left at work. Run tailscaled as a proper
-  # background LaunchDaemon (auto-starts on boot, no GUI app/login session
-  # needed to keep it alive) rather than relying on the Mac App Store
-  # Tailscale.app, which is sandboxed and depends on staying logged into a
-  # GUI session. Matches how Super/Think/Link already run Tailscale.
-  # One-time setup after this switches: `sudo tailscale up --ssh`.
-  services.tailscale.enable = true;
+  # tailscaled runs as a LaunchDaemon via modules/darwin/networking (shared by
+  # all Darwin hosts). No Mac App Store Tailscale.app here -- it is sandboxed
+  # and needs a live GUI login session, which a headless machine will not have.
+  # One-time setup after first switch: `sudo tailscale up --ssh`.
 }

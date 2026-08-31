@@ -8,5 +8,15 @@ in
     Proton Pass Safari extension'';
 
   config = lib.mkIf cfg.enable {
+    homebrew = {
+      casks = [
+        "proton-mail"
+        "proton-drive"
+        "protonvpn"
+      ];
+      masApps = {
+        "Proton Pass for Safari" = 6502835663;
+      };
+    };
   };
 }

@@ -7,5 +7,9 @@ in
     desktop chat clients: telegram, discord'';
 
   config = lib.mkIf cfg.enable {
+    homebrew.casks = [
+      "telegram"
+      "discord"
+    ];
   };
 }

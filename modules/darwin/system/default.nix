@@ -17,7 +17,6 @@
       autohide = true;
       show-recents = false; # do not show recent apps in dock
       mru-spaces = false; # do not rearrange spaces based on most recent
-      expose-group-apps = true; # prevents aerospace from having tiny mission control windows
     };
 
     controlcenter = {
@@ -73,11 +72,6 @@
     # this uses macOS `defaults` commands:
     # https://github.com/yannbertrand/macos-defaults
     CustomUserPreferences = {
-      ".GlobalPreferences" = {
-        # automatically switch to a new space when switching to the application
-        AppleSpacesSwitchOnActivate = true;
-      };
-
       NSGlobalDomain = {
         # Add a context menu item for showing the Web Inspector in web views
         WebKitDeveloperExtras = true;
@@ -112,9 +106,6 @@
 
     screensaver.askForPassword = true;
     screensaver.askForPasswordDelay = 10; # number of seconds in screensaver before having to reenter password
-
-    spaces.spans-displays = false; # true means one space spans across all physical displays
-    # i set it to false because i want to retain the menu bar in the built-in display
 
     WindowManager = {
       HideDesktop = false;
@@ -161,20 +152,9 @@
     # })
   ];
 
-  services.jankyborders = {
-    enable = true;
-    style = "round";
-    hidpi = true;
-    blur_radius = 5.0;
-    # active_color = "0xff4C99F4";
-    active_color = "0xCC4C99F4"; # 50% alpha is CC
-    inactive_color = "0xff414550";
-  };
-
   environment.shellAliases = {
     v = "nvim";
     ta = "tmux a";
-    aero = "cat ~/.config/aerospace/aerospace.toml";
   };
 
   environment.variables = {
