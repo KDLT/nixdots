@@ -77,6 +77,14 @@ in
               zstyle ':autocomplete:*' timeout 1.0  # max 1 second wait for completion
 
               # Load zsh-autocomplete FIRST (creates ZLE widgets)
+              # Pinned to a tagged release rather than tracking the default
+              # branch: HEAD uses an async (zasync) completion loader that can
+              # lose a race on a cold, freshly-spawned login shell, throwing
+              # "command not found: _autocomplete__*" on the very first
+              # widget invocation (Up-arrow, Tab, ...) -- a known class of
+              # issue in this plugin's tracker. A nested non-login shell
+              # avoids it only because it inherits an already-warm loader.
+              zinit ice ver'26.08.04'
               zinit light marlonrichert/zsh-autocomplete
 
               # Load syntax highlighting AFTER autocomplete
