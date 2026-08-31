@@ -118,7 +118,7 @@
     {
       darwinConfigurations = {
         K-MBP = nix-darwin.lib.darwinSystem {
-          modules = darwinModules ++ [ ./machines/MBP/default.nix ];
+          modules = darwinModules ++ [ ./machines/K-MBP/default.nix ];
           specialArgs = inheritArgs;
         };
 
