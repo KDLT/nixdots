@@ -121,6 +121,11 @@
           modules = darwinModules ++ [ ./machines/MBP/default.nix ];
           specialArgs = inheritArgs;
         };
+
+        K-MBA = nix-darwin.lib.darwinSystem {
+          modules = darwinModules ++ [ ./machines/K-MBA/default.nix ];
+          specialArgs = inheritArgs;
+        };
       };
 
       nixosConfigurations = {
