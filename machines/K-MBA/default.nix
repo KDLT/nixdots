@@ -53,6 +53,10 @@ in
     interface.enable = true;
     proton.enable = true;
     dev.enable = true;
+
+    # restic -> B2 backup of the kidlat-kitchens workspace. Needs
+    # ~/.config/restic/b2-env (mode 600) placed by hand before first switch.
+    kidlat-backup.enable = true;
   };
 
   # --- This machine's extra Homebrew, on top of the always-on layer and the
