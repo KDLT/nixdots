@@ -34,7 +34,6 @@ in
     "docker-desktop" # docker engine (K-MBA uses the CLI formula instead)
 
     # not yet sorted into a bundle -- K-MBP-only for now
-    "google-drive"
     "google-gemini"
     "shottr" # screenshot tool
     "superwhisper" # AI voice dictation

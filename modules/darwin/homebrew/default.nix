@@ -21,6 +21,7 @@
       "aldente" # menu-bar battery charge limiter
       "claude-code" # prefer the cask over the npm install
       "vorssaint" # multi-purpose menu bar app
+      "google-drive"
     ];
 
     # Applications from the Mac App Store (via mas). You must have installed
