@@ -83,6 +83,7 @@
       yq # yaml, json, xml, csv and properties documents from the CLI
       openssl # cryptographic library that implements the ssl and tls protocols
       csvlens # scrollable, vim-like csv viewer for the terminal
+      bats # bash automated testing system
 
       # moved over from homebrew
       gh # github CLI
@@ -97,7 +98,11 @@
 
       # development
       # python3 # python
-      nodejs # brew: node
+      nodejs_24 # pinned major: the applenotes MCP on K-MBP points at
+      # /run/current-system/sw/bin/node and macOS ties its Automation + Full
+      # Disk Access grants to the exact (ad-hoc-signed) binary, so an
+      # unpinned `nodejs` alias bump silently revokes them mid-workflow.
+      # Bump this deliberately and re-grant in System Settings when you do.
       bun # Incredibly fast JavaScript runtime, bundler, transpiler and package manager
 
       # rust development
