@@ -84,6 +84,7 @@
       openssl # cryptographic library that implements the ssl and tls protocols
       csvlens # scrollable, vim-like csv viewer for the terminal
       bats # bash automated testing system
+      poppler-utils # splits pdf to images
 
       # moved over from homebrew
       gh # github CLI

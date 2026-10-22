@@ -1,5 +1,11 @@
 # straight up lifted from
 # https://github.com/AlexNabokikh/nix-config/blob/master/home/modules/darwin-aerospace.nix
+config-version = 2
+
+# config-version 1 inferred this list from keybindings; 2 requires it explicit
+# https://nikitabobko.github.io/AeroSpace/guide#config-version
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
 # Start AeroSpace at login
 start-at-login = true
 
@@ -24,13 +30,13 @@ automatically-unhide-macos-hidden-apps = true
 # main is LG C3 via HDMI2.1; built-in = Macbook display
 # "main" must be set in System Settings > Displays > Use as
 [workspace-to-monitor-force-assignment]
-1 = 'main' # kitty
+1 = 'main'     # kitty
 2 = 'built-in' # firefox
-3 = 'main' # safari/firefox
+3 = 'main'     # safari/firefox
 4 = 'built-in' # messages,discord
 5 = 'built-in' # finder
 6 = 'built-in' # activity monitor, system settings
-7 = 'main' # spotify/applemusic
+7 = 'main'     # spotify/applemusic
 8 = 'main'
 9 = 'main'
 0 = 'main'
@@ -42,16 +48,16 @@ preset = 'qwerty'
 # Gaps settings
 [gaps]
 inner.horizontal = 13
-inner.vertical =   13
-outer.left =       13
-outer.bottom =     13
-outer.top =        13
-outer.right =      13
+inner.vertical = 13
+outer.left = 13
+outer.bottom = 13
+outer.top = 13
+outer.right = 13
 
 # Main mode bindings
 [mode.main.binding]
 # Launch applications
-alt-shift-enter = 'exec-and-forget open -na kitty' # -na is [n]ew instance of [a]pplication
+alt-shift-enter = 'exec-and-forget open -na kitty'         # -na is [n]ew instance of [a]pplication
 alt-shift-b = 'exec-and-forget open -a firefox'
 alt-shift-m = 'exec-and-forget open -a Messages'
 alt-shift-e = 'exec-and-forget open -na kitty --args yazi' # immediately opens yazi in a new kitty terminal
@@ -163,3 +169,7 @@ run = ['move-node-to-workspace 6']
 [[on-window-detected]]
 if.app-id = 'com.apple.systempreferences'
 run = ['layout tiling', 'move-node-to-workspace 6']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Music'
+run = ['layout tiling', 'move-node-to-workspace 7']
