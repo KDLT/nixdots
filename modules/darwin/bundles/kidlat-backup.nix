@@ -96,12 +96,13 @@ in
       file.".local/bin/kidlat-memory-watch.sh".source = "${kidlat-memory-watch}/bin/kidlat-memory-watch.sh";
     };
 
+    # `command` (not a raw serviceConfig.ProgramArguments) is what makes
+    # nix-darwin wrap the exec in `/bin/sh -c "/bin/wait4path /nix/store &&
+    # exec ..."`. Without it, launchd can try to exec the /nix/store path
+    # before /nix is mounted at login, fail with EX_CONFIG, and park the
+    # job on a store-appeared event that never fires again that boot.
+    launchd.user.agents.kidlat-backup-daily.command = "${kidlat-backup}/bin/kidlat-backup.sh --tag kidlat-auto-scheduled";
     launchd.user.agents.kidlat-backup-daily.serviceConfig = {
-      ProgramArguments = [
-        "${kidlat-backup}/bin/kidlat-backup.sh"
-        "--tag"
-        "kidlat-auto-scheduled"
-      ];
       StartCalendarInterval = [
         {
           Hour = 3;
@@ -113,8 +114,8 @@ in
       StandardErrorPath = "/tmp/com.kidlat.backup.daily.err";
     };
 
+    launchd.user.agents.kidlat-memory-watch.command = "${kidlat-memory-watch}/bin/kidlat-memory-watch.sh";
     launchd.user.agents.kidlat-memory-watch.serviceConfig = {
-      ProgramArguments = [ "${kidlat-memory-watch}/bin/kidlat-memory-watch.sh" ];
       RunAtLoad = true;
       KeepAlive = true;
       EnvironmentVariables.HOME = home;
